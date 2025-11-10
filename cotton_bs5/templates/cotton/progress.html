@@ -3,15 +3,14 @@
         :min="0"
         :max="100"
         text
-        label
+        label="{% trans 'Progress' %}"
         variant="primary"
         striped
         animated
         class />
-{% trans "Progress" as default_label %}
 <div class="progress {{ class }}"
      role="progressbar"
-     aria-label="{% firstof label default_label %}"
+     aria-label="{{ label }}"
      aria-valuenow="{{ value }}"
      aria-valuemin="{{ min }}"
      aria-valuemax="{{ max }}"
