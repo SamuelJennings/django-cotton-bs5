@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "django-cotton-bs5"
-version = "0.2.2"
+version = "0.3.0"
 description = "Bootstrap 5 components for use with Django Cotton."
 authors = ["Sam <samuel.scott.jennings@gmail.com>"]
 license = "MIT"
@@ -178,31 +178,10 @@ extend_exclude = [
     "docs",
     ".*tests",
 ]
-ignore_transitive = [
-    "toml",
-]
-# deptry checks imports but doesn't detect apps in djangos installed_apps settings. These must be listed here to avoid dependency errors.
-ignore_obsolete = [
-        "dj-rest-auth",
-        "django-adminactions",
-        "django-celery-beat",
-        "django-compressor",
-        "django-cors-headers",
-        "django-dbbackup",
-        "django-htmx",
-        "django-libsass",
-        "django-nested-admin",
-        "django-postgres-metrics",
-        "django-social-share",
-        "django-spaghetti-and-meatballs",
-        "django-tellme",
-        "gunicorn",
-        "psycopg2-binary",
-        "redis",
-        "whitenoise",
-        "django-laboratory",
-]
-
+ignore = [
+    "DEP004",
+    "DEP002",
+    ]
 
 [tool.tox]
 legacy_tox_ini = """
