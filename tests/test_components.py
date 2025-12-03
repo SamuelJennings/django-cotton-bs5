@@ -798,6 +798,54 @@ class ButtonGroupComponentTests(CottonBS5ComponentTests):
         self.assertAttributeNotExist("vertical", rendered)
         self.assertAttributeNotExist('label="Test"', rendered)
 
+    def test_button_group_with_gap(self):
+        """Test button group with gap uses d-flex instead of btn-group."""
+        template_str = '<c-button_group gap="2">Content</c-button_group>'
+        rendered = self.render_template(template_str)
+
+        self.assertInHTML("d-flex", rendered)
+        self.assertInHTML("gap-2", rendered)
+        self.assertNotInHTML("btn-group", rendered)
+        # Should still have role/aria-label since it's semantically a group
+        self.assertInHTML('role="group"', rendered)
+        self.assertInHTML('aria-label="Button group"', rendered)
+
+    def test_button_group_with_gap_vertical(self):
+        """Test button group with gap and vertical uses flex-column."""
+        template_str = '<c-button_group gap="3" vertical>Content</c-button_group>'
+        rendered = self.render_template(template_str)
+
+        self.assertInHTML("d-flex", rendered)
+        self.assertInHTML("flex-column", rendered)
+        self.assertInHTML("gap-3", rendered)
+        self.assertNotInHTML("btn-group-vertical", rendered)
+
+    def test_button_group_with_gap_and_size(self):
+        """Test button group with gap and size applies btn-group-{size} class."""
+        template_str = '<c-button_group gap="2" size="lg">Content</c-button_group>'
+        rendered = self.render_template(template_str)
+
+        self.assertInHTML("d-flex", rendered)
+        self.assertInHTML("gap-2", rendered)
+        self.assertInHTML("btn-group-lg", rendered)
+
+    def test_button_group_gap_no_erroneous_attributes(self):
+        """Test button group with gap doesn't add gap as HTML attribute."""
+        template_str = '<c-button_group gap="2">Content</c-button_group>'
+        rendered = self.render_template(template_str)
+
+        # Should NOT appear as HTML attribute
+        self.assertAttributeNotExist('gap="2"', rendered)
+
+    def test_button_group_without_gap_uses_btn_group(self):
+        """Test button group without gap uses standard btn-group class."""
+        template_str = "<c-button_group>Content</c-button_group>"
+        rendered = self.render_template(template_str)
+
+        self.assertInHTML("btn-group", rendered)
+        self.assertNotInHTML("d-flex", rendered)
+        self.assertInHTML('role="group"', rendered)
+
 
 class BadgeComponentTests(CottonBS5ComponentTests):
     """Tests for badge component."""
