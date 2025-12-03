@@ -56,9 +56,7 @@ def prerelease(c):
     print("=" * 60)
 
     # Step 1: Run comprehensive linting, type checking, and dependency analysis
-    print(
-        "\n🧹 Step 1: Running comprehensive linting, type checking, and dependency analysis"
-    )
+    print("\n🧹 Step 1: Running comprehensive linting, type checking, and dependency analysis")
     print("🚀 Running pre-commit hooks (includes mypy and deptry)")
     c.run("poetry run pre-commit run -a")
 
@@ -73,9 +71,7 @@ def prerelease(c):
     # Step 3: Run comprehensive test suite
     print("\n🧪 Step 3: Running comprehensive test suite")
     print("🚀 Running pytest with coverage")
-    c.run(
-        "poetry run pytest --cov --cov-config=pyproject.toml --cov-report=html --cov-report=term --tb=no -qq"
-    )
+    c.run("poetry run pytest --cov --cov-config=pyproject.toml --cov-report=html --cov-report=term --tb=no -qq")
 
     # Step 4: Update requirements.txt (final step)
     print("\n📦 Step 4: Updating requirements.txt")
@@ -84,9 +80,7 @@ def prerelease(c):
 
     print("\n" + "=" * 60)
     print("✅ Pre-release checks completed successfully!")
-    print(
-        "🎉 Repository is ready for release. You can now run 'invoke release' with the appropriate rule."
-    )
+    print("🎉 Repository is ready for release. You can now run 'invoke release' with the appropriate rule.")
     print("   Example: invoke release --rule=patch")
 
 
@@ -129,9 +123,7 @@ def release(c, rule="", commit_staged=False):
             print(f"🚀 Committing staged changes and version bump for v{version_short}")
             c.run(f'git add pyproject.toml && git commit -m "Release v{version_short}"')
         else:
-            print(
-                f"🚀 No staged changes found, committing only version bump for v{version_short}"
-            )
+            print(f"🚀 No staged changes found, committing only version bump for v{version_short}")
             c.run(f'git commit pyproject.toml -m "Release v{version_short}"')
     else:
         c.run(f'git commit pyproject.toml -m "Release v{version_short}"')

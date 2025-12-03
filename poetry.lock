@@ -2737,4 +2737,4 @@ django-compressor = ["django-compressor"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.10,<4.0"
-content-hash = "9eaeccfd3e93621ae248e2a08b665bcaa098ff95f2bc478b64bf97fc284c8b11"
+content-hash = "f37234e176a2b1be36819cf2a098d5d922182f81729124e17d79cdd31110c0c7"
