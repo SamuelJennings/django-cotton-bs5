@@ -6,10 +6,18 @@ on:
       - main
     paths:
       - 'cotton_bs5/**'
+      - 'pyproject.toml'
+      - 'poetry.lock'
+      - '.pre-commit-config.yaml'
+      - '.github/workflows/build.yml'
   pull_request:
-    types: [opened, synchronize, reopened, edited]
+    types: [opened, synchronize, reopened]
     paths:
       - 'cotton_bs5/**'
+      - 'pyproject.toml'
+      - 'poetry.lock'
+      - '.pre-commit-config.yaml'
+      - '.github/workflows/build.yml'
   workflow_dispatch:
 
 jobs:

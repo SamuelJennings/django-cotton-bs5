@@ -6,6 +6,8 @@ on:
       - main
     paths:
       - 'docs/**'
+      - 'cotton_bs5/templates/**'
+      - 'README.md'
   workflow_dispatch:
 
 permissions:

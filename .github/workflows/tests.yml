@@ -7,11 +7,17 @@ on:
     paths:
       - 'cotton_bs5/**'
       - 'tests/**'
+      - 'pyproject.toml'
+      - 'poetry.lock'
+      - '.github/workflows/tests.yml'
   pull_request:
-    types: [opened, synchronize, reopened, edited]
+    types: [opened, synchronize, reopened]
     paths:
       - 'cotton_bs5/**'
       - 'tests/**'
+      - 'pyproject.toml'
+      - 'poetry.lock'
+      - '.github/workflows/tests.yml'
   workflow_dispatch:
 
 jobs:
