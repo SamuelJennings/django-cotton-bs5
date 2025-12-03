@@ -376,6 +376,56 @@ class BreadcrumbsComponentTests(CottonBS5ComponentTests):
 
         self.assertInHTML("Slot content", rendered)
 
+    def test_breadcrumbs_with_items_array(self):
+        """Test breadcrumbs with items array."""
+        items = [
+            {"text": "Home", "href": "/"},
+            {"text": "Products", "href": "/products/"},
+            {"text": "Current Page"},
+        ]
+        template_str = "<c-breadcrumbs :items='items' />"
+        rendered = self.render_template(template_str, {"items": items})
+
+        self.assertInHTML("Home", rendered)
+        self.assertInHTML('href="/"', rendered)
+        self.assertInHTML("Products", rendered)
+        self.assertInHTML('href="/products/"', rendered)
+        self.assertInHTML("Current Page", rendered)
+        self.assertInHTML("active", rendered)  # Last item should be active
+
+    def test_breadcrumbs_with_items_array_mixed_content(self):
+        """Test breadcrumbs items with custom classes."""
+        items = [
+            {"text": "Home", "href": "/", "class": "custom-class"},
+            {"text": "Current"},
+        ]
+        template_str = "<c-breadcrumbs :items='items' />"
+        rendered = self.render_template(template_str, {"items": items})
+
+        self.assertInHTML("custom-class", rendered)
+        self.assertInHTML("Home", rendered)
+        self.assertInHTML("Current", rendered)
+
+    def test_breadcrumbs_slot_when_no_items(self):
+        """Test breadcrumbs uses slot content when no items array provided."""
+        template_str = """
+        <c-breadcrumbs>
+            <c-breadcrumbs.item href="/" text="Manual Item" />
+        </c-breadcrumbs>"""
+        rendered = self.render_template(template_str)
+
+        self.assertInHTML("Manual Item", rendered)
+
+    def test_breadcrumbs_items_no_erroneous_attributes(self):
+        """Test breadcrumbs with items doesn't add items as HTML attribute."""
+        items = [{"text": "Test", "href": "/"}]
+        template_str = "<c-breadcrumbs :items='items' />"
+        rendered = self.render_template(template_str, {"items": items})
+
+        # Should NOT appear as HTML attribute
+        self.assertNotIn('items="', rendered)
+        self.assertNotIn("items=", rendered)
+
 
 class CardComponentTests(CottonBS5ComponentTests):
     """Tests for card components."""
