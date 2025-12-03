@@ -42,7 +42,6 @@ def prerelease(c):
     This task performs all necessary steps to prepare the repository for release:
     1. Run linting, formatting, type checking, and dependency checks via pre-commit hooks
     2. Run quality checks and tests
-    3. Update requirements.txt
 
     Use this before running the release task to ensure everything is ready.
 
@@ -56,7 +55,9 @@ def prerelease(c):
     print("=" * 60)
 
     # Step 1: Run comprehensive linting, type checking, and dependency analysis
-    print("\n🧹 Step 1: Running comprehensive linting, type checking, and dependency analysis")
+    print(
+        "\n🧹 Step 1: Running comprehensive linting, type checking, and dependency analysis"
+    )
     print("🚀 Running pre-commit hooks (includes mypy and deptry)")
     c.run("poetry run pre-commit run -a")
 
@@ -71,21 +72,20 @@ def prerelease(c):
     # Step 3: Run comprehensive test suite
     print("\n🧪 Step 3: Running comprehensive test suite")
     print("🚀 Running pytest with coverage")
-    c.run("poetry run pytest --cov --cov-config=pyproject.toml --cov-report=html --cov-report=term --tb=no -qq")
-
-    # Step 4: Update requirements.txt (final step)
-    print("\n📦 Step 4: Updating requirements.txt")
-    print("🚀 Exporting Poetry dependencies to requirements.txt")
-    c.run("poetry export -o requirements.txt --with=dev --without-hashes")
+    c.run(
+        "poetry run pytest --cov --cov-config=pyproject.toml --cov-report=html --cov-report=term --tb=no -qq"
+    )
 
     print("\n" + "=" * 60)
     print("✅ Pre-release checks completed successfully!")
-    print("🎉 Repository is ready for release. You can now run 'invoke release' with the appropriate rule.")
+    print(
+        "🎉 Repository is ready for release. You can now run 'invoke release' with the appropriate rule."
+    )
     print("   Example: invoke release --rule=patch")
 
 
 @task
-def release(c, rule="", commit_staged=False):
+def release(c, rule=""):
     """
     Create a new git tag and push it to the remote repository.
 
@@ -94,7 +94,6 @@ def release(c, rule="", commit_staged=False):
 
     Args:
         rule: Version bump rule (major, minor, patch, etc.)
-        commit_staged: If True, commit all staged changes along with the version bump
 
     RULE	    BEFORE	AFTER
     major	    1.3.0	2.0.0
@@ -107,6 +106,16 @@ def release(c, rule="", commit_staged=False):
     prerelease	1.0.3a0	1.0.3a1
     prerelease	1.0.3b0	1.0.3b1
     """
+    # Check for unstaged changes
+    unstaged_result = c.run("git diff --name-only", hide=True, warn=True)
+    if unstaged_result.stdout.strip():
+        print("⚠️  WARNING: You have unstaged changes:")
+        print(unstaged_result.stdout)
+        response = input("Continue with release? (y/N): ").strip().lower()
+        if response not in ("y", "yes"):
+            print("❌ Release cancelled.")
+            return
+
     if rule:
         # bump the current version using the specified rule
         c.run(f"poetry version {rule}")
@@ -115,20 +124,19 @@ def release(c, rule="", commit_staged=False):
     version_short = c.run("poetry version -s", hide=True).stdout.strip()
     version = c.run("poetry version", hide=True).stdout.strip()
 
-    # 2. commit the changes to pyproject.toml (and optionally staged changes)
-    if commit_staged:
-        # Check if there are any staged changes
-        staged_result = c.run("git diff --cached --name-only", hide=True, warn=True)
-        if staged_result.stdout.strip():
-            print(f"🚀 Committing staged changes and version bump for v{version_short}")
-            c.run(f'git add pyproject.toml && git commit -m "Release v{version_short}"')
-        else:
-            print(f"🚀 No staged changes found, committing only version bump for v{version_short}")
-            c.run(f'git commit pyproject.toml -m "Release v{version_short}"')
+    # 2. Commit the version bump and any staged changes
+    # Check if there are any staged changes
+    staged_result = c.run("git diff --cached --name-only", hide=True, warn=True)
+    if staged_result.stdout.strip():
+        print(f"🚀 Committing staged changes and version bump for v{version_short}")
+        c.run(f'git add pyproject.toml && git commit -m "Release v{version_short}"')
     else:
+        print(f"🚀 Committing version bump for v{version_short}")
         c.run(f'git commit pyproject.toml -m "Release v{version_short}"')
 
-    # 3. create a tag and push it to the remote repository
+    # 3. Create a tag
     c.run(f'git tag -a v{version_short} -m "{version}"')
-    c.run("git push --tags")
-    c.run("git push origin main")
+
+    # 4. Push commits and tags together
+    print(f"📤 Pushing v{version_short} to remote repository...")
+    c.run("git push origin main --follow-tags")
