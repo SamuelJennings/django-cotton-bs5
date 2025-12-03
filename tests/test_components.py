@@ -799,6 +799,107 @@ class ButtonGroupComponentTests(CottonBS5ComponentTests):
         self.assertAttributeNotExist('label="Test"', rendered)
 
 
+class BadgeComponentTests(CottonBS5ComponentTests):
+    """Tests for badge component."""
+
+    def test_badge_basic_rendering(self):
+        """Test basic badge rendering with default variant."""
+        template_str = '<c-badge text="New" />'
+        rendered = self.render_template(template_str)
+
+        self.assertInHTML("badge", rendered)
+        self.assertInHTML("text-bg-primary", rendered)
+        self.assertInHTML("New", rendered)
+        self.assertInHTML("<span", rendered)
+
+    def test_badge_with_slot_content(self):
+        """Test badge with slot content instead of text attribute."""
+        template_str = "<c-badge>Badge Text</c-badge>"
+        rendered = self.render_template(template_str)
+
+        self.assertInHTML("Badge Text", rendered)
+        self.assertInHTML("badge", rendered)
+
+    def test_badge_custom_variant(self):
+        """Test badge with custom variant."""
+        template_str = '<c-badge text="Success" variant="success" />'
+        rendered = self.render_template(template_str)
+
+        self.assertInHTML("text-bg-success", rendered)
+        self.assertNotInHTML("text-bg-primary", rendered)
+
+    def test_badge_pill(self):
+        """Test badge with pill styling."""
+        template_str = '<c-badge text="Pill" pill />'
+        rendered = self.render_template(template_str)
+
+        self.assertInHTML("rounded-pill", rendered)
+
+    def test_badge_with_href_uses_anchor_tag(self):
+        """Test badge automatically uses <a> tag when href is provided."""
+        template_str = '<c-badge text="Link Badge" href="/example" />'
+        rendered = self.render_template(template_str)
+
+        self.assertInHTML("<a", rendered)
+        self.assertInHTML('href="/example"', rendered)
+        self.assertNotInHTML("<span", rendered)
+        self.assertInHTML("badge", rendered)
+
+    def test_badge_without_href_uses_span_tag(self):
+        """Test badge uses <span> tag when no href is provided."""
+        template_str = '<c-badge text="Span Badge" />'
+        rendered = self.render_template(template_str)
+
+        self.assertInHTML("<span", rendered)
+        self.assertNotInHTML("<a", rendered)
+
+    def test_badge_with_href_and_pill(self):
+        """Test badge as link with pill styling."""
+        template_str = '<c-badge text="Pill Link" href="/link" pill variant="warning" />'
+        rendered = self.render_template(template_str)
+
+        self.assertInHTML("<a", rendered)
+        self.assertInHTML('href="/link"', rendered)
+        self.assertInHTML("rounded-pill", rendered)
+        self.assertInHTML("text-bg-warning", rendered)
+
+    def test_badge_custom_class(self):
+        """Test badge with custom CSS class."""
+        template_str = '<c-badge text="Custom" class="my-custom-class" />'
+        rendered = self.render_template(template_str)
+
+        self.assertInHTML("my-custom-class", rendered)
+        self.assertInHTML("badge", rendered)
+
+    def test_badge_additional_attributes(self):
+        """Test badge with additional HTML attributes."""
+        template_str = '<c-badge text="Data Badge" data-id="123" title="Hover text" />'
+        rendered = self.render_template(template_str)
+
+        self.assertInHTML('data-id="123"', rendered)
+        self.assertInHTML('title="Hover text"', rendered)
+
+    def test_badge_no_erroneous_attributes(self):
+        """Test that badge doesn't add c-vars as HTML attributes."""
+        template_str = '<c-badge text="Test" variant="danger" pill />'
+        rendered = self.render_template(template_str)
+
+        # These should NOT appear as HTML attributes
+        self.assertAttributeNotExist('text="Test"', rendered)
+        self.assertAttributeNotExist('variant="danger"', rendered)
+        self.assertAttributeNotExist("pill=", rendered)
+
+    def test_badge_href_with_additional_attrs(self):
+        """Test badge link with multiple additional attributes."""
+        template_str = '<c-badge text="External" href="https://example.com" target="_blank" rel="noopener" />'
+        rendered = self.render_template(template_str)
+
+        self.assertInHTML("<a", rendered)
+        self.assertInHTML('href="https://example.com"', rendered)
+        self.assertInHTML('target="_blank"', rendered)
+        self.assertInHTML('rel="noopener"', rendered)
+
+
 class NavbarComponentTests(CottonBS5ComponentTests):
     """Tests for navbar components."""
 
