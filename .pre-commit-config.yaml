@@ -42,16 +42,21 @@ repos:
         language: system
         types: [python]
         files: ^cotton_bs5/
-  - repo: local
+  # - repo: local
+  #   hooks:
+  #     - id: deptry
+  #       name: deptry
+  #       language: python
+  #       entry: deptry
+  #       additional_dependencies: ["deptry==0.24.0"]
+  #       args: ["--verbose", "."]
+  #       pass_filenames: false
+  #       always_run: true
+
+  - repo: https://github.com/fpgmaas/deptry.git
+    rev: "0.24.0"
     hooks:
       - id: deptry
-        name: deptry
-        language: python
-        entry: deptry
-        additional_dependencies: ["deptry==0.24.0"]
-        args: ["--verbose", "."]
-        pass_filenames: false
-        always_run: true
 
 # sets up .pre-commit-ci.yaml to ensure pre-commit dependencies stay up to date
 ci:
