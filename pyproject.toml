@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "django-cotton-bs5"
-version = "0.5.0"
+version = "0.5.1"
 description = "Bootstrap 5 components for use with Django Cotton."
 authors = ["Sam <samuel.scott.jennings@gmail.com>"]
 license = "MIT"
