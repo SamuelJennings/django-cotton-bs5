@@ -3,9 +3,11 @@
         :horizontal="False"
         class />
 {# djlint:off #}
-<{% if numbered %}ol{% else %}ul{% endif %}
+{% with numbered|yesno:"ol,ul" as element %}
+<{{ element }}
 class="list-group{% if flush %} list-group-flush{% endif %}{% if horizontal %} list-group-horizontal{% if horizontal != True %}-{{ horizontal }}{% endif %}{% endif %} {{ class }}"
 {{ attrs }}>
 {{ slot }}
-</{% if numbered %}ol{% else %}ul{% endif %}>
+</{{ element }}>
+{% endwith %}
 {# djlint:on #}

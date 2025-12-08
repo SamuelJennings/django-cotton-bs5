@@ -1,6 +1,10 @@
 <c-vars text class />
 {% with element=href|yesno:"a,span" %}
   {# djlint:off #}
-<li class="breadcrumb-item{% if element == 'span' %} active{% endif %}{% if class %} {{ class }}{% endif %}"{% if element == 'span' %} aria-current="page"{% endif %}><{{ element }}{% if element == 'a' %} class="link-underline link-underline-opacity-0 link-underline-opacity-75-hover"{% endif %} {{ attrs }}>{{ text }}{{ slot }}</{{ element }}></li>
+<li class="breadcrumb-item{% if element == 'span' %} active{% endif %} {{ class }}"{% if element == 'span' %} aria-current="page"{% endif %}>
+  <{{ element }}{% if href %} class="link-underline link-underline-opacity-0 link-underline-opacity-75-hover"{% endif %} {{ attrs }}>
+  {{ text }}{{ slot }}
+  </{{ element }}>
+</li>
   {# djlint:on #}
 {% endwith %}

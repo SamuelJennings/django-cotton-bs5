@@ -1,6 +1,8 @@
-<c-vars text active disabled variant tag="li" class />
-{% with element=href|yesno:"a" default=tag %}
-  {# djlint:off #}
-<{{ element }} class="list-group-item{% if element == 'a' %} list-group-item-action{% endif %}{% if active %} active{% elif disabled %} disabled{% endif %}{% if variant %} list-group-item-{{ variant }}{% endif %}{% if class %} {{ class }}{% endif %}"{% if active %} aria-current="true"{% elif disabled %} aria-disabled="true"{% endif %} {{ attrs }}>{{ text }}{{ slot }}</{{ element }}>
-  {# djlint:on #}
+<c-vars text active disabled variant class />
+{# djlint:off #}
+{% with element=href|yesno:"a,li" %}
+<{{ element }} class="list-group-item{% if href %} list-group-item-action{% endif %}{% if active %} active{% elif disabled %} disabled{% endif %}{% if variant %} list-group-item-{{ variant }}{% endif %} {{ class }}"{% if active %} aria-current="true"{% elif disabled %} aria-disabled="true"{% endif %} {{ attrs }}>
+  {{ text }}{{ slot }}
+</{{ element }}>
 {% endwith %}
+{# djlint:on #}
