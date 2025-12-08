@@ -1,13 +1,6 @@
-<c-vars href text class />
-<li class="breadcrumb-item{% if not href %} active{% endif %} {{ class }}"
-    {% if not href %}aria-current="page"{% endif %}>
-  {% if href %}
-    <a href="{{ href }}"
-       class="link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
-       {{ attrs }}>
-      {{ text }}{{ slot }}
-    </a>
-  {% else %}
-    {{ text }}{{ slot }}
-  {% endif %}
-</li>
+<c-vars text class />
+{% with element=href|yesno:"a,span" %}
+  {# djlint:off #}
+<li class="breadcrumb-item{% if element == 'span' %} active{% endif %}{% if class %} {{ class }}{% endif %}"{% if element == 'span' %} aria-current="page"{% endif %}><{{ element }}{% if element == 'a' %} class="link-underline link-underline-opacity-0 link-underline-opacity-75-hover"{% endif %} {{ attrs }}>{{ text }}{{ slot }}</{{ element }}></li>
+  {# djlint:on #}
+{% endwith %}

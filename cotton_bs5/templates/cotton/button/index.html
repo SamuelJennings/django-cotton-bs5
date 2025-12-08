@@ -1,15 +1,6 @@
 <c-vars variant="primary" size="" outline="" text class />
-{# djlint:off #}
-<{% if href %}a{% else %}button{% endif %}
-  class="btn {% if outline %} btn-outline-{{ variant }}{% else %} btn-{{ variant }}{% endif %}
-  {% if size %}btn-{{ size }}{% endif %}
-  {{ class }}" {{ attrs }}>
-{# djlint:on #}
-{% if slot %}
-  {{ slot }}
-{% else %}
-  {{ text }}
-{% endif %}
-{# djlint:off #}
-</{% if href %}a{% else %}button{% endif %}>
-{# djlint:on #}
+{% with element=href|yesno:"a,button" %}
+  {# djlint:off #}
+<{{ element }} class="btn{% if outline %} btn-outline-{{ variant }}{% else %} btn-{{ variant }}{% endif %}{% if size %} btn-{{ size }}{% endif %}{% if class %} {{ class }}{% endif %}" {{ attrs }}>{{ slot }} {{ text }}</{{ element }}>
+  {# djlint:on #}
+{% endwith %}

@@ -1,15 +1,6 @@
-<c-vars href text active disabled class />
-{% if href %}
-  <a class="dropdown-item{% if active %} active{% endif %}{% if disabled %} disabled{% endif %} {{ class }}"
-     {% if disabled %}tabindex="-1" aria-disabled="true"{% endif %}
-     {{ attrs }}>
-    {{ text }} {{ slot }}
-  </a>
-{% else %}
-  <button class="dropdown-item{% if active %} active{% endif %}{% if disabled %} disabled{% endif %} {{ class }}"
-          type="button"
-          {% if disabled %}disabled{% endif %}
-          {{ attrs }}>
-    {{ text }} {{ slot }}
-  </button>
-{% endif %}
+<c-vars text active disabled class />
+{% with element=href|yesno:"a,button" %}
+  {# djlint:off #}
+<{{ element }} class="dropdown-item{% if active %} active{% endif %}{% if disabled %} disabled{% endif %}{% if class %} {{ class }}{% endif %}"{% if element == "button" %} type="button"{% endif %}{% if disabled %}{% if element == "a" %} tabindex="-1" aria-disabled="true"{% else %} disabled{% endif %}{% endif %} {{ attrs }}>{{ text }}{{ slot }}</{{ element }}>
+  {# djlint:on #}
+{% endwith %}
