@@ -6,15 +6,23 @@ authors = ["Sam <samuel.scott.jennings@gmail.com>"]
 license = "MIT"
 readme = "README.md"
 packages = [{include = "cotton_bs5"}]
+classifiers = [
+    "Framework :: Django",
+    "Framework :: Pytest",
+]
 
 [tool.poetry.dependencies]
-python = ">=3.10,<4.0"
-django-cotton = ">=2.3.1"
+python = ">=3.12,<4.00"
+django-cotton = "^2.6.1"
+beautifulsoup4 = "^4.14.3"
 django-compressor = {version = "^4.5.1", optional = true}
-django-libsass = "^0.9"
+django-libsass = {version = "^0.9", optional = true}
 
 [tool.poetry.extras]
-django-compressor = ["django-compressor"]
+django-compressor = ["django-compressor", "django-libsass"]
+
+[tool.poetry.plugins."pytest11"]
+cotton_bs5 = "cotton_bs5.fixtures"
 
 [tool.poetry.group.dev.dependencies]
 Django = ">=4.2,<6.0"
@@ -22,6 +30,8 @@ django-crispy-forms = "^2.4"
 crispy-bootstrap5 = "^2025.6"
 shot-scraper = "^1.8"
 fairdm-dev-tools = {git = "https://github.com/FAIR-DM/dev-tools"}
+pytest = ">=7.0"
+beautifulsoup4 = "^4.14.3"
 
 [build-system]
 requires = ["poetry-core"]
@@ -181,7 +191,9 @@ extend_exclude = [
 ignore = [
     "DEP004",
     "DEP002",
-    ]
+]
+per_rule_ignores = {DEP001 = ["pytest", "bs4"]}
+
 
 [tool.tox]
 legacy_tox_ini = """
