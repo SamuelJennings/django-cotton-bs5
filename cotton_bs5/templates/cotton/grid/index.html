@@ -1,5 +1,6 @@
-<c-vars cols="" gap="1" :responsive="{}" class />
-<div class="row{% if cols %} row-cols-{{ cols }}{% endif %}{% if gap %} g-{{ gap }}{% endif %}{% for bp,cols in responsive.items %} row-cols-{{ bp }}-{{ cols }}{% endfor %} {{ class }}"
+<c-vars cols=1 gap="1" sm md lg xl xxl class />
+<div class="row{% if cols %} row-cols-{{ cols }}{% endif %}{% if gap %} g-{{ gap }}{% endif %}{% if sm %} row-cols-sm-{{ sm }}{% endif %}{% if md %} row-cols-md-{{ sm }}{% endif %}{% if lg %} row-cols-lg-{{ lg }}{% endif %}{% if xl %} row-cols-xl-{{ xl }}{% endif %}{% if xl %} row-cols-xl-{{ xl }}{% endif %}{% if xxl %} row-cols-xxl-{{ xxl }}{% endif %}{{ class }}"
      {{ attrs }}>
   {{ slot }}
 </div>
+
