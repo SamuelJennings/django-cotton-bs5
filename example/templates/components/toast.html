@@ -1,0 +1,28 @@
+<c-page title="Toast">
+  <c-page.section title="Toast">
+    {% cotton:verbatim %}
+      <c-button variant="primary"
+                onclick="showToast()"
+                text="Show Toast" />
+      <div class="position-fixed top-0 end-0 p-3"
+           style="z-index: 11">
+        <c-toast id="liveToast">
+          <c-toast.header>
+            <strong class="me-auto">Bootstrap</strong>
+            <small>11 mins ago</small>
+          </c-toast.header>
+          <c-toast.body>
+            Hello, world! This is a toast message.
+          </c-toast.body>
+        </c-toast>
+      </div>
+      <script>
+        function showToast() {
+          var toastEl = document.getElementById("liveToast");
+          var toast = new bootstrap.Toast(toastEl);
+          toast.show();
+        }
+      </script>
+    {% endcotton:verbatim %}
+  </c-page.section>
+</c-page>

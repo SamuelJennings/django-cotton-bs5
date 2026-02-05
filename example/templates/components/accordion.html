@@ -1,0 +1,20 @@
+<c-page title="Accordion"
+        description="Build vertically collapsing accordions">
+  <c-page.section title="Basic Example">
+    {% cotton:verbatim %}
+      <c-accordion id="accordionExample">
+        <c-accordion.item text="Accordion Item #1" show>
+          This is the first item's accordion body. It is shown by default because we declared show on the
+        </c-accordion.item>
+        <c-accordion.item text="Accordion Item #2">
+          <strong>This is the second item's accordion body.</strong>
+          It is hidden by default.
+        </c-accordion.item>
+        <c-accordion.item text="Accordion Item #3">
+          <strong>This is the third item's accordion body.</strong>
+          It is also hidden by default.
+        </c-accordion.item>
+      </c-accordion>
+    {% endcotton:verbatim %}
+  </c-page.section>
+</c-page>

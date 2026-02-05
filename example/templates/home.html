@@ -1,0 +1,218 @@
+{% extends "base.html" %}
+{% load i18n static example cotton_bs5 %}
+{% block content %}
+  <div class="container-fluid px-4 py-5">
+    <!-- Hero Section -->
+    <div class="text-center mb-5">
+      <h1 class="display-3 fw-bold mb-3">
+        <span class="text-primary">Cotton</span> Bootstrap 5
+      </h1>
+      <p class="lead text-muted mb-4 mx-auto"
+         style="max-width: 700px">
+        Beautiful, reusable Bootstrap 5 components for Django Cotton.
+        Build modern web interfaces faster with clean, semantic template syntax.
+      </p>
+      <div class="d-flex gap-3 justify-content-center flex-wrap mb-4">
+        <a href="https://github.com/SamuelJennings/cotton-bs5"
+           class="btn btn-primary btn-lg px-4">
+          <svg xmlns="http://www.w3.org/2000/svg"
+               width="16"
+               height="16"
+               fill="currentColor"
+               class="bi bi-github me-2"
+               viewBox="0 0 16 16">
+            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" />
+          </svg>
+          GitHub
+        </a>
+        <a href="https://pypi.org/project/django-cotton-bs5/"
+           class="btn btn-outline-secondary btn-lg px-4">PyPI</a>
+      </div>
+      <!-- Project Badges -->
+      <div class="d-flex gap-2 justify-content-center flex-wrap">
+        <img src="https://img.shields.io/pypi/v/django-cotton-bs5.svg"
+             alt="PyPI version" />
+        <img src="https://img.shields.io/pypi/pyversions/django-cotton-bs5.svg"
+             alt="Python versions" />
+        <img src="https://img.shields.io/pypi/djversions/django-cotton-bs5.svg"
+             alt="Django versions" />
+        <img src="https://img.shields.io/github/actions/workflow/status/SamuelJennings/django-cotton-bs5/test.yml?branch=main&label=tests"
+             alt="Build status" />
+        <img src="https://img.shields.io/codecov/c/github/SamuelJennings/django-cotton-bs5"
+             alt="Code coverage" />
+        <img src="https://img.shields.io/github/license/SamuelJennings/django-cotton-bs5.svg"
+             alt="License" />
+      </div>
+    </div>
+    <!-- Quick Start -->
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-8">
+        <c-card>
+          <c-card.body>
+            <div class="d-flex align-items-center mb-3">
+              <svg xmlns="http://www.w3.org/2000/svg"
+                   width="24"
+                   height="24"
+                   fill="currentColor"
+                   class="bi bi-lightning-charge-fill text-warning me-2"
+                   viewBox="0 0 16 16">
+                <path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z" />
+              </svg>
+              <h4 class="mb-0">Quick Start</h4>
+            </div>
+            <div class="mb-3">
+              <h6 class="text-muted mb-2">1. Install the package</h6>
+              <pre class="mb-0 p-3 bg-light rounded"><code>pip install django-cotton-bs5</code></pre>
+            </div>
+            <div>
+              <h6 class="text-muted mb-2">
+                2. Add to your <code>INSTALLED_APPS</code> in settings.py
+              </h6>
+              <pre class="mb-0 p-3 bg-light rounded"><code>INSTALLED_APPS = [
+    # ... your other apps
+    "django_cotton",
+    "cotton_bs5",
+]</code></pre>
+            </div>
+            <div class="alert alert-info mt-3 mb-0">
+              <small>
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     width="16"
+                     height="16"
+                     fill="currentColor"
+                     class="bi bi-info-circle me-1"
+                     viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                  <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+                </svg>
+                That's it! You can now use Cotton BS5 components in your Django templates.
+              </small>
+            </div>
+          </c-card.body>
+        </c-card>
+      </div>
+    </div>
+    <!-- Features Section -->
+    <div class="row g-4 mb-5">
+      <div class="col-md-4">
+        <c-card class="h-100 border-0 shadow-sm">
+          <c-card.body>
+            <div class="rounded-circle bg-primary bg-opacity-10 d-inline-flex p-3 mb-3">
+              <svg xmlns="http://www.w3.org/2000/svg"
+                   width="24"
+                   height="24"
+                   fill="currentColor"
+                   class="bi bi-file-earmark-code text-primary"
+                   viewBox="0 0 16 16">
+                <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z" />
+                <path d="M8.646 6.646a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L10.293 9 8.646 7.354a.5.5 0 0 1 0-.708zm-1.292 0a.5.5 0 0 0-.708 0l-2 2a.5.5 0 0 0 0 .708l2 2a.5.5 0 0 0 .708-.708L5.707 9l1.647-1.646a.5.5 0 0 0 0-.708z" />
+              </svg>
+            </div>
+            <h5 class="fw-bold">Reduce Boilerplate</h5>
+            <p class="text-muted mb-0">
+              Cut your HTML code by ~50% or more. Replace verbose Bootstrap markup with clean, intuitive Cotton component syntax.
+            </p>
+          </c-card.body>
+        </c-card>
+      </div>
+      <div class="col-md-4">
+        <c-card class="h-100 border-0 shadow-sm">
+          <c-card.body>
+            <div class="rounded-circle bg-success bg-opacity-10 d-inline-flex p-3 mb-3">
+              <svg xmlns="http://www.w3.org/2000/svg"
+                   width="24"
+                   height="24"
+                   fill="currentColor"
+                   class="bi bi-arrow-repeat text-success"
+                   viewBox="0 0 16 16">
+                <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z" />
+                <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z" />
+              </svg>
+            </div>
+            <h5 class="fw-bold">Easy Updates</h5>
+            <p class="text-muted mb-0">
+              Update component appearance site-wide by modifying a single template. Override components to match your design system effortlessly.
+            </p>
+          </c-card.body>
+        </c-card>
+      </div>
+      <div class="col-md-4">
+        <c-card class="h-100 border-0 shadow-sm">
+          <c-card.body>
+            <div class="rounded-circle bg-info bg-opacity-10 d-inline-flex p-3 mb-3">
+              <svg xmlns="http://www.w3.org/2000/svg"
+                   width="24"
+                   height="24"
+                   fill="currentColor"
+                   class="bi bi-layers text-info"
+                   viewBox="0 0 16 16">
+                <path d="M8.235 1.559a.5.5 0 0 0-.47 0l-7.5 4a.5.5 0 0 0 0 .882L3.188 8 .264 9.559a.5.5 0 0 0 0 .882l7.5 4a.5.5 0 0 0 .47 0l7.5-4a.5.5 0 0 0 0-.882L12.813 8l2.922-1.559a.5.5 0 0 0 0-.882l-7.5-4zm3.515 7.008L14.438 10 8 13.433 1.562 10 4.25 8.567l3.515 1.874a.5.5 0 0 0 .47 0l3.515-1.874zM8 9.433 1.562 6 8 2.567 14.438 6 8 9.433z" />
+              </svg>
+            </div>
+            <h5 class="fw-bold">Consistent Styling</h5>
+            <p class="text-muted mb-0">
+              Maintain a uniform look and feel across your entire site. Define components once, use everywhere for guaranteed consistency.
+            </p>
+          </c-card.body>
+        </c-card>
+      </div>
+    </div>
+    <!-- Components Grid -->
+    <div class="mb-4">
+      <h2 class="text-center mb-4">Explore Components</h2>
+      <p class="text-center text-muted mb-4">Click on any component to see live examples and implementation code</p>
+    </div>
+    <div class="row g-3 mb-5">
+      {% for component in component_menu %}
+        <div class="col-sm-6 col-md-4 col-lg-3">
+          <a href="{% url component.url_name %}"
+             class="text-decoration-none">
+            <c-card class="h-100 shadow-sm hover-shadow transition">
+              <c-card.body class="d-flex align-items-center justify-content-between">
+                <span class="fw-semibold text-dark">{{ component.name }}</span>
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     width="16"
+                     height="16"
+                     fill="currentColor"
+                     class="bi bi-arrow-right text-primary"
+                     viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
+                </svg>
+              </c-card.body>
+            </c-card>
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+    <!-- Footer Info -->
+    <div class="row justify-content-center mt-5 pt-5 border-top">
+      <div class="col-lg-8 text-center">
+        <p class="text-muted mb-3">
+          <strong>Django Cotton BS5</strong> is an open-source project. Contributions and feature requests are welcome!
+        </p>
+        <div class="d-flex gap-3 justify-content-center flex-wrap">
+          <a href="https://github.com/SamuelJennings/cotton-bs5/issues"
+             class="btn btn-sm btn-outline-secondary">Report Issue</a>
+          <a href="https://github.com/SamuelJennings/cotton-bs5"
+             class="btn btn-sm btn-outline-secondary">Contribute</a>
+          <a href="https://pypi.org/project/django-cotton-bs5/"
+             class="btn btn-sm btn-outline-secondary">PyPI Package</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <style>
+    .hover-shadow {
+      transition: all 0.3s ease;
+    }
+
+    .hover-shadow:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+    }
+
+    .transition {
+      transition: all 0.3s ease;
+    }
+  </style>
+{% endblock content %}

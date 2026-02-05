@@ -1,0 +1,40 @@
+<c-page title="Dropdown">
+  <c-page.section title="Dropdown">
+    {% cotton:verbatim %}
+      <div class="vstack gap-1">
+        <c-dropdown>
+          <c-slot name="button">
+            <c-dropdown.toggle variant="secondary" text="Dropdown" />
+          </c-slot>
+          <c-dropdown.item href="#action1" text="Action 1" />
+          <c-dropdown.item href="#action2" text="Action 2" />
+          <c-dropdown.divider />
+          <c-dropdown.header text="Dropdown Header" />
+          <c-dropdown.item href="#action3" text="Action 3" />
+        </c-dropdown>
+        <c-dropdown direction="right">
+          <c-slot name="button">
+            <c-dropdown.toggle variant="secondary"
+                               text="Dropright"
+                               :caret="False" />
+          </c-slot>
+          <c-dropdown.item href="#action1" text="Action 1" />
+        </c-dropdown>
+        <c-dropdown direction="up">
+          <c-slot name="button">
+            <c-dropdown.toggle variant="secondary" text="Dropup" />
+          </c-slot>
+          <c-dropdown.item href="#action1" text="Action 1" />
+        </c-dropdown>
+        <c-dropdown direction="left">
+          <c-slot name="button">
+            <c-dropdown.toggle class="float-end"
+                               variant="secondary"
+                               text="Dropleft" />
+          </c-slot>
+          <c-dropdown.item href="#action1" text="Action 1" />
+        </c-dropdown>
+      </div>
+    {% endcotton:verbatim %}
+  </c-page.section>
+</c-page>

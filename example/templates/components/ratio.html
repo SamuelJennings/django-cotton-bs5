@@ -1,0 +1,20 @@
+<c-page title="Ratio">
+  <c-page.section title="Ratio">
+    {% cotton:verbatim %}
+      <c-grid cols="2" gap="3">
+        <c-grid.col>
+          <c-ratio w="16" h="9">
+            <div style="background: linear-gradient(45deg, #007bff, #6f42c1)"
+                 class="d-flex align-items-center justify-content-center text-white">w=16, h=9</div>
+          </c-ratio>
+        </c-grid.col>
+        <c-grid.col>
+          <c-ratio perc="70%">
+            <div style="background: linear-gradient(45deg, #28a745, #20c997)"
+                 class="d-flex align-items-center justify-content-center text-white">70%</div>
+          </c-ratio>
+        </c-grid.col>
+      </c-grid>
+    {% endcotton:verbatim %}
+  </c-page.section>
+</c-page>

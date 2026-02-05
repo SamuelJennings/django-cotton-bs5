@@ -1,0 +1,46 @@
+<c-page title="Tabs">
+  <c-page.section title="Tabs">
+    {% cotton:verbatim %}
+      <c-tabs id="myTabs" type="tabs" fill justify>
+        <c-tabs.item target="home" text="Home" active />
+        <c-tabs.item target="profile" text="Profile" />
+        <c-tabs.item target="contact" text="Contact" />
+      </c-tabs>
+      <c-tabs.content>
+        <c-tabs.pane id="home" active>
+          This is the home tab content. It contains information about the
+          home section.
+        </c-tabs.pane>
+        <c-tabs.pane id="profile">
+          This is the profile tab content. Here you would find
+          profile-related information.
+        </c-tabs.pane>
+        <c-tabs.pane id="contact">
+          This is the contact tab content. Contact information and forms
+          would go here.
+        </c-tabs.pane>
+      </c-tabs.content>
+      <div class="d-flex mt-3">
+        <c-tabs id="verticalTabs" type="pills" vertical>
+          <c-tabs.item target="vhome" text="Home" active />
+          <c-tabs.item target="vprofile" text="Profile" />
+          <c-tabs.item target="vcontact" text="Contact" />
+        </c-tabs>
+        <c-tabs.content>
+          <c-tabs.pane id="vhome" active>
+            This is the home tab content. It contains information about the
+            home section.
+          </c-tabs.pane>
+          <c-tabs.pane id="vprofile">
+            This is the profile tab content. Here you would find
+            profile-related information.
+          </c-tabs.pane>
+          <c-tabs.pane id="vcontact">
+            This is the contact tab content. Contact information and forms
+            would go here.
+          </c-tabs.pane>
+        </c-tabs.content>
+      </div>
+    {% endcotton:verbatim %}
+  </c-page.section>
+</c-page>

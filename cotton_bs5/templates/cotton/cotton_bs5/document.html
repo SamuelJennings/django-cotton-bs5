@@ -1,8 +1,8 @@
 {% load cotton_bs5 %}
-<section>
+<section id="{{ title|slugify }}">
   <h2>{{ title }}</h2>
   <p>{{ help }}</p>
   {% show_code %}
-  {{ slot }}
-{% endshow_code %}
+    {{ slot }}
+  {% endshow_code %}
 </section>

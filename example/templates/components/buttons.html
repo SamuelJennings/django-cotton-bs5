@@ -1,0 +1,27 @@
+<c-page title="Buttons">
+  <c-page.section title="Buttons">
+    {% cotton:verbatim %}
+      <c-vstack gap=3>
+        <c-hstack>
+          <c-button variant="primary" text="Primary Button" />
+          <c-button variant="secondary" text="Secondary Button" />
+          <c-button variant="success" text="Success Button" />
+          <c-button variant="danger" text="Danger Button" />
+          <c-button variant="warning" text="Warning Button" />
+          <c-button variant="info" text="Info Button" />
+        </c-hstack>
+        <c-hstack>
+          <c-button variant="outline-primary" text="Outline Primary" />
+          <c-button variant="outline-secondary"
+                    text="Outline Secondary" />
+          <c-button variant="outline-success" text="Outline Success" />
+        </c-hstack>
+        <c-hstack>
+          <c-button size="sm" variant="primary" text="Small Button" />
+          <c-button variant="primary" text="Normal Button" />
+          <c-button size="lg" variant="primary" text="Large Button" />
+        </c-hstack>
+      </c-vstack>
+    {% endcotton:verbatim %}
+  </c-page.section>
+</c-page>

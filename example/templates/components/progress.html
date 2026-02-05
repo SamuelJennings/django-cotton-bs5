@@ -1,0 +1,23 @@
+<c-page title="Progress">
+  <c-page.section title="Progress">
+    {% cotton:verbatim %}
+      <div class="vstack gap-2">
+        <c-progress value="40" text="value=40" />
+        <c-progress value="50"
+                    striped
+                    variant="warning"
+                    text="value=50, striped, variant='warning'" />
+        <c-progress min="10"
+                    max="20"
+                    value="17"
+                    variant="danger"
+                    text="min=10, max=20, value=17, variant=danger" />
+        <c-progress value="100"
+                    variant="success"
+                    striped
+                    animated
+                    text="value=100, variant='success', striped, animated" />
+      </div>
+    {% endcotton:verbatim %}
+  </c-page.section>
+</c-page>

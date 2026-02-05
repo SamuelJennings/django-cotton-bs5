@@ -19,13 +19,146 @@
     </style>
   </head>
   <body>
-    {% block content %}
-    {% endblock content %}
+    <div class="container-fluid">
+      <div class="row vh-100">
+        <!-- Desktop Sidebar Navigation -->
+        <div class="col-md-3 col-lg-2 h-100 overflow-auto d-none d-md-block py-3 border-end bg-light">
+          <div class="mb-4 text-center">
+            <a href="{% url 'home' %}"
+               class="text-decoration-none">
+              <h4 class="fw-bold mb-0">
+                <span class="text-primary">Cotton</span> <span class="text-dark">BS5</span>
+              </h4>
+            </a>
+          </div>
+          <div class="mb-3">
+            <h6 class="fw-bold text-muted text-uppercase small">Components</h6>
+          </div>
+          <c-list-group flush>
+            {% for component in component_menu %}
+              <c-list-group.item href="{% url component.url_name %}"
+                                 text="{{ component.name }}"
+                                 class="border-0 py-2 px-3 rounded mb-1" />
+            {% endfor %}
+          </c-list-group>
+        </div>
+        <!-- Main Content Area -->
+        <div class="col-md-9 col-lg-10 col-12 h-100 overflow-auto px-0">
+          <!-- Mobile Navigation Toggle Button -->
+          <div class="d-md-none position-sticky top-0 z-3 bg-white border-bottom shadow-sm p-3">
+            <div class="d-flex justify-content-between align-items-center">
+              <h5 class="mb-0 fw-bold">Cotton BS5</h5>
+              <button class="btn btn-outline-primary btn-sm"
+                      type="button"
+                      data-bs-toggle="offcanvas"
+                      data-bs-target="#mobileNav"
+                      aria-controls="mobileNav">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     width="16"
+                     height="16"
+                     fill="currentColor"
+                     class="bi bi-list"
+                     viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+                </svg>
+                Menu
+              </button>
+            </div>
+          </div>
+          <!-- Mobile Offcanvas Navigation -->
+          <div class="offcanvas offcanvas-start"
+               tabindex="-1"
+               id="mobileNav"
+               aria-labelledby="mobileNavLabel">
+            <div class="offcanvas-header border-bottom">
+              <h5 class="offcanvas-title fw-bold"
+                  id="mobileNavLabel">
+                <a href="{% url 'home' %}"
+                   class="text-decoration-none">
+                  <span class="text-primary">Cotton</span> <span class="text-dark">BS5</span>
+                </a>
+              </h5>
+              <button type="button"
+                      class="btn-close"
+                      data-bs-dismiss="offcanvas"
+                      aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+              <c-list-group flush>
+                {% for component in component_menu %}
+                  <c-list-group.item href="{% url component.url_name %}"
+                                     text="{{ component.name }}"
+                                     class="border-0 py-2 px-3 rounded mb-1" />
+                {% endfor %}
+              </c-list-group>
+            </div>
+          </div>
+          {% block content %}
+          {% endblock content %}
+        </div>
+      </div>
+    </div>
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <script>
       hljs.highlightAll();
+
+      // Copy to clipboard functionality
+      document.addEventListener('DOMContentLoaded', function() {
+        const copyButtons = document.querySelectorAll('.copy-btn');
+
+        copyButtons.forEach(button => {
+          button.addEventListener('click', async function() {
+            const targetId = this.getAttribute('data-copy-target');
+            const codeElement = document.getElementById(targetId);
+
+            if (!codeElement) return;
+
+            const code = codeElement.textContent;
+
+            try {
+              await navigator.clipboard.writeText(code);
+
+              // Visual feedback
+              const originalHTML = this.innerHTML;
+              this.innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+                  <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+                </svg>
+                Copied!
+              `;
+              this.classList.add('btn-success');
+              this.classList.remove('btn-outline-secondary');
+
+              setTimeout(() => {
+                this.innerHTML = originalHTML;
+                this.classList.remove('btn-success');
+                this.classList.add('btn-outline-secondary');
+              }, 2000);
+            } catch (err) {
+              console.error('Failed to copy:', err);
+              // Fallback for older browsers
+              const textArea = document.createElement('textarea');
+              textArea.value = code;
+              textArea.style.position = 'fixed';
+              textArea.style.left = '-999999px';
+              document.body.appendChild(textArea);
+              textArea.select();
+              try {
+                document.execCommand('copy');
+                this.textContent = 'Copied!';
+                setTimeout(() => {
+                  this.innerHTML = originalHTML;
+                }, 2000);
+              } catch (err) {
+                console.error('Fallback copy failed:', err);
+              }
+              document.body.removeChild(textArea);
+            }
+          });
+        });
+      });
     </script>
   </body>
 </html>

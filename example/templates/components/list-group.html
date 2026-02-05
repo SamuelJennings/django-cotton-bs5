@@ -1,0 +1,20 @@
+<c-page title="List Group">
+  <c-page.section title="List Group">
+    {% cotton:verbatim %}
+      <c-grid cols="2" gap="3">
+        <c-list-group>
+          <c-list-group.item text="First item" />
+          <c-list-group.item active text="Active item" />
+          <c-list-group.item text="Third item" />
+          <c-list-group.item disabled text="Disabled item" />
+        </c-list-group>
+        <c-list-group>
+          <c-list-group.item href="#" variant="primary" text="Primary item" />
+          <c-list-group.item href="#" variant="success" text="Success item" />
+          <c-list-group.item href="#" variant="danger" text="Danger item" />
+          <c-list-group.item href="#" variant="warning" text="Warning item" />
+        </c-list-group>
+      </c-grid>
+    {% endcotton:verbatim %}
+  </c-page.section>
+</c-page>

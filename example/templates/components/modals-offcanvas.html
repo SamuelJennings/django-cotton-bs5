@@ -1,0 +1,49 @@
+<c-page title="Modals & Offcanvas">
+  <c-page.section title="Modals & Offcanvas">
+    {% cotton:verbatim %}
+      <c-button variant="primary"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal"
+                text="Launch Demo Modal" />
+      <c-modal id="exampleModal">
+        <c-modal.header>
+          <c-modal.title text="Modal Title" />
+        </c-modal.header>
+        <c-modal.body>
+          <p>This is the modal body content. You can put any content here.</p>
+          <p>
+            Modals are used to display important information or forms in an
+            overlay.
+          </p>
+        </c-modal.body>
+        <c-modal.footer>
+          <c-button variant="secondary"
+                    data-bs-dismiss="modal"
+                    text="Close" />
+          <c-button variant="primary" text="Save Changes" />
+        </c-modal.footer>
+      </c-modal>
+      <c-button variant="primary"
+                data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasExample"
+                text="Toggle Offcanvas" />
+      <c-offcanvas id="offcanvasExample" placement="start">
+        <c-offcanvas.header>
+          <c-offcanvas.title title="Offcanvas Title" />
+        </c-offcanvas.header>
+        <c-offcanvas.body>
+          <p>This is the offcanvas content. It slides in from the side.</p>
+          <p>
+            Offcanvas components are great for navigation menus and side
+            panels.
+          </p>
+        </c-offcanvas.body>
+        <c-offcanvas.footer>
+          <c-button variant="outline-secondary"
+                    data-bs-dismiss="offcanvas"
+                    text="Close" />
+        </c-offcanvas.footer>
+      </c-offcanvas>
+    {% endcotton:verbatim %}
+  </c-page.section>
+</c-page>

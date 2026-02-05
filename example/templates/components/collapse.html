@@ -1,0 +1,22 @@
+<c-page title="Collapse">
+  <c-page.section title="Collapse">
+    {% cotton:verbatim %}
+      <div class="vstack gap-1">
+        <c-collapse id="collapseExample" text="Toggle Collapse">
+          <div class="card card-body mt-2">
+            This is the collapsible content. It's hidden by default and
+            shown when the button is clicked.
+          </div>
+        </c-collapse>
+        <c-collapse id="horizontalCollapse"
+                    text="Toggle Collapse"
+                    horizontal>
+          <div class="card card-body mt-2" style="width: 300px">
+            This is the collapsible content. It's hidden by default and
+            shown when the button is clicked.
+          </div>
+        </c-collapse>
+      </div>
+    {% endcotton:verbatim %}
+  </c-page.section>
+</c-page>

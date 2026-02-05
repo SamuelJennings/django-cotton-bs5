@@ -1,0 +1,35 @@
+<c-page title="Carousel">
+  <c-page.section title="Carousel">
+    {% cotton:verbatim %}
+      <c-carousel id="demoCarousel">
+        <c-carousel.item active>
+          <div style="height: 300px;
+                      background: linear-gradient(45deg, #007bff, #6f42c1)"
+               class="d-flex align-items-center justify-content-center">
+            <c-carousel.caption>
+              <h5 class="text-white">First Slide</h5>
+            </c-carousel.caption>
+          </div>
+        </c-carousel.item>
+        <c-carousel.item>
+          <div style="height: 300px;
+                      background: linear-gradient(45deg, #28a745, #20c997)"
+               class="d-flex align-items-center justify-content-center">
+            <c-carousel.caption>
+              <h5 class="text-white">Second Slide</h5>
+            </c-carousel.caption>
+          </div>
+        </c-carousel.item>
+        <c-carousel.item>
+          <div style="height: 300px;
+                      background: linear-gradient(45deg, #dc3545, #fd7e14)"
+               class="d-flex align-items-center justify-content-center">
+            <c-carousel.caption>
+              <h5 class="text-white">Third Slide</h5>
+            </c-carousel.caption>
+          </div>
+        </c-carousel.item>
+      </c-carousel>
+    {% endcotton:verbatim %}
+  </c-page.section>
+</c-page>

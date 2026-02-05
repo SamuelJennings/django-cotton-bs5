@@ -1,42 +1,101 @@
 {% load cotton_bs5 %}
-<div class="card p-0">
-  <div class="rendered-content p-3">{{ rendered }}</div>
-  <div class="container-fluid border-top border-bottom py-1">
-    <div role="tablist" class="nav nav-tabs gap-2">
+<div class="card component-demo-card">
+  <!-- Rendered Component Preview -->
+  <div class="demo-preview border-bottom p-4">{{ rendered }}</div>
+  <!-- Code Tabs Navigation -->
+  <div class="border-bottom">
+    <div role="tablist"
+         class="nav nav-tabs border-0 px-3 pt-2">
       {% genid "syntax-tab" as syntax_tab_id %}
       <button type="button"
-              class="btn btn-outline-secondary btn-sm active"
+              class="nav-link active"
               id="{{ syntax_tab_id }}"
               data-bs-toggle="tab"
               data-bs-target="#{{ syntax_tab_id }}-pane"
               role="tab"
               aria-controls="{{ syntax_tab_id }}-pane"
-              aria-selected="true">Cotton Syntax</button>
+              aria-selected="true">
+        <svg xmlns="http://www.w3.org/2000/svg"
+             width="14"
+             height="14"
+             fill="currentColor"
+             class="bi bi-code-slash me-1"
+             viewBox="0 0 16 16">
+          <path d="M10.478 1.647a.5.5 0 1 0-.956-.294l-4 13a.5.5 0 0 0 .956.294l4-13zM4.854 4.146a.5.5 0 0 1 0 .708L1.707 8l3.147 3.146a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0zm6.292 0a.5.5 0 0 0 0 .708L14.293 8l-3.147 3.146a.5.5 0 0 0 .708.708l3.5-3.5a.5.5 0 0 0 0-.708l-3.5-3.5a.5.5 0 0 0-.708 0z" />
+        </svg>
+        Cotton Syntax
+      </button>
       {% genid "html-tab" as html_tab_id %}
       <button type="button"
-              class="btn btn-outline-secondary btn-sm"
-              id="html-tab"
+              class="nav-link"
+              id="{{ html_tab_id }}"
               data-bs-toggle="tab"
               data-bs-target="#{{ html_tab_id }}-pane"
               role="tab"
               aria-controls="{{ html_tab_id }}-pane"
-              aria-selected="false">HTML Output</button>
+              aria-selected="false">
+        <svg xmlns="http://www.w3.org/2000/svg"
+             width="14"
+             height="14"
+             fill="currentColor"
+             class="bi bi-file-code me-1"
+             viewBox="0 0 16 16">
+          <path d="M6.646 5.646a.5.5 0 1 1 .708.708L5.707 8l1.647 1.646a.5.5 0 0 1-.708.708l-2-2a.5.5 0 0 1 0-.708l2-2zm2.708 0a.5.5 0 1 0-.708.708L10.293 8 8.646 9.646a.5.5 0 0 0 .708.708l2-2a.5.5 0 0 0 0-.708l-2-2z" />
+          <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z" />
+        </svg>
+        HTML Output
+      </button>
     </div>
   </div>
-  <div class="tab-content p-3">
+  <!-- Code Tabs Content -->
+  <div class="tab-content">
     <div class="tab-pane fade show active"
          id="{{ syntax_tab_id }}-pane"
          role="tabpanel"
          aria-labelledby="{{ syntax_tab_id }}"
          tabindex="0">
-      <pre><code class="language-html">{{ code }}</code></pre>
+      <div class="position-relative">
+        <button class="btn btn-sm btn-outline-secondary position-absolute top-0 end-0 m-3 copy-btn"
+                data-copy-target="{{ syntax_tab_id }}-code"
+                aria-label="Copy Cotton syntax to clipboard"
+                title="Copy code">
+          <svg xmlns="http://www.w3.org/2000/svg"
+               width="14"
+               height="14"
+               fill="currentColor"
+               class="bi bi-clipboard"
+               viewBox="0 0 16 16">
+            <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
+            <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
+          </svg>
+          Copy
+        </button>
+        <pre class="mb-0 p-3"><code id="{{ syntax_tab_id }}-code" class="language-html">{{ code }}</code></pre>
+      </div>
     </div>
     <div class="tab-pane fade"
          id="{{ html_tab_id }}-pane"
          role="tabpanel"
          aria-labelledby="{{ html_tab_id }}"
          tabindex="0">
-      <pre><code class="language-html">{{ html }}</code></pre>
+      <div class="position-relative">
+        <button class="btn btn-sm btn-outline-secondary position-absolute top-0 end-0 m-3 copy-btn"
+                data-copy-target="{{ html_tab_id }}-code"
+                aria-label="Copy HTML output to clipboard"
+                title="Copy code">
+          <svg xmlns="http://www.w3.org/2000/svg"
+               width="14"
+               height="14"
+               fill="currentColor"
+               class="bi bi-clipboard"
+               viewBox="0 0 16 16">
+            <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
+            <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
+          </svg>
+          Copy
+        </button>
+        <pre class="mb-0 p-3"><code id="{{ html_tab_id }}-code" class="language-html">{{ html }}</code></pre>
+      </div>
     </div>
   </div>
 </div>

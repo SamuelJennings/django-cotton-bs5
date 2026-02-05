@@ -33,6 +33,7 @@ fairdm-dev-tools = {git = "https://github.com/FAIR-DM/dev-tools"}
 pytest = ">=7.0"
 beautifulsoup4 = "^4.14.3"
 django-browser-reload = "^1.21.0"
+django-distill = "^3.0"
 
 [build-system]
 requires = ["poetry-core"]
@@ -135,6 +136,7 @@ exclude = [
 blank_line_after_tag="c-vars"
 close_void_tags=true
 custom_html="c-[\\w.-]+"
+custom_blocks="cotton:verbatim,show_code"
 format_js=true
 format_css=true
 indent=2

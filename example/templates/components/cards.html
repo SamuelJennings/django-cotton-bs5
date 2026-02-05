@@ -1,0 +1,36 @@
+<c-page title="Cards">
+  <c-page.section title="Cards">
+    {% cotton:verbatim %}
+      <c-grid cols="3" gap="3">
+        <c-grid.col>
+          <c-card minimal>
+            <c-card.header text="Card Header" />
+            <c-card.body>
+              <c-card.title text="Card Title" />
+              <p class="card-text">This is a basic card with header, body, and footer sections.</p>
+              <c-button variant="primary" text="Go somewhere" />
+            </c-card.body>
+            <c-card.footer>
+              <small class="text-muted">Last updated 3 mins ago</small>
+            </c-card.footer>
+          </c-card>
+        </c-grid.col>
+        <c-grid.col>
+          <c-card>
+            <c-card.body>
+              <h5 class="card-title">Simple Card</h5>
+              <p class="card-text">This is a simple card with just a body section.</p>
+              <c-button variant="success" text="Action" />
+            </c-card.body>
+          </c-card>
+        </c-grid.col>
+        <c-grid.col>
+          <c-card border="primary">
+            <h5 class="card-title text-primary">Primary Border</h5>
+            <p class="card-text">This card has a primary border.</p>
+          </c-card>
+        </c-grid.col>
+      </c-grid>
+    {% endcotton:verbatim %}
+  </c-page.section>
+</c-page>

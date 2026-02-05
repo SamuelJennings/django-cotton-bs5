@@ -85,3 +85,6 @@ dist
 #no migration files except __init__.py
 .github/instructions/general.instructions.md
 django-cotton-bs5.code-workspace
+.github/skills/chrome-devtools/SKILL.md
+.github/skills/frontend-design/LICENSE.txt
+.github/skills/frontend-design/SKILL.md

@@ -1,0 +1,16 @@
+<c-page title="Breadcrumbs">
+  <c-page.section title="Breadcrumbs">
+    {% cotton:verbatim %}
+      <c-breadcrumbs>
+        <c-breadcrumbs.item href="#" text="Home" />
+        <c-breadcrumbs.item href="#" text="Library" />
+        <c-breadcrumbs.item active text="Data" />
+      </c-breadcrumbs>
+      <c-breadcrumbs divider=">">
+        <c-breadcrumbs.item href="/" text="Home" />
+        <c-breadcrumbs.item href="/library" text="Library" />
+        <c-breadcrumbs.item active text="Data" />
+      </c-breadcrumbs>
+    {% endcotton:verbatim %}
+  </c-page.section>
+</c-page>

@@ -1,0 +1,14 @@
+<c-page title="Alerts">
+  <c-page.section title="Alerts">
+    {% cotton:verbatim %}
+      <c-alert text="This is a primary alert!" variant="primary" />
+      <c-alert text="This is a dismissible danger alert!"
+               variant="danger"
+               dismissible />
+      <c-alert variant="success">
+        <strong>Success!</strong>
+        This alert has custom markup.
+      </c-alert>
+    {% endcotton:verbatim %}
+  </c-page.section>
+</c-page>

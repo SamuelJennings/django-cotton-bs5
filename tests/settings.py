@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "crispy_forms",
     "crispy_bootstrap5",
     "django_browser_reload",
+    "django_distill",
     # "debug_toolbar",
 ]
 
@@ -89,6 +90,10 @@ DATABASES = {
 AUTH_PASSWORD_VALIDATORS = []
 
 STATIC_URL = "/static/"
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+
+# django-distill configuration
+DISTILL_DIR = os.path.join(BASE_DIR, "dist")
 
 CACHES = {
     "default": {
