@@ -16,10 +16,11 @@
 */.ipynb_checkpoints/*
 .DS_Store
 .vscode
+staticfiles/
 
 # Project files
 .ropeproject
-.project
+staticfiles/
 .pydevproject
 # .settings
 .idea

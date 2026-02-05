@@ -36,8 +36,8 @@ INSTALLED_APPS = [
     "cotton_bs5",
     "crispy_forms",
     "crispy_bootstrap5",
-    "django_browser_reload",
     "django_distill",
+    "django_browser_reload",
     # "debug_toolbar",
 ]
 
@@ -52,11 +52,19 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.common.CommonMiddleware",
-    "django_browser_reload.middleware.BrowserReloadMiddleware",
     # "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
-ROOT_URLCONF = "example.urls"
+# Add browser reload middleware only in DEBUG mode
+if DEBUG and not os.environ.get("GITHUB_PAGES_REPO"):
+    MIDDLEWARE.append("django_browser_reload.middleware.BrowserReloadMiddleware")
+
+# Use GitHub Pages URLs wrapper when deploying to GitHub Pages
+GITHUB_PAGES_REPO = os.environ.get("GITHUB_PAGES_REPO", None)
+if GITHUB_PAGES_REPO:
+    ROOT_URLCONF = "example.urls_github_pages"
+else:
+    ROOT_URLCONF = "example.urls"
 
 TEMPLATES = [
     {
@@ -94,6 +102,11 @@ STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 # django-distill configuration
 DISTILL_DIR = os.path.join(BASE_DIR, "dist")
+
+# GitHub Pages subdirectory configuration
+# When deploying to GitHub Pages, static files are served from the repo subdirectory
+if os.environ.get("GITHUB_PAGES_REPO"):
+    STATIC_URL = f"/{os.environ.get('GITHUB_PAGES_REPO')}/static/"
 
 CACHES = {
     "default": {
@@ -144,3 +157,5 @@ INTERNAL_IPS = [
 ]
 
 LOGIN_REDIRECT_URL = "/"
+
+

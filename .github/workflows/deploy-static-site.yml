@@ -55,6 +55,8 @@ jobs:
 
       - name: Generate static site
         run: poetry run python manage.py distill-local --force --collectstatic dist
+        env:
+          GITHUB_PAGES_REPO: django-cotton-bs5
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

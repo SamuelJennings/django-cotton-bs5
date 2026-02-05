@@ -1,5 +1,7 @@
+import os
 from pathlib import Path
 
+from django.conf import settings
 from django.urls import include, path
 from django.utils.text import slugify
 from django.views.generic import TemplateView
@@ -119,16 +121,11 @@ def generate_component_routes():
             # Create template path
             template_path = f"components/{template_file.name}"
 
-            # Add route using distill_path for static generation
-            def get_component():
-                return None
-
             routes.append(
                 distill_path(
                     f"{slug}/",
                     DemoPageView.as_view(template_name=template_path),
                     name=slug,
-                    # distill_func=get_component,
                     distill_file=f"{slug}/index.html",
                 )
             )
@@ -144,7 +141,12 @@ urlpatterns = [
         distill_func=get_index,
         distill_file="index.html",
     ),
-    path("__reload__/", include("django_browser_reload.urls")),
     # Dynamically generated component routes
     *generate_component_routes(),
 ]
+
+# Add browser reload URLs only in DEBUG mode
+if settings.DEBUG and not os.environ.get("GITHUB_PAGES_REPO"):
+    from django.urls import include, path
+
+    urlpatterns.append(path("__reload__/", include("django_browser_reload.urls")))
