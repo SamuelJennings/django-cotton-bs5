@@ -2543,4 +2543,4 @@ django-compressor = ["django-compressor", "django-libsass"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.12,<4.00"
-content-hash = "8cdac4a90042ad18f09d0e942010869adc1dbd52addf7042a20364dfb9a12f45"
+content-hash = "11c55e93a0949a747621ff20158dd834e9170e8ecda8f31785bddbba6ed78ca4"

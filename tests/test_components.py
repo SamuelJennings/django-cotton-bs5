@@ -1069,8 +1069,9 @@ class TestShowCodeTag:
 
     def test_show_code_node_init(self):
         """Test ShowCodeNode initializes with nodelist."""
-        from cotton_bs5.templatetags.cotton_bs5 import ShowCodeNode
         from django.template import NodeList
+
+        from cotton_bs5.templatetags.cotton_bs5 import ShowCodeNode
 
         nodelist = NodeList()
         node = ShowCodeNode(nodelist)

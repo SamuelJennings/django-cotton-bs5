@@ -1,8 +1,14 @@
-<c-vars id text target parent header class />
+{% load cotton_bs5 %}
+<c-vars id text target header class show />
+{% cotton_parent as parent %}
+{% genid "accordion-item" as uid %}
+{% firstof id uid as target %}
 <div class="accordion-item {{ class }}" {{ attrs }}>
-  {% if text %}<c-accordion.header :attrs="attrs" />{% endif %}
+  {% if text %}<c-accordion.header target="{{ target }}" :attrs="attrs" />{% endif %}
   {{ header }}
-  <c-accordion.body id="{{ target }}" :attrs="attrs">
+  <c-accordion.body id="{{ target }}"
+                    parent="{{ parent.id }}"
+                    :attrs="attrs">
     {{ slot }}
   </c-accordion.body>
 </div>

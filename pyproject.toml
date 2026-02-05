@@ -32,6 +32,7 @@ shot-scraper = "^1.8"
 fairdm-dev-tools = {git = "https://github.com/FAIR-DM/dev-tools"}
 pytest = ">=7.0"
 beautifulsoup4 = "^4.14.3"
+django-browser-reload = "^1.21.0"
 
 [build-system]
 requires = ["poetry-core"]

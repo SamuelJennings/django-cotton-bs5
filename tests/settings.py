@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     "cotton_bs5",
     "crispy_forms",
     "crispy_bootstrap5",
+    "django_browser_reload",
     # "debug_toolbar",
 ]
 
@@ -50,6 +51,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.common.CommonMiddleware",
+    "django_browser_reload.middleware.BrowserReloadMiddleware",
     # "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 

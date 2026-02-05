@@ -1,0 +1,8 @@
+{% load cotton_bs5 %}
+<section>
+  <h2>{{ title }}</h2>
+  <p>{{ help }}</p>
+  {% show_code %}
+  {{ slot }}
+{% endshow_code %}
+</section>

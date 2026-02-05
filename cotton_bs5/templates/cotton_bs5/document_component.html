@@ -1,33 +1,42 @@
-<c-card.wrapper>
+{% load cotton_bs5 %}
+<div class="card p-0">
   <div class="rendered-content p-3">{{ rendered }}</div>
   <div class="container-fluid border-top border-bottom py-1">
-    <c-button
-      text="Component Syntax"
-      variant="secondary"
-      class="active"
-      outline
-      small
-    />
-    <c-button text="Rendered HTML" variant="secondary" outline small />
+    <div role="tablist" class="nav nav-tabs gap-2">
+      {% genid "syntax-tab" as syntax_tab_id %}
+      <button type="button"
+              class="btn btn-outline-secondary btn-sm active"
+              id="{{ syntax_tab_id }}"
+              data-bs-toggle="tab"
+              data-bs-target="#{{ syntax_tab_id }}-pane"
+              role="tab"
+              aria-controls="{{ syntax_tab_id }}-pane"
+              aria-selected="true">Cotton Syntax</button>
+      {% genid "html-tab" as html_tab_id %}
+      <button type="button"
+              class="btn btn-outline-secondary btn-sm"
+              id="html-tab"
+              data-bs-toggle="tab"
+              data-bs-target="#{{ html_tab_id }}-pane"
+              role="tab"
+              aria-controls="{{ html_tab_id }}-pane"
+              aria-selected="false">HTML Output</button>
+    </div>
   </div>
   <div class="tab-content p-3">
-    <div
-      class="tab-pane fade show active"
-      id="cotton-"
-      role="tabpanel"
-      aria-labelledby="pills-home-tab"
-      tabindex="0"
-    >
-      <pre><code>{{ code }}</code></pre>
+    <div class="tab-pane fade show active"
+         id="{{ syntax_tab_id }}-pane"
+         role="tabpanel"
+         aria-labelledby="{{ syntax_tab_id }}"
+         tabindex="0">
+      <pre><code class="language-html">{{ code }}</code></pre>
     </div>
-    <div
-      class="tab-pane fade"
-      id="pills-profile"
-      role="tabpanel"
-      aria-labelledby="pills-profile-tab"
-      tabindex="0"
-    >
-      {% filter force_escape %} {{ rendered }} {% endfilter %}
+    <div class="tab-pane fade"
+         id="{{ html_tab_id }}-pane"
+         role="tabpanel"
+         aria-labelledby="{{ html_tab_id }}"
+         tabindex="0">
+      <pre><code class="language-html">{{ html }}</code></pre>
     </div>
   </div>
-</c-card.wrapper>
+</div>

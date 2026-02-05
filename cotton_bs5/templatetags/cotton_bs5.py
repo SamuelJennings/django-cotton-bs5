@@ -1,11 +1,22 @@
 """Template tags and filters for MVP navbar widgets."""
 
+import secrets
+import string
 import textwrap
 
 from django import template
 from django.template.loader import render_to_string
 from django.utils.html import escape
+from django.utils.safestring import mark_safe
 from django_cotton.compiler_regex import CottonCompiler
+
+# Conditional import for BeautifulSoup
+try:
+    from bs4 import BeautifulSoup
+
+    HAS_BEAUTIFULSOUP = True
+except ImportError:
+    HAS_BEAUTIFULSOUP = False
 
 register = template.Library()
 
@@ -36,6 +47,75 @@ def slot_is_empty(slot):
     """
     if isinstance(slot, str):
         return slot.strip() == ""
+
+
+@register.filter
+def beautify_html(html):
+    """Clean up and format unformatted HTML with proper indentation.
+
+    Removes common leading whitespace and strips leading/trailing blank lines
+    to produce clean, readable HTML.
+
+    Args:
+        html (str): Unformatted HTML string
+
+    Returns:
+        str: Formatted HTML with normalized indentation
+
+    Example:
+        Input:  "    <div>\n        <p>Hello</p>\n    </div>"
+        Output: "<div>\n    <p>Hello</p>\n</div>"
+    """
+    return textwrap.dedent(html).strip("\n")
+
+
+@register.simple_tag
+def genid(prefix="", length=6):
+    """Generate a unique random ID for use in HTML attributes.
+
+    Produces a short random string suitable for use as unique HTML element IDs.
+    Can optionally include a prefix for semantic naming.
+
+    Args:
+        prefix (str): Optional prefix to prepend to the random string.
+                     If provided, the format is "{prefix}-{random_string}".
+                     Defaults to empty string (no prefix).
+        length (int): Length of the random string to generate.
+                     Defaults to 6 characters.
+
+    Returns:
+        str: Generated ID. If prefix is provided, returns "{prefix}-{random_string}",
+             otherwise returns just the random string.
+
+    Example:
+        {% genid %}                              # Returns something like "a3b2c1"
+        {% genid "tab" %}                        # Returns something like "tab-a3b2c1"
+        {% genid "modal" 8 %}                    # Returns something like "modal-a3b2c1d9"
+        {% genid prefix="button" length=10 %}   # Returns something like "button-a3b2c1d9e7"
+    """
+    random_str = "".join(
+        secrets.choice(string.ascii_lowercase + string.digits) for _ in range(length)
+    )
+    if prefix:
+        return f"{prefix}-{random_str}"
+    return random_str
+
+
+@register.simple_tag(takes_context=True)
+def cotton_parent(context):
+    cotton_data = context.get("cotton_data", {})
+    if not cotton_data:
+        return None
+    stack = cotton_data.get("stack", [])
+    if not stack:
+        return None
+
+    stack_length = len(stack)
+
+    parent_idx = stack_length - 2  # Get the index of the parent element
+
+    # this will ONLY return attrs declared on the component itself, not c-vars
+    return stack[parent_idx]["attrs"]
 
 
 @register.simple_tag(takes_context=True)
@@ -143,20 +223,45 @@ class ShowCodeNode(template.Node):
         """
         raw = self.nodelist.render(context)
 
-        # 1. Normalize indentation
-        dedented = textwrap.dedent(raw)
+        # Beautifulsoup does annoying things to the Cotton syntax, so we'll skip that step and clean ourselves
+        # soup = BeautifulSoup(raw, "html.parser")
+        # cleaned = soup.prettify(formatter="html5")
 
-        # 2. Remove leading/trailing blank lines
-        cleaned = dedented.strip("\n")
+        cleaned = textwrap.dedent(raw).strip("\n")
 
-        # 3. Escape for HTML
-        escaped = escape(cleaned)
+        # 3. Escape Cotton syntax for HTML display in code tag
+        code = escape(cleaned)
 
+        # 4. Compile Cotton syntax
         compiled = compiler.process(cleaned)
 
+        # 5. Render the compiled template
         t = template.Template(compiled)
-        rendered = t.render(context)
+        rendered_raw = t.render(context)
+
+        # 6. Clean the rendered HTML using BeautifulSoup for proper formatting
+        if not HAS_BEAUTIFULSOUP:
+            raise ImportError(
+                "BeautifulSoup4 is required for the show_code template tag. "
+                "Install it with: pip install beautifulsoup4"
+            )
+
+        soup = BeautifulSoup(rendered_raw, "html.parser")
+        rendered_cleaned = soup.prettify()
+
+        # rendered_cleaned = textwrap.dedent(rendered_raw).strip("\n")
+        # rendered_cleaned = re.sub(r'\n\s*\n(\s*\n)+', '\n\n', rendered_cleaned)
+
+        # Remove excessive blank lines (more than one consecutive blank line)
+        # rendered_cleaned = rendered_cleaned.strip()
+
+        # 7. Mark safe for actual rendering on page
+        rendered = mark_safe(rendered_cleaned)
+
+        # 8. Escape cleaned HTML for display in code tag
+        html = escape(rendered_cleaned)
+
         return render_to_string(
             "cotton_bs5/document_component.html",
-            {"code": escaped, "rendered": rendered},
+            {"code": code, "rendered": rendered, "html": html},
         )
