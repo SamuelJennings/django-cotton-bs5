@@ -7,7 +7,7 @@
   <div class="container-fluid px-4 py-4">
     <!-- Breadcrumbs -->
     <c-breadcrumbs class="mb-3">
-      <c-breadcrumbs.item href="/" text="Home" />
+      <c-breadcrumbs.item href="{% url "home" %}" text="Home" />
       <c-breadcrumbs.item active text="{{ title }}" />
     </c-breadcrumbs>
     <!-- Page Header -->
