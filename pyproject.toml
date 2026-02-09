@@ -12,9 +12,8 @@ classifiers = [
 ]
 
 [tool.poetry.dependencies]
-python = ">=3.12,<4.00"
+python = ">=3.10,<4"
 django-cotton = "^2.6.1"
-beautifulsoup4 = "^4.14.3"
 django-compressor = {version = "^4.5.1", optional = true}
 django-libsass = {version = "^0.9", optional = true}
 
@@ -28,12 +27,9 @@ cotton_bs5 = "cotton_bs5.fixtures"
 Django = ">=4.2,<6.0"
 django-crispy-forms = "^2.4"
 crispy-bootstrap5 = "^2025.6"
-shot-scraper = "^1.8"
 fairdm-dev-tools = {git = "https://github.com/FAIR-DM/dev-tools"}
-pytest = ">=7.0"
-beautifulsoup4 = "^4.14.3"
-django-browser-reload = "^1.21.0"
 django-distill = "^3.0"
+django-formset = "^2.2.3"
 
 [build-system]
 requires = ["poetry-core"]
