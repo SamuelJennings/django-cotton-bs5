@@ -34,21 +34,16 @@ jobs:
       - name: Check out
         uses: actions/checkout@v6
 
-      - name: Set up Poetry env
-        uses: SamuelJennings/cached-poetry-action@v1
-        with:
-          python-version: ${{ matrix.python-version }}
-          poetry-version: 2.3.2
-
       - name: Install system dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y libpq-dev
 
-      - name: Install dependencies
-        run: |
-          poetry install --with test
-          poetry add django==${{ matrix.django-version }}
+      - name: Set up Poetry env
+        uses: SamuelJennings/cached-poetry-action@v2.0
+        with:
+          python-version: ${{ matrix.python-version }}
+          poetry-install-args: --with test
 
       - name: Run tests
         run: |
