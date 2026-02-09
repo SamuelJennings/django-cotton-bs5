@@ -6,7 +6,7 @@ version = "3.11.1"
 description = "ASGI specs, helper code, and adapters"
 optional = false
 python-versions = ">=3.9"
-groups = ["main", "dev"]
+groups = ["main", "dev", "test"]
 files = [
     {file = "asgiref-3.11.1-py3-none-any.whl", hash = "sha256:e8667a091e69529631969fd45dc268fa79b99c92c5fcdda727757e52146ec133"},
     {file = "asgiref-3.11.1.tar.gz", hash = "sha256:5f184dc43b7e763efe848065441eac62229c9f7b0475f41f80e207a114eda4ce"},
@@ -311,11 +311,12 @@ version = "0.4.6"
 description = "Cross-platform colored terminal text."
 optional = false
 python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*,!=3.6.*,>=2.7"
-groups = ["dev"]
+groups = ["dev", "test"]
 files = [
     {file = "colorama-0.4.6-py2.py3-none-any.whl", hash = "sha256:4f1d9991f5acc0ca119f9d443620b77f9d6b33703e51011c16baf57afb285fc6"},
     {file = "colorama-0.4.6.tar.gz", hash = "sha256:08695f5cb7ed6e0531a20572697297273c47b8cae5a63ffc6d6ed5c201be6e44"},
 ]
+markers = {test = "sys_platform == \"win32\""}
 
 [[package]]
 name = "coverage"
@@ -323,7 +324,7 @@ version = "7.13.3"
 description = "Code coverage measurement for Python"
 optional = false
 python-versions = ">=3.10"
-groups = ["dev"]
+groups = ["dev", "test"]
 files = [
     {file = "coverage-7.13.3-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:0b4f345f7265cdbdb5ec2521ffff15fa49de6d6c39abf89fc7ad68aa9e3a55f0"},
     {file = "coverage-7.13.3-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:96c3be8bae9d0333e403cc1a8eb078a7f928b5650bae94a18fb4820cc993fb9b"},
@@ -534,7 +535,7 @@ version = "5.2.11"
 description = "A high-level Python web framework that encourages rapid development and clean, pragmatic design."
 optional = false
 python-versions = ">=3.10"
-groups = ["main", "dev"]
+groups = ["main", "dev", "test"]
 files = [
     {file = "django-5.2.11-py3-none-any.whl", hash = "sha256:e7130df33ada9ab5e5e929bc19346a20fe383f5454acb2cc004508f242ee92c0"},
     {file = "django-5.2.11.tar.gz", hash = "sha256:7f2d292ad8b9ee35e405d965fbbad293758b858c34bbf7f3df551aeeac6f02d3"},
@@ -621,7 +622,7 @@ version = "3.2.0"
 description = "Django template coverage.py plugin"
 optional = false
 python-versions = ">=3.10"
-groups = ["dev"]
+groups = ["dev", "test"]
 files = [
     {file = "django_coverage_plugin-3.2.0-py3-none-any.whl", hash = "sha256:a4a9400c784c86f1ba53a73c336508e07316c92345b34a0eb0b22b3b14cdbdd6"},
     {file = "django_coverage_plugin-3.2.0.tar.gz", hash = "sha256:0e1460294ecd4b192bd09788ab9ad9380d9b8c9b45925b408ce6c620ac352585"},
@@ -890,7 +891,7 @@ version = "1.3.1"
 description = "Backport of PEP 654 (exception groups)"
 optional = false
 python-versions = ">=3.7"
-groups = ["dev"]
+groups = ["dev", "test"]
 markers = "python_version == \"3.10\""
 files = [
     {file = "exceptiongroup-1.3.1-py3-none-any.whl", hash = "sha256:a7a39a3bd276781e98394987d3a5701d0c4edffb633bb7a5144577f82c773598"},
@@ -924,7 +925,7 @@ version = "3.3.3"
 description = "A versatile test fixtures replacement based on thoughtbot's factory_bot for Ruby."
 optional = false
 python-versions = ">=3.8"
-groups = ["dev"]
+groups = ["dev", "test"]
 files = [
     {file = "factory_boy-3.3.3-py2.py3-none-any.whl", hash = "sha256:1c39e3289f7e667c4285433f305f8d506efc2fe9c73aaea4151ebd5cdea394fc"},
     {file = "factory_boy-3.3.3.tar.gz", hash = "sha256:866862d226128dfac7f2b4160287e899daf54f2612778327dd03d0e2cb1e3d03"},
@@ -943,45 +944,49 @@ version = "2025.1"
 description = "Tools to assist development of FairDM data portals"
 optional = false
 python-versions = ">=3.10,<4"
-groups = ["dev"]
+groups = ["dev", "test"]
 files = []
 develop = false
 
 [package.dependencies]
-black = "^24.8.0"
-coverage = "^7.6.0"
-deptry = "^0.20.0"
-django-browser-reload = "^1.15.0"
-django-coverage-plugin = "^3.1.0"
-django-debug-toolbar = "^4.4.0"
-django-debug-toolbar-template-profiler = "^2.1.0"
-django-extensions = "^3.2.0"
-django-model-info = "^0.2.2"
-django-stubs = "^5.1.0"
-djangorestframework-stubs = "^3.15.0"
-djlint = "^1.35.0"
-factory-boy = "^3.3.3"
-invoke = "^2.2.0"
-ipython = "^8.12.0"
-mypy = "^1.14.0"
-pip-licenses = "^4.5.0"
-pre-commit = "^3.5.0"
-pylint-celery = "^0.3"
-pylint-django = "^2.6.1"
-pytest = "^8.3.0"
-pytest-cov = "^5.0.0"
-pytest-django = "^4.11.1"
-pytest-env = "^1.1.5"
-pytest-sugar = "^1.1.1"
-tox = "^4.25.0"
-types-python-dateutil = "^2.9.0.20241206"
-types-requests = "^2.32.0.20241016"
+black = {version = "^24.8.0", optional = true}
+coverage = {version = "^7.6.0", optional = true}
+deptry = {version = "^0.20.0", optional = true}
+django-browser-reload = {version = "^1.15.0", optional = true}
+django-coverage-plugin = {version = "^3.1.0", optional = true}
+django-debug-toolbar = {version = "^4.4.0", optional = true}
+django-debug-toolbar-template-profiler = {version = "^2.1.0", optional = true}
+django-extensions = {version = "^3.2.0", optional = true}
+django-model-info = {version = "^0.2.2", optional = true}
+django-stubs = {version = "^5.1.0", optional = true}
+djangorestframework-stubs = {version = "^3.15.0", optional = true}
+djlint = {version = "^1.35.0", optional = true}
+factory-boy = {version = "^3.3.3", optional = true}
+invoke = {version = "^2.2.0", optional = true}
+ipython = {version = "^8.12.0", optional = true}
+mypy = {version = "^1.14.0", optional = true}
+pip-licenses = {version = "^4.5.0", optional = true}
+pre-commit = {version = "^3.5.0", optional = true}
+pylint-celery = {version = "^0.3", optional = true}
+pylint-django = {version = "^2.6.1", optional = true}
+pytest = {version = "^8.3.0", optional = true}
+pytest-cov = {version = "^5.0.0", optional = true}
+pytest-django = {version = "^4.11.1", optional = true}
+pytest-env = {version = "^1.1.5", optional = true}
+pytest-sugar = {version = "^1.1.1", optional = true}
+tox = {version = "^4.25.0", optional = true}
+types-python-dateutil = {version = "^2.9.0.20241206", optional = true}
+types-requests = {version = "^2.32.0.20241016", optional = true}
+
+[package.extras]
+dev = ["black (>=24.8.0,<25.0.0)", "deptry (>=0.20.0,<0.21.0)", "django-browser-reload (>=1.15.0,<2.0.0)", "django-debug-toolbar (>=4.4.0,<5.0.0)", "django-debug-toolbar-template-profiler (>=2.1.0,<3.0.0)", "django-extensions (>=3.2.0,<4.0.0)", "django-model-info (>=0.2.2,<0.3.0)", "django-stubs (>=5.1.0,<6.0.0)", "djangorestframework-stubs (>=3.15.0,<4.0.0)", "djlint (>=1.35.0,<2.0.0)", "invoke (>=2.2.0,<3.0.0)", "ipython (>=8.12.0,<9.0.0)", "mypy (>=1.14.0,<2.0.0)", "pip-licenses (>=4.5.0,<5.0.0)", "pre-commit (>=3.5.0,<4.0.0)", "pylint-celery (>=0.3,<0.4)", "pylint-django (>=2.6.1,<3.0.0)", "tox (>=4.25.0,<5.0.0)", "types-python-dateutil (>=2.9.0.20241206,<3.0.0.0)", "types-requests (>=2.32.0.20241016,<3.0.0.0)"]
+test = ["coverage (>=7.6.0,<8.0.0)", "django-coverage-plugin (>=3.1.0,<4.0.0)", "factory-boy (>=3.3.3,<4.0.0)", "pytest (>=8.3.0,<9.0.0)", "pytest-cov (>=5.0.0,<6.0.0)", "pytest-django (>=4.11.1,<5.0.0)", "pytest-env (>=1.1.5,<2.0.0)", "pytest-sugar (>=1.1.1,<2.0.0)"]
 
 [package.source]
 type = "git"
 url = "https://github.com/FAIR-DM/dev-tools"
 reference = "HEAD"
-resolved_reference = "4e939c17a1bd20a74fe9f80c9a384bd9b3c0a7e2"
+resolved_reference = "10cfa58f53f49217f9ec7f4ffa3ac9e4f94fb78c"
 
 [[package]]
 name = "faker"
@@ -989,7 +994,7 @@ version = "40.4.0"
 description = "Faker is a Python package that generates fake data for you."
 optional = false
 python-versions = ">=3.10"
-groups = ["dev"]
+groups = ["dev", "test"]
 files = [
     {file = "faker-40.4.0-py3-none-any.whl", hash = "sha256:486d43c67ebbb136bc932406418744f9a0bdf2c07f77703ea78b58b77e9aa443"},
     {file = "faker-40.4.0.tar.gz", hash = "sha256:76f8e74a3df28c3e2ec2caafa956e19e37a132fdc7ea067bc41783affcfee364"},
@@ -1049,7 +1054,7 @@ version = "2.3.0"
 description = "brain-dead simple config-ini parsing"
 optional = false
 python-versions = ">=3.10"
-groups = ["dev"]
+groups = ["dev", "test"]
 files = [
     {file = "iniconfig-2.3.0-py3-none-any.whl", hash = "sha256:f631c04d2c48c52b84d0d0549c99ff3859c98df65b3101406327ecc7d53fbf12"},
     {file = "iniconfig-2.3.0.tar.gz", hash = "sha256:c76315c77db068650d49c5b56314774a7804df16fee4402c1f19d6d15d8c4730"},
@@ -1432,7 +1437,7 @@ version = "26.0"
 description = "Core utilities for Python packages"
 optional = false
 python-versions = ">=3.8"
-groups = ["dev"]
+groups = ["dev", "test"]
 files = [
     {file = "packaging-26.0-py3-none-any.whl", hash = "sha256:b36f1fef9334a5588b4166f8bcd26a14e521f2b55e6b9de3aaa80d3ff7a37529"},
     {file = "packaging-26.0.tar.gz", hash = "sha256:00243ae351a257117b6a241061796684b084ed1c516a08c48a3f7e147a9d80b4"},
@@ -1530,7 +1535,7 @@ version = "1.6.0"
 description = "plugin and hook calling mechanisms for python"
 optional = false
 python-versions = ">=3.9"
-groups = ["dev"]
+groups = ["dev", "test"]
 files = [
     {file = "pluggy-1.6.0-py3-none-any.whl", hash = "sha256:e920276dd6813095e9377c0bc5566d94c932c33b27a3e3945d8389c374dd4746"},
     {file = "pluggy-1.6.0.tar.gz", hash = "sha256:7dcc130b76258d33b90f61b658791dede3486c3e6bfb003ee5c9bfb396dd22f3"},
@@ -1626,7 +1631,7 @@ version = "2.19.2"
 description = "Pygments is a syntax highlighting package written in Python."
 optional = false
 python-versions = ">=3.8"
-groups = ["dev"]
+groups = ["dev", "test"]
 files = [
     {file = "pygments-2.19.2-py3-none-any.whl", hash = "sha256:86540386c03d588bb81d44bc3928634ff26449851e99741617ecb9037ee5ec0b"},
     {file = "pygments-2.19.2.tar.gz", hash = "sha256:636cb2477cec7f8952536970bc533bc43743542f70392ae026374600add5b887"},
@@ -1740,7 +1745,7 @@ version = "8.4.2"
 description = "pytest: simple powerful testing with Python"
 optional = false
 python-versions = ">=3.9"
-groups = ["dev"]
+groups = ["dev", "test"]
 files = [
     {file = "pytest-8.4.2-py3-none-any.whl", hash = "sha256:872f880de3fc3a5bdc88a11b39c9710c3497a547cfa9320bc3c5e62fbf272e79"},
     {file = "pytest-8.4.2.tar.gz", hash = "sha256:86c0d0b93306b961d58d62a4db4879f27fe25513d4b969df351abdddb3c30e01"},
@@ -1764,7 +1769,7 @@ version = "5.0.0"
 description = "Pytest plugin for measuring coverage."
 optional = false
 python-versions = ">=3.8"
-groups = ["dev"]
+groups = ["dev", "test"]
 files = [
     {file = "pytest-cov-5.0.0.tar.gz", hash = "sha256:5837b58e9f6ebd335b0f8060eecce69b662415b16dc503883a02f45dfeb14857"},
     {file = "pytest_cov-5.0.0-py3-none-any.whl", hash = "sha256:4f0764a1219df53214206bf1feea4633c3b558a2925c8b59f144f682861ce652"},
@@ -1783,7 +1788,7 @@ version = "4.11.1"
 description = "A Django plugin for pytest."
 optional = false
 python-versions = ">=3.8"
-groups = ["dev"]
+groups = ["dev", "test"]
 files = [
     {file = "pytest_django-4.11.1-py3-none-any.whl", hash = "sha256:1b63773f648aa3d8541000c26929c1ea63934be1cfa674c76436966d73fe6a10"},
     {file = "pytest_django-4.11.1.tar.gz", hash = "sha256:a949141a1ee103cb0e7a20f1451d355f83f5e4a5d07bdd4dcfdd1fd0ff227991"},
@@ -1802,7 +1807,7 @@ version = "1.2.0"
 description = "pytest plugin that allows you to add environment variables."
 optional = false
 python-versions = ">=3.10"
-groups = ["dev"]
+groups = ["dev", "test"]
 files = [
     {file = "pytest_env-1.2.0-py3-none-any.whl", hash = "sha256:d7e5b7198f9b83c795377c09feefa45d56083834e60d04767efd64819fc9da00"},
     {file = "pytest_env-1.2.0.tar.gz", hash = "sha256:475e2ebe8626cee01f491f304a74b12137742397d6c784ea4bc258f069232b80"},
@@ -1821,7 +1826,7 @@ version = "1.1.1"
 description = "pytest-sugar is a plugin for pytest that changes the default look and feel of pytest (e.g. progressbar, show tests that fail instantly)."
 optional = false
 python-versions = "*"
-groups = ["dev"]
+groups = ["dev", "test"]
 files = [
     {file = "pytest-sugar-1.1.1.tar.gz", hash = "sha256:73b8b65163ebf10f9f671efab9eed3d56f20d2ca68bda83fa64740a92c08f65d"},
     {file = "pytest_sugar-1.1.1-py3-none-any.whl", hash = "sha256:2f8319b907548d5b9d03a171515c1d43d2e38e32bd8182a1781eb20b43344cc8"},
@@ -2293,7 +2298,7 @@ version = "0.5.5"
 description = "A non-validating SQL parser."
 optional = false
 python-versions = ">=3.8"
-groups = ["main", "dev"]
+groups = ["main", "dev", "test"]
 files = [
     {file = "sqlparse-0.5.5-py3-none-any.whl", hash = "sha256:12a08b3bf3eec877c519589833aed092e2444e68240a3577e8e26148acc7b1ba"},
     {file = "sqlparse-0.5.5.tar.gz", hash = "sha256:e20d4a9b0b8585fdf63b10d30066c7c94c5d7a7ec47c889a2d83a3caa93ff28e"},
@@ -2329,7 +2334,7 @@ version = "3.3.0"
 description = "ANSI color formatting for output in terminal"
 optional = false
 python-versions = ">=3.10"
-groups = ["dev"]
+groups = ["dev", "test"]
 files = [
     {file = "termcolor-3.3.0-py3-none-any.whl", hash = "sha256:cf642efadaf0a8ebbbf4bc7a31cec2f9b5f21a9f726f4ccbb08192c9c26f43a5"},
     {file = "termcolor-3.3.0.tar.gz", hash = "sha256:348871ca648ec6a9a983a13ab626c0acce02f515b9e1983332b17af7979521c5"},
@@ -2344,7 +2349,7 @@ version = "2.4.0"
 description = "A lil' TOML parser"
 optional = false
 python-versions = ">=3.8"
-groups = ["dev"]
+groups = ["dev", "test"]
 files = [
     {file = "tomli-2.4.0-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:b5ef256a3fd497d4973c11bf142e9ed78b150d36f5773f1ca6088c230ffc5867"},
     {file = "tomli-2.4.0-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:5572e41282d5268eb09a697c89a7bee84fae66511f87533a6f88bd2f7b652da9"},
@@ -2394,6 +2399,7 @@ files = [
     {file = "tomli-2.4.0-py3-none-any.whl", hash = "sha256:1f776e7d669ebceb01dee46484485f43a4048746235e683bcdffacdf1fb4785a"},
     {file = "tomli-2.4.0.tar.gz", hash = "sha256:aa89c3f6c277dd275d8e243ad24f3b5e701491a860d5121f2cdd399fbb31fc9c"},
 ]
+markers = {test = "python_version == \"3.10\""}
 
 [[package]]
 name = "tomlkit"
@@ -2515,12 +2521,12 @@ version = "4.15.0"
 description = "Backported and Experimental Type Hints for Python 3.9+"
 optional = false
 python-versions = ">=3.9"
-groups = ["main", "dev"]
+groups = ["main", "dev", "test"]
 files = [
     {file = "typing_extensions-4.15.0-py3-none-any.whl", hash = "sha256:f0fa19c6845758ab08074a0cfa8b7aecb71c999ca73d62883bc25cc018c4e548"},
     {file = "typing_extensions-4.15.0.tar.gz", hash = "sha256:0cea48d173cc12fa28ecabc3b837ea3cf6f38c6d1136f85cbaaf598984861466"},
 ]
-markers = {main = "python_version == \"3.10\""}
+markers = {main = "python_version == \"3.10\"", test = "python_version == \"3.10\""}
 
 [[package]]
 name = "tzdata"
@@ -2528,12 +2534,12 @@ version = "2025.3"
 description = "Provider of IANA time zone data"
 optional = false
 python-versions = ">=2"
-groups = ["main", "dev"]
+groups = ["main", "dev", "test"]
 files = [
     {file = "tzdata-2025.3-py2.py3-none-any.whl", hash = "sha256:06a47e5700f3081aab02b2e513160914ff0694bce9947d6b76ebd6bf57cfc5d1"},
     {file = "tzdata-2025.3.tar.gz", hash = "sha256:de39c2ca5dc7b0344f2eba86f49d614019d29f060fc4ebc8a417896a620b56a7"},
 ]
-markers = {main = "sys_platform == \"win32\"", dev = "sys_platform == \"win32\" or platform_system == \"Windows\""}
+markers = {main = "sys_platform == \"win32\"", dev = "sys_platform == \"win32\" or platform_system == \"Windows\"", test = "sys_platform == \"win32\" or platform_system == \"Windows\""}
 
 [[package]]
 name = "urllib3"
@@ -2680,4 +2686,4 @@ django-compressor = ["django-compressor", "django-libsass"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.10,<4"
-content-hash = "143abce1b8104082976bfaf60ec377747af1d939a00717a6a7d982863c1172a5"
+content-hash = "694e81c85a56a2948a8b267e0db8b217551426cbebea8b75369435b0c16c5bf7"

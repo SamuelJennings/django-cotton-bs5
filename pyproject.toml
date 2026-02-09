@@ -23,14 +23,17 @@ django-compressor = ["django-compressor", "django-libsass"]
 [tool.poetry.plugins."pytest11"]
 cotton_bs5 = "cotton_bs5.fixtures"
 
-[tool.poetry.group.dev.dependencies]
+[tool.poetry.group.test.dependencies]
 Django = ">=4.2,<6.0"
-django-crispy-forms = "^2.4"
-crispy-bootstrap5 = "^2025.6"
-fairdm-dev-tools = {git = "https://github.com/FAIR-DM/dev-tools"}
+fairdm-dev-tools = {git = "https://github.com/FAIR-DM/dev-tools", extras = ["test"]}
+
+[tool.poetry.group.dev.dependencies]
 django-distill = "^3.0"
 django-formset = "*"
+django-crispy-forms = "^2.4"
+crispy-bootstrap5 = "^2025.6"
 beautifulsoup4 = "^4.14.3"
+fairdm-dev-tools = {git = "https://github.com/FAIR-DM/dev-tools", extras = ["test", "dev"]}
 
 [build-system]
 requires = ["poetry-core"]

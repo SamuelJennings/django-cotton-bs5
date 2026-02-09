@@ -38,6 +38,7 @@ jobs:
         uses: SamuelJennings/cached-poetry-action@v1
         with:
           python-version: ${{ matrix.python-version }}
+          poetry-version: 2.3.2
 
       - name: Install system dependencies
         run: |
@@ -46,7 +47,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          poetry install
+          poetry install --with test
           poetry add django==${{ matrix.django-version }}
 
       - name: Run tests
