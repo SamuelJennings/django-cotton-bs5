@@ -29,7 +29,7 @@ django-crispy-forms = "^2.4"
 crispy-bootstrap5 = "^2025.6"
 fairdm-dev-tools = {git = "https://github.com/FAIR-DM/dev-tools"}
 django-distill = "^3.0"
-django-formset = "^2.2.3"
+django-formset = "*"
 beautifulsoup4 = "^4.14.3"
 
 [build-system]
