@@ -35,7 +35,7 @@ def docs(c):
 
 
 @task
-def prerelease(c):
+def pretry(c):
     """
     Run comprehensive pre-release checks and update all required files.
 
@@ -85,7 +85,7 @@ def prerelease(c):
 
 
 @task
-def release(c, rule=""):
+def release(c, rule="", retry=False):
     """
     Create a new git tag and push it to the remote repository.
 
@@ -94,6 +94,7 @@ def release(c, rule=""):
 
     Args:
         rule: Version bump rule (major, minor, patch, etc.)
+        retry: If True, force-push existing tags without creating new version (default: False)
 
     RULE	    BEFORE	AFTER
     major	    1.3.0	2.0.0
@@ -102,10 +103,39 @@ def release(c, rule=""):
     premajor	1.0.2	2.0.0a0
     preminor	1.0.2	1.1.0a0
     prepatch	1.0.2	1.0.3a0
-    prerelease	1.0.2	1.0.3a0
-    prerelease	1.0.3a0	1.0.3a1
-    prerelease	1.0.3b0	1.0.3b1
+    pretry	1.0.2	1.0.3a0
+    pretry	1.0.3a0	1.0.3a1
+    pretry	1.0.3b0	1.0.3b1
+
+    Examples:
+        invoke release --rule=patch        # Bump patch version and release
+        invoke release --retry            # Force-push existing tags (e.g., to retrigger CI)
     """
+    # Get the current version number
+    version_short = c.run("poetry version -s", hide=True).stdout.strip()
+    version = c.run("poetry version", hide=True).stdout.strip()
+
+    if retry:
+        # retry existing tags without creating new version
+        print(f"♻️  retrying existing tag v{version_short}...")
+        response = (
+            input(
+                f"This will force-push tag v{version_short} to retrigger CI. Continue? (y/N): "
+            )
+            .strip()
+            .lower()
+        )
+        if response not in ("y", "yes"):
+            print("❌ retry cancelled.")
+            return
+
+        # Delete and recreate tag locally, then force push
+        c.run(f"git tag -d v{version_short}", warn=True)
+        c.run(f'git tag -a v{version_short} -m "{version}"')
+        c.run(f"git push origin v{version_short} --force")
+        print(f"✅ Tag v{version_short} force-pushed successfully!")
+        return
+
     # Check for unstaged changes
     unstaged_result = c.run("git diff --name-only", hide=True, warn=True)
     if unstaged_result.stdout.strip():
@@ -119,10 +149,8 @@ def release(c, rule=""):
     if rule:
         # bump the current version using the specified rule
         c.run(f"poetry version {rule}")
-
-    # 1. Get the current version number as a variable
-    version_short = c.run("poetry version -s", hide=True).stdout.strip()
-    version = c.run("poetry version", hide=True).stdout.strip()
+        version_short = c.run("poetry version -s", hide=True).stdout.strip()
+        version = c.run("poetry version", hide=True).stdout.strip()
 
     # 2. Commit the version bump and any staged changes
     # Check if there are any staged changes
