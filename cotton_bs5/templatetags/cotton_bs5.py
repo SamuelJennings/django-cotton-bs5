@@ -8,7 +8,7 @@ from django import template
 from django.template.loader import render_to_string
 from django.utils.html import escape
 from django.utils.safestring import mark_safe
-from django_cotton.compiler_regex import CottonCompiler
+from django_cotton.compiler_regex import CottonCompiler  # type: ignore[import-untyped]
 
 # Conditional import for BeautifulSoup
 try:
@@ -150,11 +150,13 @@ def responsive(context, root: str):
     """
     # The idea is to take a root class name (e.g., "col") and
     # and generate responsive variants based on context variables xs, sm, md, lg, xl, xxl).
-    # If a context variable is present, the value should be added to root along with the responsive
+    # If an attrs variable is present, it should be the value should be added to root along with the responsive
     # name (e.g., "col-md-6").
-
+    attrs = context.get("attrs", {})
+    if not attrs:
+        return ""
     responsive_values = {
-        responsive: context.get(responsive)
+        responsive: attrs.get(responsive)
         for responsive in ["xs", "sm", "md", "lg", "xl", "xxl"]
     }
 

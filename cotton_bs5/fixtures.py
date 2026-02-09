@@ -4,10 +4,11 @@ import pytest
 from bs4 import BeautifulSoup
 from django.template import Context, Template
 from django.test import RequestFactory
-from django_cotton import render_component
-from django_cotton.compiler_regex import CottonCompiler
+from django_cotton import render_component  # type: ignore[import-untyped]
+from django_cotton.compiler_regex import CottonCompiler  # type: ignore[import-untyped]
 
 compiler = CottonCompiler()
+
 
 @pytest.fixture
 def cotton_render():
@@ -129,7 +130,7 @@ def cotton_render_string():
         if context is None:
             context = {}
         request = factory.get("/")
-        context['request'] = request
+        context["request"] = request
 
         # Compile Cotton component syntax into Django template syntax
         compiled_template = compiler.process(template_string)
@@ -201,7 +202,7 @@ def cotton_render_string_soup():
         if context is None:
             context = {}
         request = factory.get("/")
-        context['request'] = request
+        context["request"] = request
 
         # Compile Cotton component syntax into Django template syntax
         compiled_template = compiler.process(template_string)

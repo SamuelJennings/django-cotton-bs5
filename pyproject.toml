@@ -30,6 +30,7 @@ crispy-bootstrap5 = "^2025.6"
 fairdm-dev-tools = {git = "https://github.com/FAIR-DM/dev-tools"}
 django-distill = "^3.0"
 django-formset = "^2.2.3"
+beautifulsoup4 = "^4.14.3"
 
 [build-system]
 requires = ["poetry-core"]

@@ -1,6 +1,5 @@
 {% load cotton_bs5 %}
 <section id="{{ title|slugify }}" class="mb-4">
-  <!-- Section Header -->
   <div class="d-flex align-items-center mb-3">
     <h2 class="h3 mb-0 me-3">{{ title }}</h2>
     {% if title %}
@@ -35,8 +34,7 @@
       </a>
     {% endif %}
   </div>
-  {% if help %}<p class="text-muted mb-3">{{ help }}</p>{% endif %}
-  <!-- Component Demo and Code -->
+  {% if description %}<p class="mb-3">{{ description }}</p>{% endif %}
   <div class="card shadow-sm border-0">
     {% show_code %}
       {{ slot }}

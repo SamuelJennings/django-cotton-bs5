@@ -1,6 +1,6 @@
+{% load cotton_bs5 %}
 <c-vars cols=1 gap="1" sm md lg xl xxl class />
-<div class="row{% if cols %} row-cols-{{ cols }}{% endif %}{% if gap %} g-{{ gap }}{% endif %}{% if sm %} row-cols-sm-{{ sm }}{% endif %}{% if md %} row-cols-md-{{ sm }}{% endif %}{% if lg %} row-cols-lg-{{ lg }}{% endif %}{% if xl %} row-cols-xl-{{ xl }}{% endif %}{% if xl %} row-cols-xl-{{ xl }}{% endif %}{% if xxl %} row-cols-xxl-{{ xxl }}{% endif %}{{ class }}"
+<div class="row{% if cols %} row-cols-{{ cols }}{% endif %}{% if gap %} g-{{ gap }}{% endif %} {% responsive "row-cols" %} {{ class }}"
      {{ attrs }}>
   {{ slot }}
 </div>
-
