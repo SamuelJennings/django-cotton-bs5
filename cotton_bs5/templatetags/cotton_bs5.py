@@ -119,7 +119,7 @@ def cotton_parent(context):
 
 
 @register.simple_tag(takes_context=True)
-def responsive(context, root: str):
+def responsive(context, root: str, attrs=None):
     """Generate responsive Bootstrap grid classes from context variables.
 
     This tag generates responsive variants of a root class name (e.g., 'col')
@@ -152,7 +152,7 @@ def responsive(context, root: str):
     # and generate responsive variants based on context variables xs, sm, md, lg, xl, xxl).
     # If an attrs variable is present, it should be the value should be added to root along with the responsive
     # name (e.g., "col-md-6").
-    attrs = context.get("attrs", {})
+    attrs = attrs or context.get("attrs", {})
     if not attrs:
         return ""
     responsive_values = {

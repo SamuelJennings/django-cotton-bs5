@@ -64,9 +64,9 @@ class TestSpinnerComponent:
         """Test spinner accepts additional CSS classes that are merged with component classes."""
         soup = cotton_render_string_soup('<c-spinner class="my-custom-class" />')
 
-        spinner = soup.find('div', class_='spinner-border')
-        assert 'my-custom-class' in spinner['class']
-        assert 'spinner-border' in spinner['class']
+        spinner = soup.find("div", class_="spinner-border")
+        assert "my-custom-class" in spinner["class"]
+        assert "spinner-border" in spinner["class"]
 
 
 class TestAlertComponent:
@@ -92,10 +92,10 @@ class TestAlertComponent:
         """Test dismissible alert includes close button with correct classes."""
         soup = cotton_render_string_soup('<c-alert text="Test" dismissible />')
 
-        alert = soup.find('div', class_='alert')
-        assert 'alert-dismissible' in alert['class']
+        alert = soup.find("div", class_="alert")
+        assert "alert-dismissible" in alert["class"]
 
-        close_btn = soup.find('button', class_='btn-close')
+        close_btn = soup.find("button", class_="btn-close")
         assert close_btn is not None
 
     def test_alert_with_slot_content(self, cotton_render_string):
@@ -118,8 +118,8 @@ class TestAlertComponent:
         # These should NOT appear as HTML attributes
         assert 'variant="danger"' not in html
         assert 'text="Test"' not in html
-        assert 'animate=' not in html
-        assert 'dismissible=' not in html
+        assert "animate=" not in html
+        assert "dismissible=" not in html
 
 
 class TestButtonComponent:
@@ -129,22 +129,22 @@ class TestButtonComponent:
         """Test button renders as button element with default primary variant."""
         soup = cotton_render_string_soup('<c-button text="Click me" />')
 
-        button = soup.find('button')
+        button = soup.find("button")
         assert button is not None
-        assert 'btn' in button['class']
-        assert 'btn-primary' in button['class']  # default variant
+        assert "btn" in button["class"]
+        assert "btn-primary" in button["class"]  # default variant
         assert button.get_text().strip() == "Click me"
 
     def test_button_renders_as_link_when_href_provided(self, cotton_render_string_soup):
         """Test button renders as anchor tag when href attribute is provided."""
         soup = cotton_render_string_soup('<c-button href="/test/" text="Link button" />')
 
-        link = soup.find('a')
+        link = soup.find("a")
         assert link is not None
-        assert link['href'] == "/test/"
-        assert 'btn' in link['class']
+        assert link["href"] == "/test/"
+        assert "btn" in link["class"]
 
-        button = soup.find('button')
+        button = soup.find("button")
         assert button is None
 
     def test_button_custom_variant(self, cotton_render_string):
@@ -181,7 +181,7 @@ class TestButtonComponent:
         # These should NOT appear as HTML attributes because they're declared in c-vars
         assert 'variant="danger"' not in html
         assert 'size="lg"' not in html
-        assert 'outline=' not in html
+        assert "outline=" not in html
         assert 'text="Test"' not in html
 
 
@@ -255,18 +255,18 @@ class TestProgressComponent:
 
         # These should NOT appear as direct HTML attributes (only as part of aria-* attributes)
         # Component correctly transforms them to ARIA attributes
-        assert 'bg-success' in html  # variant is used in class
-        assert 'progress-bar-striped' in html  # striped is used in class
-        assert 'progress-bar-animated' in html  # animated is used in class
-        assert '50%' in html  # text is rendered as content
+        assert "bg-success" in html  # variant is used in class
+        assert "progress-bar-striped" in html  # striped is used in class
+        assert "progress-bar-animated" in html  # animated is used in class
+        assert "50%" in html  # text is rendered as content
 
         # Verify they're NOT appearing as standalone attributes outside ARIA context
         assert ' value="50"' not in html
         assert ' variant="success"' not in html
         assert ' text="50%"' not in html
         assert ' label="Test"' not in html
-        assert ' striped=' not in html
-        assert ' animated=' not in html
+        assert " striped=" not in html
+        assert " animated=" not in html
 
 
 class TestBreadcrumbsComponent:
@@ -305,20 +305,20 @@ class TestBreadcrumbsComponent:
         """Test breadcrumb item renders as link when href provided."""
         soup = cotton_render_string_soup('<c-breadcrumbs.item href="/test/" text="Test Page" />')
 
-        link = soup.find('a', href="/test/")
+        link = soup.find("a", href="/test/")
         assert link is not None
         assert "Test Page" in link.get_text()
-        assert "active" not in link.get('class', [])
+        assert "active" not in link.get("class", [])
 
     def test_breadcrumb_item_active_without_href(self, cotton_render_string_soup):
         """Test breadcrumb item without href renders as active current page."""
         soup = cotton_render_string_soup('<c-breadcrumbs.item text="Current Page" />')
 
-        item = soup.find('li', class_='breadcrumb-item')
-        assert 'active' in item['class']
-        assert item.get('aria-current') == 'page'
+        item = soup.find("li", class_="breadcrumb-item")
+        assert "active" in item["class"]
+        assert item.get("aria-current") == "page"
 
-        link = soup.find('a')
+        link = soup.find("a")
         assert link is None
 
     def test_breadcrumb_item_slot_content(self, cotton_render_string):
@@ -371,7 +371,7 @@ class TestBreadcrumbsComponent:
 
         # Should NOT appear as HTML attribute
         assert 'items="' not in html
-        assert 'items=' not in html
+        assert "items=" not in html
 
 
 class TestCardComponent:
@@ -392,20 +392,20 @@ class TestCardComponent:
         """Test card title renders with default h5 heading level."""
         soup = cotton_render_string_soup('<c-card.title text="Card Title" />')
 
-        title = soup.find('h5')
+        title = soup.find("h5")
         assert title is not None
-        assert 'card-title' in title['class']
+        assert "card-title" in title["class"]
         assert title.get_text().strip() == "Card Title"
 
     def test_card_title_custom_heading_level(self, cotton_render_string_soup):
         """Test card title renders with custom heading level."""
         soup = cotton_render_string_soup('<c-card.title level="2" text="Card Title" />')
 
-        title = soup.find('h2')
+        title = soup.find("h2")
         assert title is not None
-        assert 'card-title' in title['class']
+        assert "card-title" in title["class"]
 
-        h5 = soup.find('h5')
+        h5 = soup.find("h5")
         assert h5 is None
 
     def test_card_title_slot_content(self, cotton_render_string):
@@ -483,13 +483,15 @@ class TestTableComponent:
 
     def test_table_no_erroneous_attributes(self, cotton_render_string):
         """Test table component variables don't leak as HTML attributes."""
-        html = cotton_render_string('<c-table striped bordered hover small variant="dark" responsive="lg" caption="Test" />')
+        html = cotton_render_string(
+            '<c-table striped bordered hover small variant="dark" responsive="lg" caption="Test" />'
+        )
 
         # These should NOT appear as HTML attributes
-        assert 'striped=' not in html
-        assert 'bordered=' not in html
-        assert 'hover=' not in html
-        assert 'small=' not in html
+        assert "striped=" not in html
+        assert "bordered=" not in html
+        assert "hover=" not in html
+        assert "small=" not in html
         assert 'variant="dark"' not in html
         assert 'responsive="lg"' not in html
         assert 'caption="Test"' not in html
@@ -541,19 +543,19 @@ class TestTabsComponent:
         """Test active tab pane has proper ARIA attributes and tabindex."""
         soup = cotton_render_string_soup('<c-tabs.pane id="tab1" active>Content 1</c-tabs.pane>')
 
-        pane = soup.find('div', class_='tab-pane')
-        assert 'active' in pane['class']
-        assert pane.get('role') == 'tabpanel'
-        assert pane.get('aria-labelledby') == 'tab1-tab'
-        assert pane.get('tabindex') == '0'
+        pane = soup.find("div", class_="tab-pane")
+        assert "active" in pane["class"]
+        assert pane.get("role") == "tabpanel"
+        assert pane.get("aria-labelledby") == "tab1-tab"
+        assert pane.get("tabindex") == "0"
 
     def test_tabs_pane_inactive(self, cotton_render_string_soup):
         """Test inactive tab pane has proper ARIA attributes and tabindex."""
         soup = cotton_render_string_soup('<c-tabs.pane id="tab2">Content 2</c-tabs.pane>')
 
-        pane = soup.find('div', class_='tab-pane')
-        assert 'active' not in pane.get('class', [])
-        assert pane.get('tabindex') == '-1'
+        pane = soup.find("div", class_="tab-pane")
+        assert "active" not in pane.get("class", [])
+        assert pane.get("tabindex") == "-1"
 
     def test_tabs_no_erroneous_attributes_active(self, cotton_render_string):
         """Test tabs item component variables don't leak as HTML attributes."""
@@ -568,7 +570,7 @@ class TestTabsComponent:
         # These should NOT appear as HTML attributes because they're declared in c-vars
         assert 'target="tab1"' not in html
         assert 'text="Tab 1"' not in html
-        assert 'disabled=' not in html
+        assert "disabled=" not in html
 
     def test_tabs_no_erroneous_attributes_disabled(self, cotton_render_string):
         """Test disabled tabs item component variables don't leak as HTML attributes."""
@@ -583,7 +585,7 @@ class TestTabsComponent:
         # These should NOT appear as HTML attributes because they're declared in c-vars
         assert 'target="tab1"' not in html
         assert 'text="Tab 1"' not in html
-        assert 'active=' not in html
+        assert "active=" not in html
 
 
 class TestModalComponent:
@@ -597,12 +599,12 @@ class TestModalComponent:
             <c-modal.body>Modal content</c-modal.body>
         </c-modal>""")
 
-        modal = soup.find('div', class_='modal')
+        modal = soup.find("div", class_="modal")
         assert modal is not None
-        assert modal['id'] == 'testModal'
-        assert modal.get('aria-labelledby') == 'testModalLabel'
-        assert modal.get('aria-hidden') == 'true'
-        assert modal.get('tabindex') == '-1'
+        assert modal["id"] == "testModal"
+        assert modal.get("aria-labelledby") == "testModalLabel"
+        assert modal.get("aria-hidden") == "true"
+        assert modal.get("tabindex") == "-1"
 
     def test_modal_with_fade_animation(self, cotton_render_string):
         """Test modal renders with fade animation class."""
@@ -620,9 +622,9 @@ class TestModalComponent:
         """Test modal title renders with proper class and content."""
         html = cotton_render_string('<c-modal.title id="test" text="Modal Title" />')
 
-        assert 'modal-title' in html
+        assert "modal-title" in html
         assert 'id="testLabel"' in html
-        assert 'Modal Title' in html
+        assert "Modal Title" in html
 
 
 class TestAccordionComponent:
@@ -674,20 +676,20 @@ class TestListGroupComponent:
             <c-list_group.item text="Item 2" />
         </c-list_group>""")
 
-        ul = soup.find('ul', class_='list-group')
+        ul = soup.find("ul", class_="list-group")
         assert ul is not None
 
-        items = soup.find_all('li', class_='list-group-item')
+        items = soup.find_all("li", class_="list-group-item")
         assert len(items) == 2
 
     def test_list_group_numbered(self, cotton_render_string_soup):
         """Test numbered list group renders as ordered list."""
         soup = cotton_render_string_soup("<c-list_group numbered>Content</c-list_group>")
 
-        ol = soup.find('ol')
+        ol = soup.find("ol")
         assert ol is not None
 
-        ul = soup.find('ul')
+        ul = soup.find("ul")
         assert ul is None
 
     def test_list_group_horizontal(self, cotton_render_string):
@@ -714,9 +716,9 @@ class TestListGroupComponent:
         """Test list group item renders as link when href provided."""
         soup = cotton_render_string_soup('<c-list_group.item href="/test/" text="Link Item" />')
 
-        link = soup.find('a', href="/test/")
+        link = soup.find("a", href="/test/")
         assert link is not None
-        assert 'list-group-item-action' in link['class']
+        assert "list-group-item-action" in link["class"]
 
 
 class TestButtonGroupComponent:
@@ -763,7 +765,7 @@ class TestButtonGroupComponent:
 
         # These should NOT appear as HTML attributes because they're declared in c-vars
         assert 'size="lg"' not in html
-        assert 'vertical=' not in html
+        assert "vertical=" not in html
         # label is correctly used in aria-label, verify it's not a standalone attribute
         assert ' label="Test"' not in html
 
@@ -818,9 +820,9 @@ class TestBadgeComponent:
         """Test badge renders as span with default primary variant."""
         soup = cotton_render_string_soup('<c-badge text="New" />')
 
-        badge = soup.find('span', class_='badge')
+        badge = soup.find("span", class_="badge")
         assert badge is not None
-        assert 'text-bg-primary' in badge['class']
+        assert "text-bg-primary" in badge["class"]
         assert badge.get_text().strip() == "New"
 
     def test_badge_with_slot_content(self, cotton_render_string):
@@ -847,38 +849,38 @@ class TestBadgeComponent:
         """Test badge renders as anchor tag when href provided."""
         soup = cotton_render_string_soup('<c-badge text="Link Badge" href="/example" />')
 
-        link = soup.find('a', href="/example")
+        link = soup.find("a", href="/example")
         assert link is not None
-        assert 'badge' in link['class']
+        assert "badge" in link["class"]
 
-        span = soup.find('span', class_='badge')
+        span = soup.find("span", class_="badge")
         assert span is None
 
     def test_badge_as_span_without_href(self, cotton_render_string_soup):
         """Test badge renders as span tag when no href provided."""
         soup = cotton_render_string_soup('<c-badge text="Span Badge" />')
 
-        span = soup.find('span', class_='badge')
+        span = soup.find("span", class_="badge")
         assert span is not None
 
-        link = soup.find('a')
+        link = soup.find("a")
         assert link is None
 
     def test_badge_link_with_pill(self, cotton_render_string_soup):
         """Test badge as link with pill styling and custom variant."""
         soup = cotton_render_string_soup('<c-badge text="Pill Link" href="/link" pill variant="warning" />')
 
-        link = soup.find('a', href="/link")
+        link = soup.find("a", href="/link")
         assert link is not None
-        assert 'rounded-pill' in link['class']
-        assert 'text-bg-warning' in link['class']
+        assert "rounded-pill" in link["class"]
+        assert "text-bg-warning" in link["class"]
 
     def test_badge_with_custom_class(self, cotton_render_string):
         """Test badge merges custom CSS class with component classes."""
         html = cotton_render_string('<c-badge text="Custom" class="my-custom-class" />')
 
-        assert 'my-custom-class' in html
-        assert 'badge' in html
+        assert "my-custom-class" in html
+        assert "badge" in html
 
     def test_badge_with_additional_attributes(self, cotton_render_string):
         """Test badge renders with additional HTML attributes."""
@@ -894,11 +896,13 @@ class TestBadgeComponent:
         # These should NOT appear as HTML attributes
         assert 'text="Test"' not in html
         assert 'variant="danger"' not in html
-        assert 'pill=' not in html
+        assert "pill=" not in html
 
     def test_badge_link_with_additional_attrs(self, cotton_render_string):
         """Test badge link renders with multiple additional attributes."""
-        html = cotton_render_string('<c-badge text="External" href="https://example.com" target="_blank" rel="noopener" />')
+        html = cotton_render_string(
+            '<c-badge text="External" href="https://example.com" target="_blank" rel="noopener" />'
+        )
 
         assert "<a" in html
         assert 'href="https://example.com"' in html
@@ -957,28 +961,37 @@ class TestTemplateTagFilters:
 
     def test_slot_is_empty_with_newlines_and_spaces(self, cotton_render_string):
         """Test slot_is_empty filter strips newlines and spaces correctly."""
-        html = cotton_render_string("""{% load cotton_bs5 %}{% if "   "|slot_is_empty %}empty{% else %}not-empty{% endif %}""")
+        html = cotton_render_string(
+            """{% load cotton_bs5 %}{% if "   "|slot_is_empty %}empty{% else %}not-empty{% endif %}"""
+        )
 
         assert "empty" in html
 
     def test_slot_is_empty_with_content(self, cotton_render_string):
         """Test slot_is_empty filter returns False for strings with content."""
-        html = cotton_render_string("""{% load cotton_bs5 %}{% if "Hello"|slot_is_empty %}empty{% else %}not-empty{% endif %}""")
+        html = cotton_render_string(
+            """{% load cotton_bs5 %}{% if "Hello"|slot_is_empty %}empty{% else %}not-empty{% endif %}"""
+        )
 
         assert "not-empty" in html
 
     def test_slot_is_empty_with_content_and_whitespace(self, cotton_render_string):
         """Test slot_is_empty filter returns False for content with surrounding whitespace."""
-        html = cotton_render_string("""{% load cotton_bs5 %}{% if "  Hello  "|slot_is_empty %}empty{% else %}not-empty{% endif %}""")
+        html = cotton_render_string(
+            """{% load cotton_bs5 %}{% if "  Hello  "|slot_is_empty %}empty{% else %}not-empty{% endif %}"""
+        )
 
         assert "not-empty" in html
 
     def test_slot_is_empty_with_non_string(self, cotton_render_string):
         """Test slot_is_empty filter handles non-string types gracefully."""
-        html = cotton_render_string("""
+        html = cotton_render_string(
+            """
             {% load cotton_bs5 %}
             {% if empty_list|slot_is_empty %}empty{% else %}not-empty{% endif %}
-        """, context={'empty_list': []})
+        """,
+            context={"empty_list": []},
+        )
 
         # Should handle None return value gracefully (falsy)
         assert "not-empty" in html or "empty" in html  # Either is acceptable
@@ -989,13 +1002,16 @@ class TestResponsiveTag:
 
     def test_responsive_with_single_breakpoint(self, cotton_render_string):
         """Test responsive tag generates single breakpoint class."""
-        html = cotton_render_string("""{% load cotton_bs5 %}{% responsive 'col' as classes %}{{ classes }}""", context={'md': '6'})
+        html = cotton_render_string("{% load cotton_bs5 %}{% responsive 'col' %}", context={"attrs": {"md": "6"}})
 
         assert "col-md-6" in html
 
     def test_responsive_with_multiple_breakpoints(self, cotton_render_string):
         """Test responsive tag generates multiple breakpoint classes."""
-        html = cotton_render_string("""{% load cotton_bs5 %}{% responsive 'col' as classes %}{{ classes }}""", context={'md': '6', 'lg': '4', 'xl': '3'})
+        html = cotton_render_string(
+            "{% load cotton_bs5 %}{% responsive 'col' %}",
+            context={"attrs": {"md": "6", "lg": "4", "xl": "3"}},
+        )
 
         assert "col-md-6" in html
         assert "col-lg-4" in html
@@ -1003,14 +1019,10 @@ class TestResponsiveTag:
 
     def test_responsive_with_all_breakpoints(self, cotton_render_string):
         """Test responsive tag handles all Bootstrap breakpoint sizes."""
-        html = cotton_render_string("""{% load cotton_bs5 %}{% responsive 'col' as classes %}{{ classes }}""", context={
-            'xs': '12',
-            'sm': '6',
-            'md': '4',
-            'lg': '3',
-            'xl': '2',
-            'xxl': '1'
-        })
+        html = cotton_render_string(
+            "{% load cotton_bs5 %}{% responsive 'col' %}",
+            context={"attrs": {"xs": "12", "sm": "6", "md": "4", "lg": "3", "xl": "2", "xxl": "1"}},
+        )
 
         assert "col-xs-12" in html
         assert "col-sm-6" in html
@@ -1021,20 +1033,25 @@ class TestResponsiveTag:
 
     def test_responsive_with_no_breakpoints(self, cotton_render_string):
         """Test responsive tag returns empty string when no breakpoints defined."""
-        html = cotton_render_string("""{% load cotton_bs5 %}[{% responsive 'col' as classes %}{{ classes }}]""")
+        html = cotton_render_string("{% load cotton_bs5 %}{% responsive 'col' %}")
 
-        assert "[]" in html
+        assert html.strip() == ""
 
     def test_responsive_with_different_root_class(self, cotton_render_string):
         """Test responsive tag works with different root class names."""
-        html = cotton_render_string("""{% load cotton_bs5 %}{% responsive 'offset' as classes %}{{ classes }}""", context={'md': '2', 'lg': '1'})
+        html = cotton_render_string(
+            "{% load cotton_bs5 %}{% responsive 'offset' %}", context={"attrs": {"md": "2", "lg": "1"}}
+        )
 
         assert "offset-md-2" in html
         assert "offset-lg-1" in html
 
     def test_responsive_with_none_values(self, cotton_render_string):
         """Test responsive tag excludes None values from output."""
-        html = cotton_render_string("""{% load cotton_bs5 %}{% responsive 'col' as classes %}{{ classes }}""", context={'md': '6', 'lg': None, 'xl': '3'})
+        html = cotton_render_string(
+            "{% load cotton_bs5 %}{% responsive 'col' %}",
+            context={"attrs": {"md": "6", "lg": None, "xl": "3"}},
+        )
 
         assert "col-md-6" in html
         assert "col-xl-3" in html
