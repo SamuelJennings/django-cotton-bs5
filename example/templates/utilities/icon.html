@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load cotton %}
+<c-page title="Icon">
+  <c-page.section title="Basic Usage">
+    <c-slot name="description">
+      The <code>icon</code> component renders Bootstrap Icons using the <code>name</code> attribute.
+      Visit <a href="https://icons.getbootstrap.com/"
+    target="_blank"
+    rel="noopener">icons.getbootstrap.com</a>
+      to browse the complete icon library.
+    </c-slot>
+    {% cotton:verbatim %}
+      <c-hstack>
+        <c-icon name="heart" />
+        <c-icon name="star" />
+        <c-icon name="envelope" />
+        <c-icon name="person" />
+        <c-icon name="gear" />
+        <c-icon name="house" />
+        <c-icon name="search" />
+        <c-icon name="cart" />
+      </c-hstack>
+    {% endcotton:verbatim %}
+  </c-page.section>
+  <c-page.section title="Icons Library">
+    <c-slot name="description">
+      The <code>icon</code> component uses Bootstrap Icons, which provides over 2,000 high-quality icons.
+      Visit <a href="https://icons.getbootstrap.com/"
+    target="_blank"
+    rel="noopener">icons.getbootstrap.com</a>
+      to browse and search the complete icon library. Simply use the icon name (without the "bi-" prefix)
+      as the <code>name</code> attribute value.
+    </c-slot>
+  </c-page.section>
+</c-page>

@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% load cotton %}
+<c-page title="Vertical Stack (vstack)">
+  <c-page.section title="Basic Usage">
+    <c-slot name="description">
+      The <code>vstack</code> utility creates a vertical flexbox layout with customizable gap spacing between items.
+      Use it to arrange elements in a column with automatic spacing.
+    </c-slot>
+    {% cotton:verbatim %}
+      <c-vstack style="max-width: 400px;">
+        <c-button variant="primary" text="Button 1" class="w-100" />
+        <c-button variant="secondary" text="Button 2" class="w-100" />
+        <c-button variant="success" text="Button 3" class="w-100" />
+      </c-vstack>
+    {% endcotton:verbatim %}
+  </c-page.section>
+  <c-page.section title="Gap Spacing">
+    <c-slot name="description">
+      Control the spacing between items using the <code>gap</code> attribute.
+      Accepts Bootstrap spacing scale values (0-5). Default is <code>gap="1"</code>.
+    </c-slot>
+    {% cotton:verbatim %}
+      <c-hstack class="align-items-start">
+        <div>
+          <h6>gap="1" (default)</h6>
+          <c-vstack gap="1">
+            <c-alert variant="primary" text="Alert 1" />
+            <c-alert variant="secondary" text="Alert 2" />
+            <c-alert variant="success" text="Alert 3" />
+          </c-vstack>
+        </div>
+        <div>
+          <h6>gap="3"</h6>
+          <c-vstack gap="3">
+            <c-alert variant="primary" text="Alert 1" />
+            <c-alert variant="secondary" text="Alert 2" />
+            <c-alert variant="success" text="Alert 3" />
+          </c-vstack>
+        </div>
+      </c-hstack>
+    {% endcotton:verbatim %}
+  </c-page.section>
+  <c-page.section title="Additional Bootstrap Utilities">
+    <c-slot name="description">
+      The <code>vstack</code> component accepts additional CSS classes via the <code>class</code> attribute
+      and any HTML attributes. Use Bootstrap utility classes like <code>align-items-*</code>,
+      <code>justify-content-*</code>, borders, backgrounds, etc. to customize appearance and behavior.
+    </c-slot>
+    {% cotton:verbatim %}
+      <c-vstack style="max-width: 500px;">
+        <div>
+          <h6>With alignment and styling</h6>
+          <c-vstack class="align-items-center border border-primary rounded p-3 ">
+            <c-badge variant="primary" text="Centered Item" />
+            <c-badge variant="secondary" text="Another Item" />
+          </c-vstack>
+        </div>
+        <div>
+          <h6>Common use case: form layout</h6>
+          <c-vstack>
+            <div>
+              <label for="name" class="form-label">Name</label>
+              <input type="text" id="name" class="form-control" />
+            </div>
+            <div>
+              <label for="email" class="form-label">Email</label>
+              <input type="email" id="email" class="form-control" />
+            </div>
+            <c-hstack class="justify-content-end">
+              <c-button variant="secondary" text="Cancel" />
+              <c-button variant="primary" text="Submit" />
+            </c-hstack>
+          </c-vstack>
+        </div>
+        <div>
+          <h6>Common use case: card stack</h6>
+          <c-vstack>
+            <c-card>
+              <c-card.body>
+                <c-card.title text="Card 1" />
+                <p class="mb-0">Stacked card content.</p>
+              </c-card.body>
+            </c-card>
+            <c-card>
+              <c-card.body>
+                <c-card.title text="Card 2" />
+                <p class="mb-0">More stacked content.</p>
+              </c-card.body>
+            </c-card>
+          </c-vstack>
+        </div>
+      </c-vstack>
+    {% endcotton:verbatim %}
+  </c-page.section>
+</c-page>

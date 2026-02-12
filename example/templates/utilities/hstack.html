@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% load cotton %}
+<c-page title="Horizontal Stack (hstack)">
+  <c-page.section title="Basic Usage">
+    <c-slot name="description">
+      The <code>hstack</code> utility creates a horizontal flexbox layout with customizable gap spacing between items.
+      Use it to arrange elements in a row with automatic spacing.
+    </c-slot>
+    {% cotton:verbatim %}
+      <c-hstack>
+        <c-button variant="primary" text="Button 1" />
+        <c-button variant="secondary" text="Button 2" />
+        <c-button variant="success" text="Button 3" />
+      </c-hstack>
+    {% endcotton:verbatim %}
+  </c-page.section>
+  <c-page.section title="Gap Spacing">
+    <c-slot name="description">
+      Control the spacing between items using the <code>gap</code> attribute.
+      Accepts Bootstrap spacing scale values (0-5). Default is <code>gap="1"</code>.
+    </c-slot>
+    {% cotton:verbatim %}
+      <c-vstack>
+        <div>
+          <h6>gap="1" (default)</h6>
+          <c-hstack gap="1">
+            <c-badge variant="primary" text="Badge 1" />
+            <c-badge variant="secondary" text="Badge 2" />
+            <c-badge variant="success" text="Badge 3" />
+          </c-hstack>
+        </div>
+        <div>
+          <h6>gap="3"</h6>
+          <c-hstack gap="3">
+            <c-badge variant="primary" text="Badge 1" />
+            <c-badge variant="secondary" text="Badge 2" />
+            <c-badge variant="success" text="Badge 3" />
+          </c-hstack>
+        </div>
+      </c-vstack>
+    {% endcotton:verbatim %}
+  </c-page.section>
+  <c-page.section title="Flex Wrapping">
+    <c-slot name="description">
+      Control flex wrapping with the <code>wrap</code> boolean attribute.
+      Default is <code>wrap="True"</code> (items wrap to multiple rows).
+    </c-slot>
+    {% cotton:verbatim %}
+      <div>
+        <h6>With wrapping (default)</h6>
+        <c-hstack wrap style="max-width: 400px;" class="border p-3">
+          {# djlint:off #}
+                    {% for i in "123456789"|make_list %}<c-button variant="primary"
+                                                                  text="Button {{ i }}" />
+                    {% endfor %}
+          {# djlint:on #}
+        </c-hstack>
+        <h6 class="mt-3">Without wrapping</h6>
+        <c-hstack :wrap="False"
+                  style="max-width: 400px"
+                  class="border p-3 overflow-auto">
+          {# djlint:off #}
+                    {% for i in "123456789"|make_list %}<c-button variant="primary"
+                                                                  text="Button {{ i }}" />
+                    {% endfor %}
+          {# djlint:on #}
+        </c-hstack>
+      </div>
+    {% endcotton:verbatim %}
+  </c-page.section>
+  <c-page.section title="Additional Bootstrap Utilities">
+    <c-slot name="description">
+      The <code>hstack</code> component accepts additional CSS classes via the <code>class</code> attribute
+      and any HTML attributes. Use Bootstrap utility classes like <code>align-items-*</code>,
+      <code>justify-content-*</code>, borders, backgrounds, etc. to customize appearance and behavior.
+    </c-slot>
+    {% cotton:verbatim %}
+      <c-vstack>
+        <div>
+          <h6>With alignment and styling</h6>
+          <c-hstack class="align-items-center justify-content-center border border-primary rounded p-3 "
+                    style="height: 100px">
+            <c-badge variant="primary" text="Centered Item" />
+          </c-hstack>
+        </div>
+        <div>
+          <h6>Common use case: button group</h6>
+          <c-hstack>
+            <c-button variant="primary" text="Save" />
+            <c-button variant="secondary" text="Cancel" />
+            <c-button variant="danger" outline text="Delete" />
+          </c-hstack>
+        </div>
+      </c-vstack>
+    {% endcotton:verbatim %}
+  </c-page.section>
+</c-page>
