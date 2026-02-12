@@ -1,10 +1,16 @@
+{% load cotton_bs5 %}
 <c-vars direction="down"
-        :dir_dict="{'up': 'dropup', 'down': 'dropdown', 'left': 'dropstart', 'right':'dropend'}"
-        class />
-<div class="{{ dir_dict|get_item:direction }} {{ class }}"
-     {{ attrs }}>
-  {{ button }}
-  <ul class="dropdown-menu">
+        class
+        button_class
+        min-width="10rem" />
+<div class="{{ "drop"|add:direction }} {{ class }}">
+  {% if button %}
+    {{ button }}
+  {% else %}
+    <c-dropdown.toggle :attrs="attrs" :class="button_class" />
+  {% endif %}
+  <ul class="dropdown-menu"
+      style="--bs-dropdown-min-width: {{ min_width }}">
     {{ slot }}
   </ul>
 </div>

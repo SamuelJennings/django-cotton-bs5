@@ -1,6 +1,6 @@
 {% load cotton_bs5 %}
-<c-vars width sm md lg xl xxl class />
-<div class="{% if width %}col-{{ width }}{% else %}col{% endif %} {% responsive "col" %} {{ class }}"
+<c-vars width sm md lg xl xxl order offset class />
+<div class="{% if width %}col-{{ width }}{% else %}col{% endif %} {% responsive "col" %}{% if order %} order-{{ order }}{% endif %}{% if offset %} offset-{{ offset }}{% endif %} {{ class }}"
      {{ attrs }}>
   {{ slot }}
 </div>

@@ -1,6 +1,13 @@
-<c-vars text active disabled class />
+<c-vars text
+        icon
+        active
+        disabled
+        class
+        gap="2"
+        align="start" />
 {% with element=href|yesno:"a,button" %}
   {# djlint:off #}
-<{{ element }} class="dropdown-item{% if active %} active{% endif %}{% if disabled %} disabled{% endif %}{% if class %} {{ class }}{% endif %}"{% if element == "button" %} type="button"{% endif %}{% if disabled %}{% if element == "a" %} tabindex="-1" aria-disabled="true"{% else %} disabled{% endif %}{% endif %} {{ attrs }}>{{ text }}{{ slot }}</{{ element }}>
+<{{ element }} class="dropdown-item d-inline-flex justify-content-{{ start }} align-items-center gap-{{ gap }} {% if active %} active{% endif %}{% if disabled %} disabled{% endif %}{% if class %} {{ class }}{% endif %}"{% if element == "button" %} type="button"{% endif %}{% if disabled %}{% if element == "a" %} tabindex="-1" aria-disabled="true"{% else %} disabled{% endif %}{% endif %} {{ attrs }}>
+{% if icon %}<c-icon name="{{ icon }}" />{% endif %}{{ text }}{{ slot }}</{{ element }}>
   {# djlint:on #}
 {% endwith %}

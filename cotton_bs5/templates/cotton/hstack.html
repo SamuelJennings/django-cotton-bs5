@@ -1,4 +1,4 @@
-<c-vars gap=1 class />
-<div class="hstack gap-{{ gap }} {{ class }}"
+<c-vars gap=1 class :wrap="True" />
+<div class="hstack gap-{{ gap }}{% if wrap %} flex-wrap{% endif %} {{ class }}"
      {{ attrs }}>{{ slot }}
 </div>
