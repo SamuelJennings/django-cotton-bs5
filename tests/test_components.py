@@ -126,14 +126,18 @@ class TestButtonComponent:
     """Tests for button component."""
 
     def test_button_basic_rendering(self, cotton_render_string_soup):
-        """Test button renders as button element with default primary variant."""
+        """Test button renders as button element with default variant."""
         soup = cotton_render_string_soup('<c-button text="Click me" />')
 
         button = soup.find("button")
         assert button is not None
         assert "btn" in button["class"]
-        assert "btn-primary" in button["class"]  # default variant
-        assert button.get_text().strip() == "Click me"
+        assert "btn-default" in button["class"]  # default variant is now 'default'
+        assert "d-inline-flex" in button["class"]  # flexbox layout for icon support
+        # Text is wrapped in span with btn-text class
+        span = button.find("span", class_="btn-text")
+        assert span is not None
+        assert "Click me" in span.get_text()
 
     def test_button_renders_as_link_when_href_provided(self, cotton_render_string_soup):
         """Test button renders as anchor tag when href attribute is provided."""
@@ -152,7 +156,7 @@ class TestButtonComponent:
         html = cotton_render_string('<c-button variant="danger" text="Delete" />')
 
         assert "btn-danger" in html
-        assert "btn-primary" not in html
+        assert "btn-default" not in html
 
     def test_button_outline_variant(self, cotton_render_string):
         """Test button renders with outline variant styling."""
@@ -162,27 +166,49 @@ class TestButtonComponent:
         assert 'btn-primary"' not in html  # Should be outline, not solid
 
     def test_button_custom_size(self, cotton_render_string):
-        """Test button renders with large size class."""
+        """Test button renders with large size class using size attribute."""
         html = cotton_render_string('<c-button size="lg" text="Large button" />')
 
         assert "btn-lg" in html
+        assert "btn-default" in html  # default variant
+
+    def test_button_boolean_size_attributes(self, cotton_render_string):
+        """Test button supports boolean small and large attributes."""
+        html_small = cotton_render_string('<c-button small text="Small button" />')
+        assert "btn-sm" in html_small
+
+        html_large = cotton_render_string('<c-button large text="Large button" />')
+        assert "btn-lg" in html_large
 
     def test_button_slot_renders_with_text(self, cotton_render_string):
-        """Test button renders both slot content and text attribute."""
+        """Test button renders both text and slot content together."""
         html = cotton_render_string('<c-button text="Text">Slot content</c-button>')
 
-        assert "Slot content" in html
+        # New component renders both text and slot content
         assert "Text" in html
+        assert "Slot content" in html
+        assert "btn-text" in html  # text wrapped in span
 
     def test_button_no_erroneous_attributes(self, cotton_render_string):
         """Test button component variables don't leak as HTML attributes."""
-        html = cotton_render_string('<c-button variant="danger" size="lg" outline text="Test" />')
+        html = cotton_render_string('<c-button variant="danger" size="lg" outline text="Test" icon="star" gap="3" align="start" reverse condition />')
 
         # These should NOT appear as HTML attributes because they're declared in c-vars
         assert 'variant="danger"' not in html
         assert 'size="lg"' not in html
-        assert "outline=" not in html
+        assert 'outline="' not in html  # boolean
         assert 'text="Test"' not in html
+        assert 'icon="star"' not in html
+        assert 'gap="3"' not in html
+        assert 'align="start"' not in html
+        assert 'reverse="' not in html  # boolean
+        assert 'condition="' not in html  # boolean
+        
+        # But the classes should be applied correctly
+        assert "btn-outline-danger" in html
+        assert "btn-lg" in html
+        assert "justify-content-start" in html
+        assert "gap-3" in html
 
 
 class TestProgressComponent:
