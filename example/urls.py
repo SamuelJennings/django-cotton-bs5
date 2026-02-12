@@ -31,8 +31,12 @@ class DemoPageView(TemplateView):
         "cards": "https://getbootstrap.com/docs/5.3/components/card/",
         "carousel": "https://getbootstrap.com/docs/5.3/components/carousel/",
         "collapse": "https://getbootstrap.com/docs/5.3/components/collapse/",
+        "container": "https://getbootstrap.com/docs/5.3/layout/containers/",
         "dropdown": "https://getbootstrap.com/docs/5.3/components/dropdowns/",
-        "grid-system": "https://getbootstrap.com/docs/5.3/layout/grid/",
+        "grid": "https://getbootstrap.com/docs/5.3/layout/grid/",
+        "hstack": "https://getbootstrap.com/docs/5.3/helpers/stacks/",
+        "icon": "https://icons.getbootstrap.com/",
+        "link": "https://getbootstrap.com/docs/5.3/helpers/colored-links/",
         "list-group": "https://getbootstrap.com/docs/5.3/components/list-group/",
         "modals-offcanvas": "https://getbootstrap.com/docs/5.3/components/modal/",
         "navbar": "https://getbootstrap.com/docs/5.3/components/navbar/",
@@ -45,6 +49,7 @@ class DemoPageView(TemplateView):
         "table": "https://getbootstrap.com/docs/5.3/content/tables/",
         "tabs": "https://getbootstrap.com/docs/5.3/components/navs-tabs/",
         "toast": "https://getbootstrap.com/docs/5.3/components/toasts/",
+        "vstack": "https://getbootstrap.com/docs/5.3/helpers/stacks/",
     }
 
     def get_context_data(self, **kwargs):

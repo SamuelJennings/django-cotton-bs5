@@ -62,13 +62,13 @@
             </div>
             <div class="mb-3">
               <h6 class="text-muted mb-2">1. Install the package</h6>
-              <pre class="mb-0 p-3 bg-light rounded"><code>pip install django-cotton-bs5</code></pre>
+              <pre class="mb-0 p-3 rounded"><code>pip install django-cotton-bs5</code></pre>
             </div>
             <div>
               <h6 class="text-muted mb-2">
                 2. Add to your <code>INSTALLED_APPS</code> in settings.py
               </h6>
-              <pre class="mb-0 p-3 bg-light rounded"><code>INSTALLED_APPS = [
+              <pre class="mb-0 p-3 rounded"><code>INSTALLED_APPS = [
     # ... your other apps
     "django_cotton",
     "cotton_bs5",
@@ -162,28 +162,33 @@
       <h2 class="text-center mb-4">Explore Components</h2>
       <p class="text-center text-muted mb-4">Click on any component to see live examples and implementation code</p>
     </div>
-    <div class="row g-3 mb-5">
-      {% for component in component_menu %}
-        <div class="col-sm-6 col-md-4 col-lg-3">
-          <a href="{% url component.url_name %}"
-             class="text-decoration-none">
-            <c-card class="h-100 shadow-sm hover-shadow transition">
-              <c-card.body class="d-flex align-items-center justify-content-between">
-                <span class="fw-semibold text-dark">{{ component.name }}</span>
-                <svg xmlns="http://www.w3.org/2000/svg"
-                     width="16"
-                     height="16"
-                     fill="currentColor"
-                     class="bi bi-arrow-right text-primary"
-                     viewBox="0 0 16 16">
-                  <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
-                </svg>
-              </c-card.body>
-            </c-card>
-          </a>
+    {% for section, component_menu in component_menu.items %}
+      <div class="mb-3">
+        <h6 class="fw-bold text-muted text-uppercase small">{{ section|title }}</h6>
+        <div class="row g-3 mb-5">
+          {% for component in component_menu %}
+            <div class="col-sm-6 col-md-4 col-lg-3">
+              <a href="{% url component.url_name %}"
+                 class="text-decoration-none">
+                <c-card class="h-100 shadow-sm hover-shadow transition">
+                  <c-card.body class="d-flex align-items-center justify-content-between">
+                    <span class="fw-semibold text-dark">{{ component.name }}</span>
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         width="16"
+                         height="16"
+                         fill="currentColor"
+                         class="bi bi-arrow-right text-primary"
+                         viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
+                    </svg>
+                  </c-card.body>
+                </c-card>
+              </a>
+            </div>
+          {% endfor %}
         </div>
-      {% endfor %}
-    </div>
+      </div>
+    {% endfor %}
     <!-- Footer Info -->
     <div class="row justify-content-center mt-5 pt-5 border-top">
       <div class="col-lg-8 text-center">
