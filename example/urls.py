@@ -7,6 +7,12 @@ from django.utils.text import slugify
 from django.views.generic import TemplateView
 from django_distill import distill_path
 
+MENU_SECTIONS = [
+    "layout",
+    "components",
+    "utilities",
+]
+
 
 class DemoPageView(TemplateView):
     """
@@ -44,7 +50,17 @@ class DemoPageView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["component_menu"] = self.get_component_menu()
-
+        context["variants"] = [
+            "primary",
+            "secondary",
+            "success",
+            "danger",
+            "warning",
+            "info",
+            "light",
+            "dark",
+        ]
+        context["breakpoints"] = ["sm", "md", "lg", "xl", "xxl"]
         # Add Bootstrap docs URL if available for this component
         # Get the current URL name from the resolved URL match
         if self.request.resolver_match:
@@ -60,24 +76,29 @@ class DemoPageView(TemplateView):
     @staticmethod
     def get_component_menu():
         """
-        Generate a list of all component demo pages for the menu.
-        Returns a list of dicts with 'name' (display name) and 'url_name' (for {% url %} tag).
+        Generate a dictionary of all component demo pages organized by section.
+        Returns a dict where keys are section names and values are lists of menu items.
+        Each menu item is a dict with 'name' (display name) and 'url_name' (for {% url %} tag).
         """
-        menu_items = []
-        templates_dir = Path(__file__).parent / "templates" / "components"
+        menu_sections = {}
 
-        if templates_dir.exists():
-            for template_file in sorted(templates_dir.glob("*.html")):
-                name = template_file.stem
-                slug = slugify(name)
-                menu_items.append(
-                    {
-                        "name": name.replace("_", " ").replace("-", " ").title(),
-                        "url_name": slug,
-                    }
-                )
+        for section in MENU_SECTIONS:
+            templates_dir = Path(__file__).parent / "templates" / section
 
-        return menu_items
+            if templates_dir.exists():
+                menu_items = []
+                for template_file in sorted(templates_dir.glob("*.html")):
+                    name = template_file.stem
+                    slug = slugify(name)
+                    menu_items.append(
+                        {
+                            "name": name.replace("_", " ").replace("-", " ").title(),
+                            "url_name": slug,
+                        }
+                    )
+                menu_sections[section] = menu_items
+
+        return menu_sections
 
 
 def get_index():
@@ -87,21 +108,21 @@ def get_index():
     return None
 
 
-def get_all_components():
-    """
-    distill_func for component pages - returns None for each component
-    since they don't have URL parameters
-    """
-    templates_dir = Path(__file__).parent / "templates" / "components"
+# def get_all_components():
+#     """
+#     distill_func for component pages - returns None for each component
+#     since they don't have URL parameters
+#     """
+#     templates_dir = Path(__file__).parent / "templates" / "components"
 
-    if templates_dir.exists():
-        for _template_file in sorted(templates_dir.glob("*.html")):
-            # Return None for each component - no URL parameters needed
-            yield None
+#     if templates_dir.exists():
+#         for _template_file in sorted(templates_dir.glob("*.html")):
+#             # Return None for each component - no URL parameters needed
+#             yield None
 
 
 # Dynamically generate URL patterns for component templates
-def generate_component_routes():
+def generate_routes(template_dir):
     """
     Dynamically create URL routes for any template listed in templates/components/.
     Each template gets a URL with:
@@ -110,7 +131,7 @@ def generate_component_routes():
     - name: same as the URL path
     """
     routes = []
-    templates_dir = Path(__file__).parent / "templates" / "components"
+    templates_dir = Path(__file__).parent / "templates" / template_dir
 
     if templates_dir.exists():
         for template_file in templates_dir.glob("*.html"):
@@ -119,7 +140,7 @@ def generate_component_routes():
             # Create slugified path
             slug = slugify(name)
             # Create template path
-            template_path = f"components/{template_file.name}"
+            template_path = f"{template_dir}/{template_file.name}"
 
             routes.append(
                 distill_path(
@@ -141,9 +162,10 @@ urlpatterns = [
         distill_func=get_index,
         distill_file="index.html",
     ),
-    # Dynamically generated component routes
-    *generate_component_routes(),
 ]
+
+for section in MENU_SECTIONS:
+    urlpatterns += generate_routes(section)
 
 # Add browser reload URLs only in DEBUG mode
 if settings.DEBUG and not os.environ.get("GITHUB_PAGES_REPO"):

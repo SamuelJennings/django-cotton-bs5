@@ -181,7 +181,7 @@ For example: `https://samueljennings.github.io/django-cotton-bs5/`
 When adding a new component template to `example/templates/components/`:
 
 1. Create the template file (e.g., `new-component.html`)
-2. The `generate_component_routes()` function automatically discovers it
+2. The `generate_routes(template_dir="components")` function automatically discovers it
 3. No URL configuration changes needed
 4. Push to `main` to trigger deployment
 

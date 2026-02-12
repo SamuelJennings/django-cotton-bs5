@@ -1,0 +1,34 @@
+{% load cotton_bs5 %}
+<c-page title="Containers">
+  <c-page.section title="Basic">
+    <c-slot name="description">
+    </c-slot>
+    {% cotton:verbatim %}
+      <c-container>
+        Container content
+      </c-container>
+    {% endcotton:verbatim %}
+  </c-page.section>
+  <c-page.section title="Fluid">
+    <c-slot name="description">
+      Fluid containers on ALL screen sizes
+    </c-slot>
+    {% cotton:verbatim %}
+      <c-container fluid>
+        Container content
+      </c-container>
+    {% endcotton:verbatim %}
+  </c-page.section>
+  <c-page.section title="Responsive">
+    <c-slot name="description">
+      Responsive variations are declared by assigning a breakpoint to the fluid attribute.
+    </c-slot>
+    {# djlint:off #}
+    {% for bp in breakpoints %}{% cotton:verbatim %}
+        <c-container fluid="{{ bp }}"
+                     class="bg-secondary-subtle p-3 mb-3">
+          This container will be fluid below the "{{ bp }}" breakpoint
+        </c-container>{% endcotton:verbatim %}{% endfor %}
+    {# djlint:on #}
+  </c-page.section>
+</c-page>

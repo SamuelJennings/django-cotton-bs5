@@ -1,0 +1,5 @@
+<c-vars fluid class />
+<div class="{% if not fluid %}container{% else %}{% if fluid is True %}container-fluid{% else %}container-{{ fluid }}{% endif %}{% endif %} {{ class }}"
+     {{ attrs }}>
+  {{ slot }}
+</div>

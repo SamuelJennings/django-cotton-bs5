@@ -31,16 +31,18 @@
               </h4>
             </a>
           </div>
-          <div class="mb-3">
-            <h6 class="fw-bold text-muted text-uppercase small">Components</h6>
-          </div>
-          <c-list-group flush>
-            {% for component in component_menu %}
-              <c-list-group.item href="{% url component.url_name %}"
-                                 text="{{ component.name }}"
-                                 class="border-0 py-2 px-3 rounded mb-1" />
-            {% endfor %}
-          </c-list-group>
+          {% for section, component_menu in component_menu.items %}
+            <div class="mb-3">
+              <h6 class="fw-bold text-muted text-uppercase small">{{ section|title }}</h6>
+              <c-list-group flush>
+                {% for component in component_menu %}
+                  <c-list-group.item href="{% url component.url_name %}"
+                                     text="{{ component.name }}"
+                                     class="border-0 py-2 px-3 rounded mb-1" />
+                {% endfor %}
+              </c-list-group>
+            </div>
+          {% endfor %}
         </div>
         <!-- Main Content Area -->
         <div class="col-md-9 col-lg-10 col-12 h-100 overflow-auto px-0">

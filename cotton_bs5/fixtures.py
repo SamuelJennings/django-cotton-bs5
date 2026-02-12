@@ -4,8 +4,8 @@ import pytest
 from bs4 import BeautifulSoup
 from django.template import Context, Template
 from django.test import RequestFactory
-from django_cotton import render_component  # type: ignore[import-untyped]
 from django_cotton.compiler_regex import CottonCompiler  # type: ignore[import-untyped]
+from django_cotton.utils import render_component  # type: ignore[import-untyped]
 
 compiler = CottonCompiler()
 

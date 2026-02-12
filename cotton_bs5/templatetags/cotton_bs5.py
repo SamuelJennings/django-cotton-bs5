@@ -24,6 +24,49 @@ compiler = CottonCompiler()
 
 
 @register.filter
+def prefix(value, arg):
+    """Prefix a string with a given argument.
+
+    Args:
+        value (str): The original string to be prefixed.
+        arg (str): The prefix to add to the original string.
+
+    Returns:
+        str: The resulting string with the prefix added.
+
+    Example:
+        {{ "world"|prefix:"hello " }}  # Output: "hello-world"
+    """
+    if value:
+        return f"{arg}-{value}"
+    return ""
+
+
+@register.filter
+def postfix(value, arg):
+    """Postfix a string with a given argument.
+
+    Args:
+        value (str): The original string to be postfixed.
+        arg (str): The postfix to add to the original string.
+
+    Returns:
+        str: The resulting string with the postfix added.
+
+    Example:
+        {{ "hello"|postfix:" world" }}  # Output: "hello-world"
+    """
+    if value:
+        return f"{value}-{arg}"
+    return ""
+
+
+@register.filter
+def split(value, delimiter=","):
+    return value.split(delimiter)
+
+
+@register.filter
 def slot_is_empty(slot):
     """Check if a template slot is empty after stripping whitespace.
 

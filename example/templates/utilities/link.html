@@ -1,0 +1,86 @@
+{% load cotton_bs5 %}
+<c-page title="Links">
+  <c-page.section title="Link Variants">
+    <c-slot name="description">
+    </c-slot>
+    {% for v in variants %}
+      {% spaceless %}
+        {% cotton:verbatim %}
+          <p>
+            <c-link variant="{{ v }}" text="{{ v|title }} link" />
+          </p>
+        {% endcotton:verbatim %}
+      {% endspaceless %}
+    {% endfor %}
+  </c-page.section>
+  <c-page.section title="Opacity">
+    {% for v in "10,25,50,75,100"|split %}
+      {% spaceless %}
+        {% cotton:verbatim %}
+          <p>
+            <c-link opacity="{{ v }}" text="Link opacity {{ v }}" />
+          </p>
+        {% endcotton:verbatim %}
+      {% endspaceless %}
+    {% endfor %}
+  </c-page.section>
+  <c-page.section title="Hover Opacity">
+    {% for v in "10,25,50,75,100"|split %}
+      {% spaceless %}
+        {% cotton:verbatim %}
+          <p>
+            <c-link hover-opacity="{{ v }}"
+                    text="Link hover opacity {{ v }}" />
+          </p>
+        {% endcotton:verbatim %}
+      {% endspaceless %}
+    {% endfor %}
+  </c-page.section>
+  <h2>Underlines</h2>
+  <c-page.section title="Underline color">
+    {% for v in variants %}
+      {% spaceless %}
+        {% cotton:verbatim %}
+          <p>
+            <c-link underline="{{ v }}" text="{{ v|title }} link" />
+          </p>
+        {% endcotton:verbatim %}
+      {% endspaceless %}
+    {% endfor %}
+  </c-page.section>
+  <c-page.section title="Underline offset">
+    {% for v in "1,2,3"|split %}
+      {% spaceless %}
+        {% cotton:verbatim %}
+          <p>
+            <c-link offset={{ v }} text="Offset link {{ v }}" />
+          </p>
+        {% endcotton:verbatim %}
+      {% endspaceless %}
+    {% endfor %}
+  </c-page.section>
+  <c-page.section title="Underline opacity">
+    {% for v in "10,25,50,75,100"|split %}
+      {% spaceless %}
+        {% cotton:verbatim %}
+          <p>
+            <c-link underline-opacity="{{ v }}"
+                    text="Underline opacity {{ v }}" />
+          </p>
+        {% endcotton:verbatim %}
+      {% endspaceless %}
+    {% endfor %}
+  </c-page.section>
+  <c-page.section title="Underline opacity">
+    {% for v in "10,25,50,75,100"|split %}
+      {% spaceless %}
+        {% cotton:verbatim %}
+          <p>
+            <c-link underline-hover-opacity="{{ v }}"
+                    text="Underline hover opacity {{ v }}" />
+          </p>
+        {% endcotton:verbatim %}
+      {% endspaceless %}
+    {% endfor %}
+  </c-page.section>
+</c-page>
