@@ -1,17 +1,27 @@
 <c-page title="Ratio">
-  <c-page.section title="Ratio">
+  <c-page.section title="Basic Usage">
+    <c-slot name="description">
+      Ratio helpers maintain aspect ratios for responsive media. Use <code>w</code> and <code>h</code>
+      attributes for width/height ratios (e.g., 16:9, 4:3), or use <code>perc</code> for a percentage-based ratio.
+    </c-slot>
     {% cotton:verbatim %}
       <c-grid cols="2" gap="3">
         <c-grid.col>
           <c-ratio w="16" h="9">
             <div style="background: linear-gradient(45deg, #007bff, #6f42c1)"
-                 class="d-flex align-items-center justify-content-center text-white">w=16, h=9</div>
+                 class="d-flex align-items-center justify-content-center text-white">16:9 Ratio</div>
+          </c-ratio>
+        </c-grid.col>
+        <c-grid.col>
+          <c-ratio w="4" h="3">
+            <div style="background: linear-gradient(45deg, #28a745, #20c997)"
+                 class="d-flex align-items-center justify-content-center text-white">4:3 Ratio</div>
           </c-ratio>
         </c-grid.col>
         <c-grid.col>
           <c-ratio perc="70%">
-            <div style="background: linear-gradient(45deg, #28a745, #20c997)"
-                 class="d-flex align-items-center justify-content-center text-white">70%</div>
+            <div style="background: linear-gradient(45deg, #dc3545, #fd7e14)"
+                 class="d-flex align-items-center justify-content-center text-white">70% Ratio</div>
           </c-ratio>
         </c-grid.col>
       </c-grid>

@@ -1,22 +1,30 @@
 <c-page title="Collapse">
-  <c-page.section title="Collapse">
+  <c-page.section title="Basic Usage">
+    <c-slot name="description">
+      Collapse components toggle visibility of content. The component creates both the trigger button
+      and collapsible content. Use the <code>id</code> attribute to uniquely identify each collapse,
+      the <code>text</code> attribute for the button label, and place collapsible content in the slot.
+    </c-slot>
     {% cotton:verbatim %}
-      <div class="vstack gap-1">
-        <c-collapse id="collapseExample" text="Toggle Collapse">
-          <div class="card card-body mt-2">
-            This is the collapsible content. It's hidden by default and
-            shown when the button is clicked.
-          </div>
-        </c-collapse>
-        <c-collapse id="horizontalCollapse"
-                    text="Toggle Collapse"
-                    horizontal>
-          <div class="card card-body mt-2" style="width: 300px">
-            This is the collapsible content. It's hidden by default and
-            shown when the button is clicked.
-          </div>
-        </c-collapse>
-      </div>
+      <c-collapse id="collapseExample" text="Toggle Collapse">
+        <div class="card card-body mt-2">
+          This is the collapsible content. It's hidden by default and
+          shown when the button is clicked.
+        </div>
+      </c-collapse>
+    {% endcotton:verbatim %}
+  </c-page.section>
+  <c-page.section title="Horizontal Collapse">
+    <c-slot name="description">
+      Add the <code>horizontal</code> boolean attribute to make content collapse horizontally
+      instead of vertically.
+    </c-slot>
+    {% cotton:verbatim %}
+      <c-collapse id="horizontalCollapse"
+                  text="Toggle Horizontal Collapse"
+                  horizontal>
+        <div class="card card-body mt-2" style="width: 300px">This content collapses horizontally.</div>
+      </c-collapse>
     {% endcotton:verbatim %}
   </c-page.section>
 </c-page>

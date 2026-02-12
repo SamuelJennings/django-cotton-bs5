@@ -1,27 +1,163 @@
 <c-page title="Buttons">
-  <c-page.section title="Buttons">
+  <c-page.section title="Button & Links">
+    <c-slot name="description">
+      Create identical button and link elements using a single component. To create a link, simply provide a href attribute to the <code>c-button</code> component.
+    </c-slot>
     {% cotton:verbatim %}
-      <c-vstack gap=3>
-        <c-hstack>
-          <c-button variant="primary" text="Primary Button" />
-          <c-button variant="secondary" text="Secondary Button" />
-          <c-button variant="success" text="Success Button" />
-          <c-button variant="danger" text="Danger Button" />
-          <c-button variant="warning" text="Warning Button" />
-          <c-button variant="info" text="Info Button" />
-        </c-hstack>
-        <c-hstack>
-          <c-button variant="outline-primary" text="Outline Primary" />
-          <c-button variant="outline-secondary"
-                    text="Outline Secondary" />
-          <c-button variant="outline-success" text="Outline Success" />
-        </c-hstack>
-        <c-hstack>
-          <c-button size="sm" variant="primary" text="Small Button" />
-          <c-button variant="primary" text="Normal Button" />
-          <c-button size="lg" variant="primary" text="Large Button" />
-        </c-hstack>
+      <c-hstack>
+        <c-button variant="primary" text="I'm a button" />
+        <c-button variant="secondary" text="I'm a link" href="#" />
+      </c-hstack>
+    {% endcotton:verbatim %}
+  </c-page.section>
+  <c-page.section title="Button Variants">
+    <c-slot name="description">
+      Bootstrap 5 provides eight contextual button variants: primary, secondary, success, danger, warning, info, light, dark, and a default variant. Use the <code>variant</code> attribute to apply the appropriate styling.
+    </c-slot>
+    {% cotton:verbatim %}
+      {# djlint:off #}
+      <c-hstack>
+        <c-button text="Default Button" />
+        {% for v in variants %}<c-button variant="{{ v }}" text="{{ v|title }} Button" />
+        {% endfor %}
+      </c-hstack>
+      {# djlint:on #}
+    {% endcotton:verbatim %}
+  </c-page.section>
+  <c-page.section title="Button Sizes">
+    <c-slot name="description">
+      Control button size using <code>small</code> or <code>large</code> boolean attributes. Omit both for the default normal size.
+    </c-slot>
+    {% cotton:verbatim %}
+      <c-hstack>
+        <c-button large variant="primary" text="Large Button" />
+        <c-button variant="primary" text="Normal Button" />
+        <c-button small variant="primary" text="Small Button" />
+      </c-hstack>
+    {% endcotton:verbatim %}
+  </c-page.section>
+  <c-page.section title="Button Icons & Spacing ">
+    <c-slot name="description">
+      The <code>c-button</code> component uses d-inline-flex and gap classes by default in order to support icons inside buttons.
+    </c-slot>
+    {% cotton:verbatim %}
+      <h5>Use an icon</h5>
+      <c-hstack>
+        <c-button icon="lock" text="Button 1" variant="primary" />
+        <c-button icon="unlock" text="Button 2" variant="warning" />
+      </c-hstack>
+      <h5 class="mt-3">Reverse the order</h5>
+      <c-hstack>
+        <c-button icon="arrows"
+                  reverse
+                  text="Reverse Order"
+                  variant="primary" />
+      </c-hstack>
+      <h5 class="mt-3">Increase or decrease spacing between icon and text</h5>
+      <c-hstack>
+        {% for v in "12345" %}
+          <c-button icon="person"
+                    gap="{{ v }}"
+                    text="Gap {{ v }} {% if v == "2" %}(default ){% endif %}"
+                    variant="primary" />
+        {% endfor %}
+      </c-hstack>
+    {% endcotton:verbatim %}
+  </c-page.section>
+  <c-page.section title="Outline Variants">
+    <c-slot name="description">
+      Add the <code>outline</code> boolean attribute to create outline-style buttons with transparent backgrounds and colored borders.
+    </c-slot>
+    {% cotton:verbatim %}
+      {# djlint:off #}
+      <c-hstack>
+        {% for v in variants %}<c-button outline variant="{{ v }}" text="{{ v|title }} Outline" />{% endfor %}
+      </c-hstack>
+      {# djlint:on #}
+    {% endcotton:verbatim %}
+  </c-page.section>
+  <c-page.section title="Content Alignment">
+    <c-slot name="description">
+      Control how content is aligned within the button using the <code>align</code> attribute. Accepts Bootstrap flexbox values: <code>start</code>, <code>center</code> (default), or <code>end</code>. Best demonstrated with full-width buttons. Note: you can also use <code>between</code> or <code>around</code> if you have a need to.
+    </c-slot>
+    {% cotton:verbatim %}
+      <c-vstack class="w-100">
+        <c-button variant="primary"
+                  icon="arrow-left"
+                  text="Aligned Start"
+                  align="start"
+                  class="w-100" />
+        <c-button variant="secondary"
+                  icon="circle"
+                  text="Aligned Center"
+                  align="center"
+                  class="w-100" />
+        <c-button variant="success"
+                  icon="arrow-right"
+                  text="Aligned End"
+                  align="end"
+                  class="w-100" />
       </c-vstack>
+    {% endcotton:verbatim %}
+  </c-page.section>
+  <c-page.section title="Slot Content">
+    <c-slot name="description">
+      Instead of using the <code>text</code> attribute, you can use slot content for more complex button content like multiple elements or custom markup.
+    </c-slot>
+    {% cotton:verbatim %}
+      <c-hstack>
+        <c-button variant="primary">
+          <strong>Bold</strong> and <em>italic</em> text
+        </c-button>
+        <c-button variant="success" icon="check">
+          <span class="badge bg-light text-success ms-1">4</span>
+        </c-button>
+      </c-hstack>
+    {% endcotton:verbatim %}
+  </c-page.section>
+  <c-page.section title="Additional HTML Attributes">
+    <c-slot name="description">
+      The component accepts any HTML attribute via <code>{{ attrs }}</code>, including <code>disabled</code>, <code>type</code>, <code>data-*</code> attributes, and form-related attributes.
+    </c-slot>
+    {% cotton:verbatim %}
+      <c-hstack>
+        <c-button variant="primary" text="Disabled Button" disabled />
+        <c-button variant="success"
+                  text="Submit Form"
+                  type="submit" />
+        <c-button variant="info"
+                  text="With Tooltip"
+                  data-bs-toggle="tooltip"
+                  data-bs-title="I'm a tooltip!" />
+        <c-button variant="warning"
+                  text="Custom ID & Class"
+                  id="my-button"
+                  class="custom-class shadow-lg" />
+      </c-hstack>
+    {% endcotton:verbatim %}
+  </c-page.section>
+  <c-page.section title="Conditional Rendering">
+    <c-slot name="description">
+      Use the <code>condition</code> attribute (Python expression) to conditionally render buttons. When <code>False</code>, the button won't be rendered at all.
+    </c-slot>
+    {% cotton:verbatim %}
+      <c-hstack>
+        <c-button variant="success"
+                  text="Always Visible"
+                  :condition="True" />
+        <c-button variant="danger"
+                  text="Never Visible"
+                  :condition="False" />
+        <c-button variant="primary"
+                  text="Conditionally Visible"
+                  :condition="1" />
+      </c-hstack>
+      <p class="text-muted mt-2">
+        <small>
+          Note: The "Never Visible" button above is not rendered in the DOM.
+          The third button's visibility depends on user authentication state.
+        </small>
+      </p>
     {% endcotton:verbatim %}
   </c-page.section>
 </c-page>

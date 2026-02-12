@@ -1,28 +1,39 @@
 <c-page title="Modals & Offcanvas">
-  <c-page.section title="Modals & Offcanvas">
+  <c-page.section title="Modals">
+    <c-slot name="description">
+      Modals are dialog overlays. Use <code>c-modal.header</code>, <code>c-modal.body</code>,
+      and <code>c-modal.footer</code> sub-components. Each modal requires a unique <code>id</code> attribute.
+      Trigger modals using Bootstrap's <code>data-bs-toggle="modal"</code> and <code>data-bs-target</code> attributes.
+    </c-slot>
     {% cotton:verbatim %}
       <c-button variant="primary"
                 data-bs-toggle="modal"
                 data-bs-target="#exampleModal"
-                text="Launch Demo Modal" />
+                text="Launch Modal" />
       <c-modal id="exampleModal">
         <c-modal.header>
           <c-modal.title text="Modal Title" />
         </c-modal.header>
         <c-modal.body>
-          <p>This is the modal body content. You can put any content here.</p>
-          <p>
-            Modals are used to display important information or forms in an
-            overlay.
-          </p>
+          <p>Modal body content goes here.</p>
         </c-modal.body>
         <c-modal.footer>
           <c-button variant="secondary"
                     data-bs-dismiss="modal"
                     text="Close" />
-          <c-button variant="primary" text="Save Changes" />
+          <c-button variant="primary" text="Save" />
         </c-modal.footer>
       </c-modal>
+    {% endcotton:verbatim %}
+  </c-page.section>
+  <c-page.section title="Offcanvas">
+    <c-slot name="description">
+      Offcanvas panels slide in from screen edges. Use <code>c-offcanvas.header</code>,
+      <code>c-offcanvas.body</code>, and <code>c-offcanvas.footer</code> sub-components.
+      The <code>placement</code> attribute controls which edge: <code>"start"</code>, <code>"end"</code>,
+      <code>"top"</code>, or <code>"bottom"</code>.
+    </c-slot>
+    {% cotton:verbatim %}
       <c-button variant="primary"
                 data-bs-toggle="offcanvas"
                 data-bs-target="#offcanvasExample"
@@ -32,11 +43,7 @@
           <c-offcanvas.title title="Offcanvas Title" />
         </c-offcanvas.header>
         <c-offcanvas.body>
-          <p>This is the offcanvas content. It slides in from the side.</p>
-          <p>
-            Offcanvas components are great for navigation menus and side
-            panels.
-          </p>
+          <p>Offcanvas content slides in from the side.</p>
         </c-offcanvas.body>
         <c-offcanvas.footer>
           <c-button variant="outline-secondary"

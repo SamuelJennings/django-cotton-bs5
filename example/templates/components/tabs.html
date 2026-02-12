@@ -1,26 +1,38 @@
 <c-page title="Tabs">
-  <c-page.section title="Tabs">
+  <c-page.section title="Basic Usage">
+    <c-slot name="description">
+      Tabs organize content into switchable panels. Use <code>c-tabs.item</code> for tab buttons
+      with the <code>target</code> attribute linking to <code>c-tabs.pane</code> content sections.
+      Mark one item with <code>active</code>. The <code>type</code> attribute accepts <code>"tabs"</code>
+      or <code>"pills"</code>. Use <code>fill</code>, <code>justify</code>, and <code>vertical</code>
+      boolean attributes for layout control.
+    </c-slot>
     {% cotton:verbatim %}
-      <c-tabs id="myTabs" type="tabs" fill justify>
+      <c-tabs id="myTabs" type="tabs">
         <c-tabs.item target="home" text="Home" active />
         <c-tabs.item target="profile" text="Profile" />
         <c-tabs.item target="contact" text="Contact" />
       </c-tabs>
       <c-tabs.content>
         <c-tabs.pane id="home" active>
-          This is the home tab content. It contains information about the
-          home section.
+          Home tab content goes here.
         </c-tabs.pane>
         <c-tabs.pane id="profile">
-          This is the profile tab content. Here you would find
-          profile-related information.
+          Profile tab content goes here.
         </c-tabs.pane>
         <c-tabs.pane id="contact">
-          This is the contact tab content. Contact information and forms
-          would go here.
+          Contact tab content goes here.
         </c-tabs.pane>
       </c-tabs.content>
-      <div class="d-flex mt-3">
+    {% endcotton:verbatim %}
+  </c-page.section>
+  <c-page.section title="Pills and Vertical Tabs">
+    <c-slot name="description">
+      Use <code>type="pills"</code> for pill-style tabs. Add <code>vertical</code> boolean attribute
+      to stack tabs vertically.
+    </c-slot>
+    {% cotton:verbatim %}
+      <div class="d-flex">
         <c-tabs id="verticalTabs" type="pills" vertical>
           <c-tabs.item target="vhome" text="Home" active />
           <c-tabs.item target="vprofile" text="Profile" />
@@ -28,16 +40,13 @@
         </c-tabs>
         <c-tabs.content>
           <c-tabs.pane id="vhome" active>
-            This is the home tab content. It contains information about the
-            home section.
+            Vertical home tab content.
           </c-tabs.pane>
           <c-tabs.pane id="vprofile">
-            This is the profile tab content. Here you would find
-            profile-related information.
+            Vertical profile tab content.
           </c-tabs.pane>
           <c-tabs.pane id="vcontact">
-            This is the contact tab content. Contact information and forms
-            would go here.
+            Vertical contact tab content.
           </c-tabs.pane>
         </c-tabs.content>
       </div>

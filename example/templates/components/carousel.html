@@ -1,5 +1,10 @@
 <c-page title="Carousel">
-  <c-page.section title="Carousel">
+  <c-page.section title="Basic Usage">
+    <c-slot name="description">
+      Carousels cycle through slides of content. Use <code>c-carousel.item</code> sub-components
+      for each slide. Mark one item with the <code>active</code> boolean attribute to set the initial slide.
+      Optionally use <code>c-carousel.caption</code> for slide captions. Each carousel must have a unique <code>id</code> attribute.
+    </c-slot>
     {% cotton:verbatim %}
       <c-carousel id="demoCarousel">
         <c-carousel.item active>

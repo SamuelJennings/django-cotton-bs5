@@ -1,5 +1,10 @@
 <c-page title="Toast">
-  <c-page.section title="Toast">
+  <c-page.section title="Basic Usage">
+    <c-slot name="description">
+      Toasts are lightweight notifications. Use <code>c-toast.header</code> and <code>c-toast.body</code>
+      sub-components. Each toast must have a unique <code>id</code> attribute. Toasts require Bootstrap's
+      JavaScript to show/hide them.
+    </c-slot>
     {% cotton:verbatim %}
       <c-button variant="primary"
                 onclick="showToast()"

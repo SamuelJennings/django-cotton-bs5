@@ -1,9 +1,51 @@
 <c-page title="Placeholder">
-  <c-page.section title="Placeholder">
+  <c-page.section title="Basic Usage">
+    <c-slot name="description">
+      Placeholders show loading states for content that hasn't loaded yet.
+      Use the <code>width</code> attribute to control column width (1-12). Default is <code>width="12"</code>.
+    </c-slot>
     {% cotton:verbatim %}
-      <c-placeholder width="9" glow />
-      <c-placeholder width="6" size="lg" wave />
-      <c-placeholder variant="primary" />
+      <c-vstack>
+        <c-placeholder width="12" />
+        <c-placeholder width="6" />
+        <c-placeholder width="3" />
+      </c-vstack>
+    {% endcotton:verbatim %}
+  </c-page.section>
+  <c-page.section title="Variants">
+    <c-slot name="description">
+      Use the <code>variant</code> attribute to apply Bootstrap color variants via background color classes.
+    </c-slot>
+    {% cotton:verbatim %}
+      <c-vstack>
+        <c-placeholder variant="primary" />
+        <c-placeholder variant="success" />
+        <c-placeholder variant="danger" />
+      </c-vstack>
+    {% endcotton:verbatim %}
+  </c-page.section>
+  <c-page.section title="Sizes">
+    <c-slot name="description">
+      Use the <code>size</code> attribute with <code>"lg"</code>, <code>"sm"</code>, or <code>"xs"</code> values.
+    </c-slot>
+    {% cotton:verbatim %}
+      <c-vstack>
+        <c-placeholder width="12" size="lg" />
+        <c-placeholder width="12" />
+        <c-placeholder width="12" size="sm" />
+        <c-placeholder width="12" size="xs" />
+      </c-vstack>
+    {% endcotton:verbatim %}
+  </c-page.section>
+  <c-page.section title="Animation">
+    <c-slot name="description">
+      Add <code>glow</code> or <code>wave</code> boolean attributes for animated loading effects.
+    </c-slot>
+    {% cotton:verbatim %}
+      <c-vstack>
+        <c-placeholder width="12" glow />
+        <c-placeholder width="12" wave />
+      </c-vstack>
     {% endcotton:verbatim %}
   </c-page.section>
 </c-page>

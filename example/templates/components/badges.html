@@ -1,23 +1,53 @@
 <c-page title="Badges">
-  <c-page.section title="Badges">
+  <c-page.section title="Basic Usage">
+    <c-slot name="description">
+      Badges are small labels for counts and labels. Use the <code>text</code> attribute
+      for simple text or slot content for custom markup.
+    </c-slot>
     {% cotton:verbatim %}
-      <c-vstack gap=4>
-        <c-hstack>
-          <c-badge variant="primary" text="Primary" />
-          <c-badge variant="secondary" text="Secondary" />
-          <c-badge variant="success" text="Success" />
-          <c-badge variant="danger" text="Danger" />
-          <c-badge variant="warning" text="Warning" />
-          <c-badge variant="info" text="Info" />
-          <c-badge variant="light" text="Light" />
-          <c-badge variant="dark" text="Dark" />
-        </c-hstack>
-        <c-hstack>
-          <c-badge variant="primary" pill text="Pill Primary" />
-          <c-badge variant="success" pill text="Pill Success" />
-          <c-badge variant="danger" pill text="Pill Danger" />
-        </c-hstack>
-      </c-vstack>
+      <c-hstack>
+        <c-badge variant="primary" text="Primary" />
+        <c-badge variant="success">
+          Custom <strong>markup</strong>
+        </c-badge>
+      </c-hstack>
+    {% endcotton:verbatim %}
+  </c-page.section>
+  <c-page.section title="Variants">
+    <c-slot name="description">
+      Use the <code>variant</code> attribute to apply Bootstrap contextual colors.
+      Default is <code>variant="primary"</code>.
+    </c-slot>
+    {% cotton:verbatim %}
+      {# djlint:off #}
+      <c-hstack>
+        {% for v in variants %}<c-badge variant="{{ v }}" text="{{ v|title }}" />
+        {% endfor %}
+      </c-hstack>
+      {# djlint:on #}
+    {% endcotton:verbatim %}
+  </c-page.section>
+  <c-page.section title="Pill Badges">
+    <c-slot name="description">
+      Add the <code>pill</code> boolean attribute for rounded-pill styling.
+    </c-slot>
+    {% cotton:verbatim %}
+      <c-hstack>
+        <c-badge variant="primary" pill text="Pill Badge" />
+        <c-badge variant="success" pill text="Success" />
+        <c-badge variant="danger" pill text="Danger" />
+      </c-hstack>
+    {% endcotton:verbatim %}
+  </c-page.section>
+  <c-page.section title="Badge Links">
+    <c-slot name="description">
+      Badges automatically become links when you provide an <code>href</code> attribute.
+    </c-slot>
+    {% cotton:verbatim %}
+      <c-hstack>
+        <c-badge variant="primary" text="Regular Badge" />
+        <c-badge variant="primary" href="#" text="Badge Link" />
+      </c-hstack>
     {% endcotton:verbatim %}
   </c-page.section>
 </c-page>

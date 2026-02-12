@@ -1,11 +1,21 @@
 <c-page title="Button Groups">
-  <c-page.section title="Button Groups">
+  <c-page.section title="Basic Usage">
+    <c-slot name="description">
+      Button groups combine multiple buttons into a single unified component.
+    </c-slot>
     {% cotton:verbatim %}
       <c-button-group>
         <c-button variant="primary" text="Left" />
-        <c-button variant="secondary" text="Middle" />
-        <c-button variant="info" text="Right" />
+        <c-button variant="primary" text="Middle" />
+        <c-button variant="primary" text="Right" />
       </c-button-group>
+    {% endcotton:verbatim %}
+  </c-page.section>
+  <c-page.section title="Vertical Button Groups">
+    <c-slot name="description">
+      Add the <code>vertical</code> boolean attribute to stack buttons vertically.
+    </c-slot>
+    {% cotton:verbatim %}
       <c-button-group vertical>
         <c-button variant="primary" text="Top" />
         <c-button variant="primary" text="Middle" />

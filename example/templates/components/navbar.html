@@ -1,10 +1,15 @@
 <c-page title="Navbar">
-  <c-page.section title="Navbar">
+  <c-page.section title="Basic Usage">
+    <c-slot name="description">
+      Navbars are responsive navigation headers. Use the <code>brand</code> attribute
+      for the brand text, <code>variant</code> for colors, and <code>expand</code> to control
+      when the navbar collapses (sm, md, lg, xl, xxl).
+    </c-slot>
     {% cotton:verbatim %}
       <c-navbar variant="primary" expand="lg" brand="Cotton BS5">
         <c-navbar.link href="#" active text="Home" />
         <c-navbar.link href="#" text="Features" />
-        <c-navbar.link href="#" text="Pricing" disabled />
+        <c-navbar.link href="#" text="About" />
       </c-navbar>
     {% endcotton:verbatim %}
   </c-page.section>

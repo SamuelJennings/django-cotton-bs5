@@ -1,13 +1,46 @@
 <c-page title="Spinner">
-  <c-page.section title="Spinner">
+  <c-page.section title="Basic Usage">
+    <c-slot name="description">
+      Loading spinners indicate that content is loading or an action is being processed.
+      The <code>type</code> attribute accepts <code>"border"</code> (default) or <code>"grow"</code>.
+    </c-slot>
     {% cotton:verbatim %}
-      <c-hstack gap=3>
+      <c-hstack gap="3">
         <c-spinner />
-        <c-spinner variant="primary" />
-        <c-spinner variant="success" />
-        <c-spinner variant="danger" type="grow" />
-        <c-spinner variant="warning" type="grow" />
+        <c-spinner type="grow" />
       </c-hstack>
+    {% endcotton:verbatim %}
+  </c-page.section>
+  <c-page.section title="Variants">
+    <c-slot name="description">
+      Use the <code>variant</code> attribute to apply Bootstrap color variants.
+    </c-slot>
+    {% cotton:verbatim %}
+      {# djlint:off #}
+      <c-hstack gap="3">
+        {% for v in variants %}<c-spinner variant="{{ v }}" />
+        {% endfor %}
+      </c-hstack>
+      {# djlint:on #}
+    {% endcotton:verbatim %}
+  </c-page.section>
+  <c-page.section title="Sizes">
+    <c-slot name="description">
+      Use the <code>size</code> attribute with value <code>"sm"</code> for smaller spinners.
+    </c-slot>
+    {% cotton:verbatim %}
+      <c-hstack gap="3" class="align-items-center">
+        <c-spinner size="sm" />
+        <c-spinner />
+      </c-hstack>
+    {% endcotton:verbatim %}
+  </c-page.section>
+  <c-page.section title="Accessibility Label">
+    <c-slot name="description">
+      The <code>label</code> attribute sets the screen reader text. Default is "Loading...".
+    </c-slot>
+    {% cotton:verbatim %}
+      <c-spinner label="Processing your request..." />
     {% endcotton:verbatim %}
   </c-page.section>
 </c-page>

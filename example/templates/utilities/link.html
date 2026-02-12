@@ -1,86 +1,56 @@
 {% load cotton_bs5 %}
 <c-page title="Links">
-  <c-page.section title="Link Variants">
+  <c-page.section title="Colored Link Variants">
     <c-slot name="description">
+      Use the <code>variant</code> attribute to apply Bootstrap contextual colors to links.
+      Use the <code>text</code> attribute for link content or use slot content.
     </c-slot>
-    {% for v in variants %}
-      {% spaceless %}
-        {% cotton:verbatim %}
-          <p>
-            <c-link variant="{{ v }}" text="{{ v|title }} link" />
-          </p>
-        {% endcotton:verbatim %}
-      {% endspaceless %}
-    {% endfor %}
+    {# djlint:off #}
+    {% cotton:verbatim %}<c-vstack gap="2">
+      {% for v in variants %}<c-link variant="{{ v }}" text="{{ v|title }} link" />
+      {% endfor %}
+    </c-vstack>{% endcotton:verbatim %}
+    {# djlint:on #}
   </c-page.section>
-  <c-page.section title="Opacity">
-    {% for v in "10,25,50,75,100"|split %}
-      {% spaceless %}
-        {% cotton:verbatim %}
-          <p>
-            <c-link opacity="{{ v }}" text="Link opacity {{ v }}" />
-          </p>
-        {% endcotton:verbatim %}
-      {% endspaceless %}
-    {% endfor %}
+  <c-page.section title="Link Opacity">
+    <c-slot name="description">
+      Use the <code>opacity</code> attribute to control link opacity (10, 25, 50, 75, 100).
+      Use <code>hover-opacity</code> to control opacity on hover.
+    </c-slot>
+    {% cotton:verbatim %}
+      <c-vstack gap="2">
+        <c-link opacity="25" text="Link opacity 25" />
+        <c-link opacity="50" text="Link opacity 50" />
+        <c-link opacity="75" text="Link opacity 75" />
+        <c-link hover-opacity="25" text="Hover opacity 25" />
+        <c-link hover-opacity="50" text="Hover opacity 50" />
+      </c-vstack>
+    {% endcotton:verbatim %}
   </c-page.section>
-  <c-page.section title="Hover Opacity">
-    {% for v in "10,25,50,75,100"|split %}
-      {% spaceless %}
-        {% cotton:verbatim %}
-          <p>
-            <c-link hover-opacity="{{ v }}"
-                    text="Link hover opacity {{ v }}" />
-          </p>
-        {% endcotton:verbatim %}
-      {% endspaceless %}
-    {% endfor %}
+  <c-page.section title="Underline Colors">
+    <c-slot name="description">
+      Use the <code>underline</code> attribute to apply colored underlines to links.
+    </c-slot>
+    {# djlint:off #}
+    {% cotton:verbatim %}<c-vstack gap="2">
+      {% for v in variants %}<c-link underline="{{ v }}" text="{{ v|title }} underline" />
+      {% endfor %}
+    </c-vstack>{% endcotton:verbatim %}
+    {# djlint:on #}
   </c-page.section>
-  <h2>Underlines</h2>
-  <c-page.section title="Underline color">
-    {% for v in variants %}
-      {% spaceless %}
-        {% cotton:verbatim %}
-          <p>
-            <c-link underline="{{ v }}" text="{{ v|title }} link" />
-          </p>
-        {% endcotton:verbatim %}
-      {% endspaceless %}
-    {% endfor %}
-  </c-page.section>
-  <c-page.section title="Underline offset">
-    {% for v in "1,2,3"|split %}
-      {% spaceless %}
-        {% cotton:verbatim %}
-          <p>
-            <c-link offset={{ v }} text="Offset link {{ v }}" />
-          </p>
-        {% endcotton:verbatim %}
-      {% endspaceless %}
-    {% endfor %}
-  </c-page.section>
-  <c-page.section title="Underline opacity">
-    {% for v in "10,25,50,75,100"|split %}
-      {% spaceless %}
-        {% cotton:verbatim %}
-          <p>
-            <c-link underline-opacity="{{ v }}"
-                    text="Underline opacity {{ v }}" />
-          </p>
-        {% endcotton:verbatim %}
-      {% endspaceless %}
-    {% endfor %}
-  </c-page.section>
-  <c-page.section title="Underline opacity">
-    {% for v in "10,25,50,75,100"|split %}
-      {% spaceless %}
-        {% cotton:verbatim %}
-          <p>
-            <c-link underline-hover-opacity="{{ v }}"
-                    text="Underline hover opacity {{ v }}" />
-          </p>
-        {% endcotton:verbatim %}
-      {% endspaceless %}
-    {% endfor %}
+  <c-page.section title="Additional Bootstrap Utilities">
+    <c-slot name="description">
+      Links support additional Bootstrap utility classes like <code>offset</code>,
+      <code>underline-opacity</code>, and <code>underline-hover-opacity</code>.
+    </c-slot>
+    {% cotton:verbatim %}
+      <c-vstack gap="2">
+        <c-link offset="2" text="Link with offset 2" />
+        <c-link underline-opacity="50"
+                text="Underline opacity 50" />
+        <c-link underline-hover-opacity="75"
+                text="Underline hover opacity 75" />
+      </c-vstack>
+    {% endcotton:verbatim %}
   </c-page.section>
 </c-page>

@@ -1,9 +1,11 @@
 <c-page title="Grid System">
-  <c-page.section title="Basic Example">
+  <c-page.section title="Equal-Width Columns">
     <c-slot name="description">
+      Use the <code>cols</code> attribute on <code>&lt;c-grid&gt;</code> to create equal-width columns.
+      All child <code>&lt;c-grid.col&gt;</code> elements will automatically size to fit the specified number of columns per row.
     </c-slot>
     {% cotton:verbatim %}
-      <c-grid cols=3>
+      <c-grid cols="3" gap="3">
         <c-grid.col>
           <div class="text-bg-primary p-3 text-center">Col 1</div>
         </c-grid.col>
@@ -16,17 +18,114 @@
       </c-grid>
     {% endcotton:verbatim %}
   </c-page.section>
-  <c-page.section title="Grid System">
+  <c-page.section title="Responsive Equal-Width Columns">
+    <c-slot name="description">
+      Apply responsive breakpoints (<code>sm</code>, <code>md</code>, <code>lg</code>, <code>xl</code>, <code>xxl</code>)
+      directly on <code>&lt;c-grid&gt;</code> to change the number of equal-width columns at different screen sizes.
+      This provides a cleaner syntax than using Bootstrap classes directly.
+    </c-slot>
     {% cotton:verbatim %}
-      <c-grid>
-        <c-grid.col cols="12" md="6" lg="4">
-          <div class="bg-primary text-white p-3 text-center">Col 1</div>
+      <c-grid cols="1" md="2" lg="4" gap="3">
+        <c-grid.col>
+          <div class="text-bg-primary p-3 text-center">Item 1</div>
         </c-grid.col>
-        <c-grid.col cols="12" md="6" lg="4">
-          <div class="bg-secondary text-white p-3 text-center">Col 2</div>
+        <c-grid.col>
+          <div class="text-bg-secondary p-3 text-center">Item 2</div>
         </c-grid.col>
-        <c-grid.col cols="12" md="12" lg="4">
-          <div class="bg-success text-white p-3 text-center">Col 3</div>
+        <c-grid.col>
+          <div class="text-bg-success p-3 text-center">Item 3</div>
+        </c-grid.col>
+        <c-grid.col>
+          <div class="text-bg-warning p-3 text-center">Item 4</div>
+        </c-grid.col>
+      </c-grid>
+    {% endcotton:verbatim %}
+  </c-page.section>
+  <c-page.section title="Custom Column Widths">
+    <c-slot name="description">
+      For precise control, use the <code>width</code> attribute (or responsive breakpoints) on individual
+      <code>&lt;c-grid.col&gt;</code> components. Values are 1-12 representing grid columns, or omit for auto-sizing.
+    </c-slot>
+    {% cotton:verbatim %}
+      <c-grid gap="3">
+        <c-grid.col width="4">
+          <div class="text-bg-primary p-3 text-center">Col-4</div>
+        </c-grid.col>
+        <c-grid.col width="8">
+          <div class="text-bg-secondary p-3 text-center">Col-8</div>
+        </c-grid.col>
+      </c-grid>
+    {% endcotton:verbatim %}
+  </c-page.section>
+  <c-page.section title="Responsive Column Widths">
+    <c-slot name="description">
+      Apply breakpoint attributes on <code>&lt;c-grid.col&gt;</code> to create responsive column widths
+      that adapt to different screen sizes.
+    </c-slot>
+    {% cotton:verbatim %}
+      <c-grid gap="3">
+        <c-grid.col width="12" md="6" lg="4">
+          <div class="bg-primary text-white p-3 text-center">Full → Half → Third</div>
+        </c-grid.col>
+        <c-grid.col width="12" md="6" lg="4">
+          <div class="bg-secondary text-white p-3 text-center">Full → Half → Third</div>
+        </c-grid.col>
+        <c-grid.col width="12" md="12" lg="4">
+          <div class="bg-success text-white p-3 text-center">Full → Full → Third</div>
+        </c-grid.col>
+      </c-grid>
+    {% endcotton:verbatim %}
+  </c-page.section>
+  <c-page.section title="Column Ordering">
+    <c-slot name="description">
+      Use the <code>order</code> attribute on <code>&lt;c-grid.col&gt;</code> to change the visual order
+      of columns. Values can be 1-5 or <code>first</code>/<code>last</code>.
+    </c-slot>
+    {% cotton:verbatim %}
+      <c-grid gap="3">
+        <c-grid.col order="3">
+          <div class="text-bg-primary p-3 text-center">First in DOM (order-3)</div>
+        </c-grid.col>
+        <c-grid.col order="2">
+          <div class="text-bg-secondary p-3 text-center">Second in DOM (order-2)</div>
+        </c-grid.col>
+        <c-grid.col order="1">
+          <div class="text-bg-success p-3 text-center">Third in DOM (order-1)</div>
+        </c-grid.col>
+      </c-grid>
+    {% endcotton:verbatim %}
+  </c-page.section>
+  <c-page.section title="Column Offsets">
+    <c-slot name="description">
+      Use the <code>offset</code> attribute on <code>&lt;c-grid.col&gt;</code> to add empty space
+      before a column. Useful for centering or aligning columns.
+    </c-slot>
+    {% cotton:verbatim %}
+      <c-grid gap="3">
+        <c-grid.col width="4" offset="4">
+          <div class="text-bg-primary p-3 text-center">Centered (col-4 offset-4)</div>
+        </c-grid.col>
+        <c-grid.col width="3" offset="3">
+          <div class="text-bg-secondary p-3 text-center">col-3 offset-3</div>
+        </c-grid.col>
+      </c-grid>
+    {% endcotton:verbatim %}
+  </c-page.section>
+  <c-page.section title="Gap Spacing">
+    <c-slot name="description">
+      Use the <code>gap</code> attribute on <code>&lt;c-grid&gt;</code> to control gutter spacing
+      between columns. Values are 0-5 following Bootstrap's spacing scale.
+    </c-slot>
+    {% cotton:verbatim %}
+      <c-grid cols="3" gap="5">
+        <c-grid.col>
+          <div class="text-bg-primary p-3 text-center">Gap 5</div>
+        </c-grid.col>
+        <c-grid.col>
+          <div class="text-bg-secondary p-3 text-center">Gap 5</div>
+        </c-grid.col>
+        <c-grid.col>
+          <div class="text-bg-success p-3 text-center">Gap 5</div>
         </c-grid.col>
       </c-grid>
     {% endcotton:verbatim %}

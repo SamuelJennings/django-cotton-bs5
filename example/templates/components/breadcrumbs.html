@@ -1,15 +1,27 @@
 <c-page title="Breadcrumbs">
-  <c-page.section title="Breadcrumbs">
+  <c-page.section title="Basic Usage">
+    <c-slot name="description">
+      Breadcrumbs show the current page's location within a navigation hierarchy.
+      Use <code>c-breadcrumbs.item</code> sub-components with <code>href</code> for links.
+      Omit <code>href</code> or use <code>active</code> attribute for the current page.
+    </c-slot>
     {% cotton:verbatim %}
       <c-breadcrumbs>
         <c-breadcrumbs.item href="#" text="Home" />
         <c-breadcrumbs.item href="#" text="Library" />
-        <c-breadcrumbs.item active text="Data" />
+        <c-breadcrumbs.item text="Current Page" />
       </c-breadcrumbs>
+    {% endcotton:verbatim %}
+  </c-page.section>
+  <c-page.section title="Custom Divider">
+    <c-slot name="description">
+      Use the <code>divider</code> attribute to customize the separator between items.
+    </c-slot>
+    {% cotton:verbatim %}
       <c-breadcrumbs divider=">">
         <c-breadcrumbs.item href="/" text="Home" />
         <c-breadcrumbs.item href="/library" text="Library" />
-        <c-breadcrumbs.item active text="Data" />
+        <c-breadcrumbs.item text="Data" />
       </c-breadcrumbs>
     {% endcotton:verbatim %}
   </c-page.section>

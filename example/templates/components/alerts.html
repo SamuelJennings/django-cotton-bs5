@@ -1,14 +1,48 @@
 <c-page title="Alerts">
-  <c-page.section title="Alerts">
+  <c-page.section title="Basic Usage">
+    <c-slot name="description">
+      Alerts provide contextual feedback messages. Use the <code>text</code> attribute
+      for simple text or slot content for custom markup.
+    </c-slot>
     {% cotton:verbatim %}
-      <c-alert text="This is a primary alert!" variant="primary" />
-      <c-alert text="This is a dismissible danger alert!"
-               variant="danger"
-               dismissible />
-      <c-alert variant="success">
-        <strong>Success!</strong>
-        This alert has custom markup.
-      </c-alert>
+      <c-vstack>
+        <c-alert text="This is a primary alert!" variant="primary" />
+        <c-alert variant="success">
+          <strong>Success!</strong> This alert has custom markup.
+        </c-alert>
+      </c-vstack>
+    {% endcotton:verbatim %}
+  </c-page.section>
+  <c-page.section title="Variants">
+    <c-slot name="description">
+      Use the <code>variant</code> attribute to apply Bootstrap contextual colors.
+      Default is <code>variant="primary"</code>.
+    </c-slot>
+    {% cotton:verbatim %}
+      {# djlint:off #}
+      <c-vstack>
+        {% for v in variants %}<c-alert variant="{{ v }}"
+                                         text="{{ v|title }} alert" />
+        {% endfor %}
+      </c-vstack>
+      {# djlint:on #}
+    {% endcotton:verbatim %}
+  </c-page.section>
+  <c-page.section title="Dismissible Alerts">
+    <c-slot name="description">
+      Add the <code>dismissible</code> boolean attribute to include a close button.
+      The <code>animate</code> boolean attribute controls fade animation (default <code>True</code>).
+    </c-slot>
+    {% cotton:verbatim %}
+      <c-vstack>
+        <c-alert text="This alert can be dismissed!"
+                 variant="warning"
+                 dismissible />
+        <c-alert text="This dismissible alert has no animation."
+                 variant="info"
+                 dismissible
+                 :animate="False" />
+      </c-vstack>
     {% endcotton:verbatim %}
   </c-page.section>
 </c-page>

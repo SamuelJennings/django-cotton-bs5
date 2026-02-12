@@ -1,5 +1,10 @@
 <c-page title="Pagination">
-  <c-page.section title="Pagination">
+  <c-page.section title="Basic Usage">
+    <c-slot name="description">
+      Pagination provides navigation for paged content. Use <code>c-pagination.link</code>
+      sub-components with <code>href</code> and <code>text</code> attributes.
+      Use <code>active</code> to mark the current page and <code>disabled</code> for unavailable links.
+    </c-slot>
     {% cotton:verbatim %}
       <c-pagination>
         <c-pagination.link href="#" disabled text="Previous" />

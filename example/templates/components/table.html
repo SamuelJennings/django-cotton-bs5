@@ -1,5 +1,10 @@
 <c-page title="Table">
-  <c-page.section title="Table">
+  <c-page.section title="Basic Usage">
+    <c-slot name="description">
+      Tables display tabular data with optional styling. Use boolean attributes like <code>striped</code>,
+      <code>hover</code>, <code>bordered</code>, and <code>small</code> for styling. The <code>variant</code>
+      attribute applies color themes. The <code>responsive</code> attribute makes tables scrollable on small screens.
+    </c-slot>
     {% cotton:verbatim %}
       <c-table striped hover>
         <thead>

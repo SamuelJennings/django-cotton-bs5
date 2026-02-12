@@ -1,33 +1,37 @@
 {% load cotton_bs5 %}
 <c-page title="Containers">
-  <c-page.section title="Basic">
+  <c-page.section title="Basic Container">
     <c-slot name="description">
+      Containers center and pad content horizontally. The default container has responsive
+      max-widths at each breakpoint.
     </c-slot>
     {% cotton:verbatim %}
-      <c-container>
+      <c-container class="p-3">
         Container content
       </c-container>
     {% endcotton:verbatim %}
   </c-page.section>
-  <c-page.section title="Fluid">
+  <c-page.section title="Fluid Container">
     <c-slot name="description">
-      Fluid containers on ALL screen sizes
+      Add the <code>fluid</code> boolean attribute to create a full-width container
+      that spans the entire viewport width.
     </c-slot>
     {% cotton:verbatim %}
-      <c-container fluid>
-        Container content
+      <c-container fluid class="p-3">
+        Full width container
       </c-container>
     {% endcotton:verbatim %}
   </c-page.section>
-  <c-page.section title="Responsive">
+  <c-page.section title="Responsive Containers">
     <c-slot name="description">
-      Responsive variations are declared by assigning a breakpoint to the fluid attribute.
+      Assign a breakpoint value to the <code>fluid</code> attribute (sm, md, lg, xl, xxl)
+      to create a container that is fluid up to that breakpoint.
     </c-slot>
     {# djlint:off #}
     {% for bp in breakpoints %}{% cotton:verbatim %}
         <c-container fluid="{{ bp }}"
                      class="bg-secondary-subtle p-3 mb-3">
-          This container will be fluid below the "{{ bp }}" breakpoint
+          Fluid below "{{ bp }}" breakpoint
         </c-container>{% endcotton:verbatim %}{% endfor %}
     {# djlint:on #}
   </c-page.section>

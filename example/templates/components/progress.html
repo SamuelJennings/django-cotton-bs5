@@ -1,23 +1,59 @@
 <c-page title="Progress">
-  <c-page.section title="Progress">
+  <c-page.section title="Basic Usage">
+    <c-slot name="description">
+      Progress bars show the completion status of an operation.
+      Use the <code>value</code> attribute to set progress (0-100).
+      The <code>text</code> attribute or slot content displays inside the bar.
+    </c-slot>
     {% cotton:verbatim %}
-      <div class="vstack gap-2">
-        <c-progress value="40" text="value=40" />
-        <c-progress value="50"
-                    striped
-                    variant="warning"
-                    text="value=50, striped, variant='warning'" />
-        <c-progress min="10"
-                    max="20"
-                    value="17"
-                    variant="danger"
-                    text="min=10, max=20, value=17, variant=danger" />
-        <c-progress value="100"
+      <c-vstack>
+        <c-progress value="25" text="25%" />
+        <c-progress value="50" text="50%" />
+        <c-progress value="75" text="75%" />
+        <c-progress value="100" text="Complete!" />
+      </c-vstack>
+    {% endcotton:verbatim %}
+  </c-page.section>
+  <c-page.section title="Variants">
+    <c-slot name="description">
+      Use the <code>variant</code> attribute to apply Bootstrap contextual colors.
+      Default is <code>variant="primary"</code>.
+    </c-slot>
+    {% cotton:verbatim %}
+      <c-vstack>
+        <c-progress value="40" variant="success" text="Success" />
+        <c-progress value="60" variant="warning" text="Warning" />
+        <c-progress value="80" variant="danger" text="Danger" />
+      </c-vstack>
+    {% endcotton:verbatim %}
+  </c-page.section>
+  <c-page.section title="Striped and Animated">
+    <c-slot name="description">
+      Add the <code>striped</code> boolean attribute for a striped appearance.
+      Add the <code>animated</code> boolean attribute to animate the stripes.
+    </c-slot>
+    {% cotton:verbatim %}
+      <c-vstack>
+        <c-progress value="50" variant="info" striped text="Striped" />
+        <c-progress value="75"
                     variant="success"
                     striped
                     animated
-                    text="value=100, variant='success', striped, animated" />
-      </div>
+                    text="Animated Stripes" />
+      </c-vstack>
+    {% endcotton:verbatim %}
+  </c-page.section>
+  <c-page.section title="Custom Min/Max Range">
+    <c-slot name="description">
+      Use <code>min</code> and <code>max</code> attributes to define a custom range.
+      Default is <code>min="0"</code> and <code>max="100"</code>.
+    </c-slot>
+    {% cotton:verbatim %}
+      <c-progress min="10"
+                  max="20"
+                  value="17"
+                  variant="warning"
+                  text="17 out of 20" />
     {% endcotton:verbatim %}
   </c-page.section>
 </c-page>
