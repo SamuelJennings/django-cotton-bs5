@@ -7,12 +7,71 @@
     </c-slot>
     {% cotton:verbatim %}
       <c-dropdown text="Dropdown" variant="primary">
-        <c-dropdown.header text="Menu Header" />
+        <c-dropdown.header text="Links" />
         <c-dropdown.item href="#action1" text="Action 1" />
+        <c-dropdown.header text="Buttons" />
+        <c-dropdown.item text="Button 1" />
         <c-dropdown.divider />
         <c-dropdown.item href="#action2" text="Action 2" />
         <c-dropdown.item icon="award" href="#action3" text="With Icon" />
       </c-dropdown>
+    {% endcotton:verbatim %}
+  </c-page.section>
+  <c-page.section title="Customizing the Button">
+    <c-slot name="description">
+      The dropdown uses <code>c-button</code> internally, so all button attributes are supported.
+      Pass any attribute like <code>variant</code>, <code>size</code>, <code>text</code>, <code>icon</code>, etc.
+      to customize the dropdown button.
+      See the <a href="{% url 'buttons' %}">Button component documentation</a> for full customization options.
+    </c-slot>
+    {% cotton:verbatim %}
+      <c-hstack>
+        <c-dropdown text="Primary" variant="primary">
+          <c-dropdown.item href="#" text="Action" />
+        </c-dropdown>
+        <c-dropdown text="Success" variant="success">
+          <c-dropdown.item href="#" text="Action" />
+        </c-dropdown>
+        <c-dropdown text="Danger" variant="danger">
+          <c-dropdown.item href="#" text="Action" />
+        </c-dropdown>
+        <c-dropdown text="Small" variant="secondary" size="sm">
+          <c-dropdown.item href="#" text="Action" />
+        </c-dropdown>
+        <c-dropdown text="Large" variant="info" size="lg">
+          <c-dropdown.item href="#" text="Action" />
+        </c-dropdown>
+        <c-dropdown text="With Icon" icon="gear" variant="warning">
+          <c-dropdown.item href="#" text="Action" />
+        </c-dropdown>
+      </c-hstack>
+    {% endcotton:verbatim %}
+  </c-page.section>
+  <c-page.section title="Dropdown Caret">
+    <c-slot name="description">
+      By default, dropdowns display a caret icon to indicate they are expandable.
+      Set <code>:caret="False"</code> to hide the caret and create a cleaner button appearance.
+    </c-slot>
+    {% cotton:verbatim %}
+      <c-hstack>
+        <c-dropdown text="With Caret" variant="primary">
+          <c-dropdown.item href="#" text="Action" />
+          <c-dropdown.item href="#" text="Another action" />
+        </c-dropdown>
+        <c-dropdown text="Without Caret"
+                    variant="secondary"
+                    :caret="False">
+          <c-dropdown.item href="#" text="Action" />
+          <c-dropdown.item href="#" text="Another action" />
+        </c-dropdown>
+        <c-dropdown icon="three-dots-vertical"
+                    variant="primary"
+                    :caret="False"
+                    size="sm">
+          <c-dropdown.item href="#" text="Action" />
+          <c-dropdown.item href="#" text="Another action" />
+        </c-dropdown>
+      </c-hstack>
     {% endcotton:verbatim %}
   </c-page.section>
   <c-page.section title="Direction">
@@ -39,6 +98,181 @@
           <c-dropdown.item href="#" text="Action" />
         </c-dropdown>
       </c-hstack>
+    {% endcotton:verbatim %}
+  </c-page.section>
+  <c-page.section title="Menu Width">
+    <c-slot name="description">
+      Control the minimum width of the dropdown menu using the <code>min-width</code> attribute.
+      Default is <code>"10rem"</code>. Accepts any valid CSS width value.
+      <strong>Note:</strong> Dropdown menus will always grow to fit their content regardless of this setting.
+      This attribute is most helpful when using non-list dropdown menus (see below) where you want to ensure
+      a minimum width for form inputs or other custom content.
+    </c-slot>
+    {% cotton:verbatim %}
+      <c-hstack>
+        <c-dropdown text="Narrow (8rem)"
+                    variant="primary"
+                    min-width="8rem">
+          <c-dropdown.item href="#" text="Action" />
+          <c-dropdown.item href="#" text="Another action" />
+        </c-dropdown>
+        <c-dropdown text="Default (10rem)" variant="primary">
+          <c-dropdown.item href="#" text="Action" />
+          <c-dropdown.item href="#" text="Another action" />
+        </c-dropdown>
+        <c-dropdown text="Wide (20rem)"
+                    variant="primary"
+                    min-width="20rem">
+          <c-dropdown.item href="#" text="Action" />
+          <c-dropdown.item href="#" text="Another action" />
+        </c-dropdown>
+      </c-hstack>
+    {% endcotton:verbatim %}
+  </c-page.section>
+  <c-page.section title="Non-List Dropdown Menus">
+    <c-slot name="description">
+      By default, dropdowns render menu items within a <code>&lt;ul&gt;</code> element.
+      For custom content like forms, text, or other non-list items, set <code>:ul="False"</code>
+      to render the menu as a <code>&lt;div&gt;</code> instead.
+      This is particularly useful when combined with <code>min-width</code> to control form widths.
+    </c-slot>
+    {% cotton:verbatim %}
+      <c-hstack>
+        <c-dropdown text="Login Form"
+                    variant="primary"
+                    :ul="False"
+                    min-width="18rem">
+          <form class="px-4 py-3">
+            <div class="mb-3">
+              <label for="email" class="form-label">Email address</label>
+              <input type="email"
+                     class="form-control"
+                     id="email"
+                     placeholder="email@example.com" />
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input type="password"
+                     class="form-control"
+                     id="password"
+                     placeholder="Password" />
+            </div>
+            <button type="submit" class="btn btn-primary">Sign in</button>
+          </form>
+        </c-dropdown>
+        <c-dropdown text="Custom Content"
+                    variant="secondary"
+                    :ul="False"
+                    min-width="15rem">
+          <div class="p-3">
+            <h6>Notification Settings</h6>
+            <div class="form-check">
+              <input class="form-check-input"
+                     type="checkbox"
+                     id="check1"
+                     checked />
+              <label class="form-check-label" for="check1">Email notifications</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input"
+                     type="checkbox"
+                     id="check2" />
+              <label class="form-check-label" for="check2">SMS notifications</label>
+            </div>
+          </div>
+        </c-dropdown>
+      </c-hstack>
+    {% endcotton:verbatim %}
+  </c-page.section>
+  <c-page.section title="Item States">
+    <c-slot name="description">
+      Dropdown items support <code>active</code> and <code>disabled</code> attributes to indicate state.
+      The <code>href</code> attribute determines if the item renders as a link or button.
+      <strong>Note:</strong> The <code>disabled</code> attribute behaves differently depending on the element type:
+      for links (<code>&lt;a&gt;</code>), it adds <code>tabindex="-1"</code> and <code>aria-disabled="true"</code>;
+      for buttons (<code>&lt;button&gt;</code>), it adds the <code>disabled</code> attribute directly.
+    </c-slot>
+    {% cotton:verbatim %}
+      <c-dropdown text="Item States" variant="primary">
+        <c-dropdown.item href="#" text="Normal Link" />
+        <c-dropdown.item href="#" text="Active Link" active />
+        <c-dropdown.item href="#" text="Disabled Link" disabled />
+        <c-dropdown.divider />
+        <c-dropdown.item text="Normal Button" />
+        <c-dropdown.item text="Active Button" active />
+        <c-dropdown.item text="Disabled Button" disabled />
+      </c-dropdown>
+    {% endcotton:verbatim %}
+  </c-page.section>
+  <c-page.section title="Items with Icons">
+    <c-slot name="description">
+      Add icons to dropdown items using the <code>icon</code> attribute with valid Bootstrap 5 icon names.
+      Control the spacing between icon and text with <code>gap</code> (default: <code>"2"</code>).
+    </c-slot>
+    {% cotton:verbatim %}
+      <c-dropdown text="With Icons" variant="primary">
+        <c-dropdown.item icon="house" href="#" text="Home" />
+        <c-dropdown.item icon="person" href="#" text="Profile" />
+        <c-dropdown.item icon="gear" href="#" text="Settings" />
+        <c-dropdown.divider />
+        <c-dropdown.item icon="box-arrow-right"
+                         href="#"
+                         text="Logout"
+                         gap="3" />
+      </c-dropdown>
+    {% endcotton:verbatim %}
+  </c-page.section>
+  <c-page.section title="Item Alignment">
+    <c-slot name="description">
+      Control the alignment of item content using the <code>align</code> attribute with valid Bootstrap 5 icon names.
+      Values: <code>"start"</code> (default), <code>"center"</code>, <code>"end"</code>.
+    </c-slot>
+    {% cotton:verbatim %}
+      <c-dropdown text="Item Alignment"
+                  variant="primary"
+                  min-width="15rem">
+        <c-dropdown.item icon="text-left" text="Align Start" align="start" />
+        <c-dropdown.item icon="text-center"
+                         text="Align Center"
+                         align="center" />
+        <c-dropdown.item icon="text-right" text="Align End" align="end" />
+      </c-dropdown>
+    {% endcotton:verbatim %}
+  </c-page.section>
+  <c-page.section title="Custom Classes">
+    <c-slot name="description">
+      Use <code>class</code> to add custom classes to the dropdown button,
+      and <code>dropdown_class</code> to add classes to the wrapper div.
+      Since the dropdown uses <code>c-button</code> internally, button-related classes are applied directly to the button element.
+    </c-slot>
+    {% cotton:verbatim %}
+      <c-dropdown text="Custom Button"
+                  variant="success"
+                  dropdown_class="d-inline-block"
+                  class="rounded-pill px-4">
+        <c-dropdown.item href="#" text="Action" />
+        <c-dropdown.item href="#" text="Another action" />
+      </c-dropdown>
+    {% endcotton:verbatim %}
+  </c-page.section>
+  <c-page.section title="Custom Button with Slot">
+    <c-slot name="description">
+      For complete control over the button, pass a custom button via the <code>button</code> slot.
+      The button must include <code>data-bs-toggle="dropdown"</code> and use valid Bootstrap 5 icon names.
+    </c-slot>
+    {% cotton:verbatim %}
+      <c-dropdown variant="primary">
+        <c-slot name="button">
+          <button class="btn btn-outline-primary"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false">
+            <c-icon name="list" />
+            Custom Button
+          </button>
+        </c-slot>
+        <c-dropdown.item href="#" text="Action" />
+        <c-dropdown.item href="#" text="Another action" />
+      </c-dropdown>
     {% endcotton:verbatim %}
   </c-page.section>
 </c-page>

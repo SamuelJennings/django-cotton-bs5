@@ -1,16 +1,23 @@
-{% load cotton_bs5 %}
 <c-vars direction="down"
+        :ul="True"
+        :caret="True"
+        min-width="10rem"
         class
-        button_class
-        min-width="10rem" />
-<div class="{{ "drop"|add:direction }} {{ class }}">
-  {% if button %}
-    {{ button }}
-  {% else %}
-    <c-dropdown.toggle :attrs="attrs" :class="button_class" />
-  {% endif %}
-  <ul class="dropdown-menu"
-      style="--bs-dropdown-min-width: {{ min_width }}">
-    {{ slot }}
-  </ul>
-</div>
+        dropdown_class />
+{% spaceless %}
+  <div class="{{ "drop"|add:direction }} {{ dropdown_class }}">
+    {% if button %}
+      {{ button }}
+    {% else %}
+      <c-button class="{% if caret %}dropdown-toggle{% endif %} {{ class }}"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                :attrs="attrs" />
+    {% endif %}
+    {% with ul|yesno:"ul,div" as element %}
+      <{{ element }} class="dropdown-menu" style="--bs-dropdown-min-width: {{ min_width }}">
+      {{ slot }}
+      </{{ element }}>
+    {% endwith %}
+  </div>
+{% endspaceless %}

@@ -5,9 +5,21 @@
         class
         gap="2"
         align="start" />
-{% with element=href|yesno:"a,button" %}
-  {# djlint:off #}
-<{{ element }} class="dropdown-item d-inline-flex justify-content-{{ start }} align-items-center gap-{{ gap }} {% if active %} active{% endif %}{% if disabled %} disabled{% endif %}{% if class %} {{ class }}{% endif %}"{% if element == "button" %} type="button"{% endif %}{% if disabled %}{% if element == "a" %} tabindex="-1" aria-disabled="true"{% else %} disabled{% endif %}{% endif %} {{ attrs }}>
-{% if icon %}<c-icon name="{{ icon }}" />{% endif %}{{ text }}{{ slot }}</{{ element }}>
-  {# djlint:on #}
-{% endwith %}
+{% spaceless %}
+  <li>
+    {% with element=href|yesno:"a,button" %}
+      {# djlint:off #}
+    <{{ element }} class="dropdown-item d-inline-flex align-items-center
+                          justify-content-{{ align }}
+                          gap-{{ gap }} {% if active %}
+                          active{% endif %}{% if disabled %}
+                          disabled{% endif %} {{ class }}"
+                          {% if element == "button" and not type %} type="button"{% endif %}
+                          {% if disabled %}{% if element == "a" %} tabindex="-1" aria-disabled="true"{% else %} disabled{% endif %}{% endif %}
+                          {{ attrs }}>
+      {# djlint:on #}
+      {% if icon %}<c-icon name="{{ icon }}" />{% endif %}
+      {{ text }}{{ slot }}</{{ element }}>
+    {% endwith %}
+  </li>
+{% endspaceless %}
