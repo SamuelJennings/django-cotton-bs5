@@ -1,4 +1,5 @@
 <c-vars direction="down"
+        align
         :ul="True"
         :caret="True"
         min-width="10rem"
@@ -15,7 +16,9 @@
                 :attrs="attrs" />
     {% endif %}
     {% with ul|yesno:"ul,div" as element %}
-      <{{ element }} class="dropdown-menu" style="--bs-dropdown-min-width: {{ min_width }}">
+      <{{ element }} class="dropdown-menu
+      {% if align %}dropdown-menu-{{ align }}{% endif %}
+      " style="--bs-dropdown-min-width: {{ min_width }}">
       {{ slot }}
       </{{ element }}>
     {% endwith %}
