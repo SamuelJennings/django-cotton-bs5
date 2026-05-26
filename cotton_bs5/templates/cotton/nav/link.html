@@ -1,4 +1,16 @@
-<c-vars text active disabled class />
-<a class="nav-link{% if active %} active{% elif disabled %} disabled{% endif %} {{ class }}"
+<c-vars text active disabled class href />
+{% with element=href|yesno:"a,button" %}
+{# djlint:off #}
+<{{ element }} class="nav-link{% if active %} active{% elif disabled %} disabled{% endif %} {{ class }}"
    {% if active %} aria-current="page" {% elif disabled %} aria-disabled="true"{% endif %}
-   {{ attrs }}>{{ slot }}{{ text }}</a>
+   {% if href %}href="{{ href}}"{% endif %}
+   {{ attrs }}>
+      {% if icon %}<c-icon name="{{ icon }}" />{% endif %}
+      {% if text %}
+        <span class="btn-text">{{ text }}</span>
+      {% endif %}
+      {{ slot }}
+</{{ element }}>
+{# djlint:on #}
+
+{% endwith %}

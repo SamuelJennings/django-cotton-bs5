@@ -1,5 +1,5 @@
-<c-vars type vertical fill justified class />
-<nav class="nav {% if type %}nav-{{ type }}{% endif %} {% if fill %}nav-fill{% endif %}{% if justified %} nav-justified{% endif %}{% if vertical %} flex-column{% endif %} {{ class }}"
+<c-vars type vertical fill justified gap class />
+<nav class="nav {% if type %}nav-{{ type }}{% endif %} {% if fill %}nav-fill{% endif %}{% if justified %} nav-justified{% endif %}{% if vertical %} flex-column{% endif %}{% if gap is not None %} gap-{{ gap }}{% endif %} {{ class }}"
      {{ attrs }}>
   {{ slot }}
 </nav>
