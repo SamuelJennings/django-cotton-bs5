@@ -21,44 +21,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
-    name: Test Python ${{ matrix.python-version }}, Django ${{ matrix.django-version }}
-    strategy:
-      matrix:
-        python-version: ['3.11', '3.12']
-        django-version: ['4.2', '5.2']
-      fail-fast: false
-
-    steps:
-      - name: Check out
-        uses: actions/checkout@v6
-
-      - name: Install system dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y libpq-dev
-
-      - name: Set up Poetry env
-        uses: SamuelJennings/cached-poetry-action@v2.0
-        with:
-          python-version: ${{ matrix.python-version }}
-          poetry-install-args: --with test
-
-      - name: Run tests
-        run: |
-          if [ "${{ matrix.python-version }}" = "3.12" ] && [ "${{ matrix.django-version }}" = "5.2" ]; then
-            poetry run pytest --cov=cotton_bs5 --cov-report=xml
-          else
-            poetry run pytest
-          fi
-
-      - name: Upload coverage to Codecov
-        if: matrix.python-version == '3.12' && matrix.django-version == '5.2'
-        uses: codecov/codecov-action@v5
-        with:
-          files: ./coverage.xml
-          flags: unittests
-          name: codecov-umbrella
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+  call-tests:
+    uses: django-mvp/shared/.github/workflows/tests.yml@main
+    with:
+      coverage-package: cotton_bs5
+    secrets: inherit

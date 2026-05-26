@@ -35,7 +35,7 @@ def docs(c):
 
 
 @task
-def pretry(c):
+def prerelease(c):
     """
     Run comprehensive pre-release checks and update all required files.
 
