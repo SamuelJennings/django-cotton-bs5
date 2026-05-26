@@ -1,8 +1,86 @@
+import shutil
 import subprocess
 import time
+from pathlib import Path
 
 import requests
 from invoke import task
+
+# ---------------------------------------------------------------------------
+# Vendor path constants
+# ---------------------------------------------------------------------------
+
+REPO_ROOT = Path(__file__).resolve().parent
+
+# Destination for vendored Bootstrap SCSS inside the app static tree.
+BOOTSTRAP_VENDOR_SCSS_DST = REPO_ROOT / "cotton_bs5" / "static" / "bootstrap" / "scss"
+
+# npm package specifier for Bootstrap 5.
+BOOTSTRAP_NPM_PACKAGE = "bootstrap@^5"
+
+# npm package source path (relative to node_modules) containing the SCSS tree.
+BOOTSTRAP_NPM_SCSS_SRC = REPO_ROOT / "node_modules" / "bootstrap" / "scss"
+
+
+# ---------------------------------------------------------------------------
+# Helper functions
+# ---------------------------------------------------------------------------
+
+
+def _require_npm(c):
+    """Raise RuntimeError if npm is not available on PATH."""
+    result = c.run("npm --version", hide=True, warn=True)
+    if result.failed:
+        raise RuntimeError("npm is not available. Install Node.js to use this task.")
+    return result.stdout.strip()
+
+
+@task
+def refresh_bootstrap_scss(c):
+    """
+    Refresh the vendored Bootstrap 5 SCSS source tree.
+
+    Steps:
+    1. Verify npm is available.
+    2. Install the latest Bootstrap 5 package with npm (lockfile pins the version).
+    3. Delete the existing vendored SCSS tree under cotton_bs5/static/bootstrap/scss/.
+    4. Copy the refreshed SCSS sources from node_modules into the vendor tree.
+
+    Usage::
+
+        invoke refresh-bootstrap-scss
+    """
+    npm_version = _require_npm(c)
+    print(f"npm {npm_version} detected.")
+
+    print(f"Installing {BOOTSTRAP_NPM_PACKAGE} …")
+    result = c.run(f"npm install {BOOTSTRAP_NPM_PACKAGE}", warn=True)
+    if result.failed:
+        raise RuntimeError(
+            f"npm install failed for {BOOTSTRAP_NPM_PACKAGE}. Check your network connection and npm registry settings."
+        )
+
+    if not BOOTSTRAP_NPM_SCSS_SRC.is_dir():
+        raise FileNotFoundError(
+            f"Expected Bootstrap SCSS source at {BOOTSTRAP_NPM_SCSS_SRC} after install, "
+            "but the directory was not found. The package layout may have changed."
+        )
+
+    print(f"Copying SCSS sources → {BOOTSTRAP_VENDOR_SCSS_DST} …")
+    if BOOTSTRAP_VENDOR_SCSS_DST.exists():
+        shutil.rmtree(BOOTSTRAP_VENDOR_SCSS_DST)
+    BOOTSTRAP_VENDOR_SCSS_DST.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copytree(BOOTSTRAP_NPM_SCSS_SRC, BOOTSTRAP_VENDOR_SCSS_DST)
+
+    pkg_lock = REPO_ROOT / "package-lock.json"
+    if pkg_lock.exists():
+        print(f"Lockfile present at {pkg_lock} — resolved version is pinned.")
+    else:
+        print(
+            "⚠  No package-lock.json found. Commit the lockfile after this run to ensure reproducible vendor refreshes."
+        )
+
+    print("✅ Bootstrap SCSS vendor tree refreshed successfully.")
 
 
 @task

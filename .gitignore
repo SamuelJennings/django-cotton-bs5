@@ -17,6 +17,7 @@
 .DS_Store
 .vscode
 staticfiles/
+node_modules/
 
 # Project files
 .ropeproject

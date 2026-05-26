@@ -1,0 +1,8 @@
+// Override Bootstrap's Sass maps here.
+//
+// This file is imported after Bootstrap's variables (so you can reference them)
+// but before Bootstrap's maps are compiled. Use it to extend or replace map
+// entries such as $theme-colors, $spacers, $grid-breakpoints, etc.
+//
+// Example:
+//   $theme-colors: map-merge($theme-colors, ("brand": #bada55));
