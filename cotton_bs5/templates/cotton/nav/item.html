@@ -1,4 +1,6 @@
 <c-vars class link_class />
 <li class="nav-item {{ class }}">
-  <c-nav.link :attrs="attrs" class="{{ link_class }}" />
+  <c-nav.link :attrs="attrs" class="{{ link_class }}">
+    {{ slot }}
+  </c-nav.link>
 </li>
